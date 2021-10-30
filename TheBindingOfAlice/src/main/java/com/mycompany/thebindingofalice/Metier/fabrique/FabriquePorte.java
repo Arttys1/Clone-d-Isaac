@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Fabrique abstraite, héritant de Fabrique, gérant la création des portes
  */
 public class FabriquePorte extends Fabrique {
-	public ArrayList<ConctructeurPorte> constructeurs = new ArrayList<ConctructeurPorte>();
+	private ArrayList<ConctructeurPorte> constructeurs = new ArrayList<ConctructeurPorte>();
 
 	public TypePorte[] Types() {
 		throw new UnsupportedOperationException();

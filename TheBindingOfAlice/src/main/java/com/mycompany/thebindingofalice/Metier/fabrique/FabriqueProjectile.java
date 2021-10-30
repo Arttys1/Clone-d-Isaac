@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Fabrique abstraite, héritant de Fabrique, gérant la création des projectiles
  */
 public class FabriqueProjectile extends Fabrique {
-	public ArrayList<ConstructeurProjectile> constructeurs = new ArrayList<ConstructeurProjectile>();
+	private ArrayList<ConstructeurProjectile> constructeurs = new ArrayList<ConstructeurProjectile>();
 
 	public TypeProjectile[] Types() {
 		throw new UnsupportedOperationException();

@@ -8,8 +8,8 @@ import com.mycompany.thebindingofalice.Metier.niveau.carte.Carte;
  * Classe représentant les niveaux du jeu.
  */
 public class Niveau {
-	public Partie unnamed_Partie_;
-	public Carte carte;
+	private Partie unnamed_Partie_;
+	private Carte carte;
 
 	public void getCarte() {
 		throw new UnsupportedOperationException();

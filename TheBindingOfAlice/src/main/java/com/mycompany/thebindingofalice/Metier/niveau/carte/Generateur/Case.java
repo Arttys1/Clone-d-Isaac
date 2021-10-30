@@ -9,7 +9,7 @@ public abstract class Case {
 	private TypeCase type;
 	private int ligne;
 	private int colonne;
-	public Salle unnamed_Salle_;
+	private Salle salle;
 
 	public Case(int ligne, int colonne) {
 		throw new UnsupportedOperationException();

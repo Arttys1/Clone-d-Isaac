@@ -11,7 +11,7 @@ import com.mycompany.thebindingofalice.Metier.Statistiques;
 public abstract class Ennemi extends Evoluable implements ICollision {
 	private int vie;
 	private TypeEnnemi type;
-	public Statistiques unnamed_Statistiques_;
+	private Statistiques statistiques;
 
 	public void Bouger(DirectionDeplacement dir) {
 		throw new UnsupportedOperationException();

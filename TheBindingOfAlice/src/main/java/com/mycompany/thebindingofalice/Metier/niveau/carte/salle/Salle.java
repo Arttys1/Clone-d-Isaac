@@ -12,12 +12,11 @@ import com.mycompany.thebindingofalice.Metier.niveau.carte.Generateur.CaseMur;
 public abstract class Salle {
 	private TypeSalle type;
 	private CaseMur[] murs;
-	public Carte unnamed_Carte_;
-	public Joueur unnamed_Joueur_;
-	public Carte unnamed_Carte_2;
-	public ArrayList<Case> cases = new ArrayList<Case>();
-	public ArrayList<Porte> portes = new ArrayList<Porte>();
-	public ArrayList<Evoluable> evoluables = new ArrayList<Evoluable>();
+	private Joueur joueur;
+	private Carte carte;
+	private ArrayList<Case> cases = new ArrayList<Case>();
+	private ArrayList<Porte> portes = new ArrayList<Porte>();
+	private ArrayList<Evoluable> evoluables = new ArrayList<Evoluable>();
 
 	public Salle(TypeSalle type) {
 		throw new UnsupportedOperationException();

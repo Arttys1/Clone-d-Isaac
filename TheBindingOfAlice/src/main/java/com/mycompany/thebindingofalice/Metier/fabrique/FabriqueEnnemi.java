@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Fabrique abstraite, héritant de Fabrique, gérant la création des ennemis
  */
 public class FabriqueEnnemi extends Fabrique {
-	public ArrayList<ConstructeurEnnemi> constructeurs = new ArrayList<ConstructeurEnnemi>();
+	private ArrayList<ConstructeurEnnemi> constructeurs = new ArrayList<ConstructeurEnnemi>();
 
 	public TypeEnnemi[] Types() {
 		throw new UnsupportedOperationException();

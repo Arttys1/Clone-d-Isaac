@@ -5,8 +5,8 @@ import java.util.ArrayList;
  * Classe Multiton, gérant toutes les instances des fabriques abstraite.
  */
 public abstract class Fabrique {
-	public ArrayList<Fabrique> instances = new ArrayList<Fabrique>();
-	public Fabrique unnamed_Fabrique_;
+	private ArrayList<Fabrique> instances = new ArrayList<Fabrique>();
+	private Fabrique fabrique;
 
 	public static void register(TypeFabrique type) {
 		throw new UnsupportedOperationException();

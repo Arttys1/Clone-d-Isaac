@@ -9,9 +9,9 @@ import java.util.ArrayList;
  */
 public class Partie {
 	private static Partie instance;
-	public ArrayList<Niveau> niveaux = new ArrayList<Niveau>();
-	public ArrayList<ICollision> objetsCollision = new ArrayList<ICollision>();
-	public Joueur joueur;
+	private ArrayList<Niveau> niveaux = new ArrayList<Niveau>();
+	private ArrayList<ICollision> objetsCollision = new ArrayList<ICollision>();
+	private Joueur joueur;
 
 	private Partie() {
 		throw new UnsupportedOperationException();

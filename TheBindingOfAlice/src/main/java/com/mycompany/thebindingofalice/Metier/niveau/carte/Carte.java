@@ -9,9 +9,9 @@ import java.util.ArrayList;
  * Classe représentant la carte d'un niveau
  */
 public class Carte {
-	public Niveau unnamed_Niveau_;
-	public ArrayList<Salle> salles = new ArrayList<Salle>();
-	public Salle salleCourante;
+	private Niveau unnamed_Niveau_;
+	private ArrayList<Salle> salles = new ArrayList<Salle>();
+	private Salle salleCourante;
 
 	public Salle[] GetSalle() {
 		throw new UnsupportedOperationException();

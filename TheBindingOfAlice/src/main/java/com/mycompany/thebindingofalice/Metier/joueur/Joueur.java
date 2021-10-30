@@ -20,9 +20,9 @@ public class Joueur extends Evoluable implements ICollision {
 	private int vitesseX;
 	private int vitesseY;
 	private Cle[] cles;
-	public Partie unnamed_Partie_;
-	public Salle salleCourante;
-	public Statistiques stats;
+	private Partie partie;
+	private Salle salleCourante;
+	private Statistiques stats;
 
 	public void Tirer(DirectionTir tir) {
 		throw new UnsupportedOperationException();

@@ -10,6 +10,6 @@ public class Statistiques {
 	private Object porteeTir;
 	private Object vitesseProjectile;
 	private Object chance;
-	public Joueur unnamed_Joueur_;
-	public Ennemi stats;
+	private Joueur unnamed_Joueur_;
+	private Ennemi stats;
 }
