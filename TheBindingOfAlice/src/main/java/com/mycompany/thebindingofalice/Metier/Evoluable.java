@@ -1,16 +1,20 @@
 package com.mycompany.thebindingofalice.Metier;
 
-import com.mycompany.thebindingofalice.Metier.niveau.carte.salle.Salle;
-
 /**
  * Classe abstraite, représentant les objets pouvant evoluer au cours du temps.
  */
 public abstract class Evoluable {
-	private Salle unnamed_Salle_;
-	private Coordonnee coordonnee;
+    private final Coordonnee coordonnee;
 
-	/**
-	 * Méthode appelé à chaque frame du jeu. Le paramètre pas représente le pas de temps entre deux appel de la méthode.
-	 */
-	public abstract void evoluer(long pas);
+    protected Evoluable(Coordonnee c) {
+        coordonnee = c;
+    }
+        
+    public Coordonnee getCoordonnee() { return coordonnee; }
+    
+    /**
+     * Méthode appelé à chaque frame du jeu.Le paramètre pas représente le pas de temps entre deux appel de la méthode.
+     * @param pas
+     */
+    public abstract void evoluer(long pas);
 }

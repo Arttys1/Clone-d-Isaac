@@ -8,5 +8,10 @@ public class CaseVide extends Case {
     public CaseVide(int ligne, int colonne) {
         super(ligne, colonne);
     }
+
+    @Override
+    public TypeCase getType() {
+        return TypeCase.VIDE;
+    }
     
 }

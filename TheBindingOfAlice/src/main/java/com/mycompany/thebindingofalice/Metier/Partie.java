@@ -8,32 +8,38 @@ import java.util.ArrayList;
  * Classe représentant une partie du jeu. Elle est le point d'entrée de la couche métier
  */
 public class Partie {
-	private static Partie instance;
-	private ArrayList<Niveau> niveaux = new ArrayList<Niveau>();
-	private ArrayList<ICollision> objetsCollision = new ArrayList<ICollision>();
-	private Joueur joueur;
+    private static Partie instance = null;
+    private final ArrayList<Niveau> niveaux;
+    private final ArrayList<ICollision> objetsCollision;
+    private Joueur joueur;
 
-	private Partie() {
-		throw new UnsupportedOperationException();
-	}
+    private Partie() {
+        this.objetsCollision = new ArrayList<>();
+        this.niveaux = new ArrayList<>();
+        
+    }
 
-	public static Partie get() {
-		throw new UnsupportedOperationException();
-	}
+    public static Partie get() {
+        if(instance == null)
+        {
+            instance = new Partie();
+        }
+        return instance;
+    }
 
-	public void Evoluer() {
-		throw new UnsupportedOperationException();
-	}
+    public void Evoluer() {
+            throw new UnsupportedOperationException();
+    }
 
-	public Joueur GetJoueur() {
-		throw new UnsupportedOperationException();
-	}
+    public void addICollision(ICollision o) { objetsCollision.add(o); }
+    
+    public Joueur GetJoueur() { return joueur; }
 
-	public void ChangerSalle(DirectionSalle d) {
-		throw new UnsupportedOperationException();
-	}
+    public void ChangerSalle(DirectionSalle d) {
+            throw new UnsupportedOperationException();
+    }
 
-	public void ChangerNiveau() {
-		throw new UnsupportedOperationException();
-	}
+    public void ChangerNiveau() {
+            throw new UnsupportedOperationException();
+    }
 }

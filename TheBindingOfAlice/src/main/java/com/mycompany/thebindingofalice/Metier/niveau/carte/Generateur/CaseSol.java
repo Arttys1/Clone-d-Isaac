@@ -8,6 +8,11 @@ public class CaseSol extends Case {
     public CaseSol(int ligne, int colonne) {
         super(ligne, colonne);
     }
+
+    @Override
+    public TypeCase getType() {
+        return TypeCase.SOL;
+    }
     
     
 }

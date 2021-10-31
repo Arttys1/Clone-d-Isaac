@@ -5,32 +5,39 @@ import com.mycompany.thebindingofalice.Metier.joueur.Joueur;
 import com.mycompany.thebindingofalice.Metier.niveau.carte.Carte;
 import com.mycompany.thebindingofalice.Metier.niveau.carte.Generateur.Case;
 import com.mycompany.thebindingofalice.Metier.niveau.carte.Generateur.CaseMur;
+import com.mycompany.thebindingofalice.Metier.niveau.carte.Generateur.CaseSol;
 
 /**
  * Classe abstraite représentant les salles. Elle est composé de cases
  */
 public abstract class Salle {
-	private TypeSalle type;
-	private CaseMur[] murs;
-	private Joueur joueur;
-	private Carte carte;
-	private ArrayList<Case> cases = new ArrayList<Case>();
-	private ArrayList<Porte> portes = new ArrayList<Porte>();
-	private ArrayList<Evoluable> evoluables = new ArrayList<Evoluable>();
+	private final ArrayList<Case> cases;
+	private final ArrayList<Porte> portes;
+	private final ArrayList<Evoluable> evoluables;
 
-	public Salle(TypeSalle type) {
-		throw new UnsupportedOperationException();
+	public Salle() {
+            this.evoluables = new ArrayList<>();
+            this.portes = new ArrayList<>();
+            this.cases = new ArrayList<>();            
 	}
 
 	public void AddEvoluable(Evoluable e) {
-		throw new UnsupportedOperationException();
+		evoluables.add(e);
 	}
 
 	public boolean RemoveEvoluable(Evoluable e) {
-		throw new UnsupportedOperationException();
+		return evoluables.remove(e);
 	}
 
-	public Case[] getCases() {
-		throw new UnsupportedOperationException();
+	public ArrayList<Case> getCases() {
+            return new ArrayList<>(cases);          
 	}
+        
+        protected void AddCase(Case c)
+        {
+            cases.add(c);
+        }
+        
+        public abstract TypeSalle getType();
+        
 }

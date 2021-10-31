@@ -1,5 +1,6 @@
 package com.mycompany.thebindingofalice.Metier.objet.ramassable.bonus;
 
+import com.mycompany.thebindingofalice.Metier.Coordonnee;
 import com.mycompany.thebindingofalice.Metier.objet.ramassable.ObjetRamassable;
 
 /**
@@ -7,5 +8,9 @@ import com.mycompany.thebindingofalice.Metier.objet.ramassable.ObjetRamassable;
  */
 public abstract class Bonus extends ObjetRamassable {
 
-	public abstract void effet();
+    protected Bonus(Coordonnee c) {
+        super(c);
+    }
+    
+    public abstract void effet();
 }
