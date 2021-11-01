@@ -28,7 +28,7 @@ public class Partie {
     }
 
     public void Evoluer() {
-            throw new UnsupportedOperationException();
+        //TODO
     }
 
     public void addICollision(ICollision o) { objetsCollision.add(o); }
@@ -36,10 +36,10 @@ public class Partie {
     public Joueur GetJoueur() { return joueur; }
 
     public void ChangerSalle(DirectionSalle d) {
-            throw new UnsupportedOperationException();
+        //TODO
     }
 
     public void ChangerNiveau() {
-            throw new UnsupportedOperationException();
+        //TODO
     }
 }

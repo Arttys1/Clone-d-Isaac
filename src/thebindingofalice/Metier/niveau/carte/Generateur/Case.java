@@ -6,7 +6,7 @@ public abstract class Case {
 	private final int ligne;
 	private final int colonne;
 
-	public Case(int ligne, int colonne) {
+	public Case(int colonne, int ligne) {
 		this.ligne = ligne;
                 this.colonne = colonne;
 	}
@@ -16,4 +16,5 @@ public abstract class Case {
         public int getColonne() { return colonne; }
         
 	public abstract TypeCase getType();
+        public abstract String getSprite();
 }

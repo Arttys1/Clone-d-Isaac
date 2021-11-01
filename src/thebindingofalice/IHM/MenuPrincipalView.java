@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import thebindingofalice.Main;
 
 /**
@@ -37,14 +38,12 @@ public class MenuPrincipalView implements Initializable {
     public void MCJouer(MouseEvent event){
         try {
             Parent root = FXMLLoader.load(getClass().getResource("EnJeu.fxml"));
-            Main.getPrimaryStage().setScene(new Scene(root));
+            Stage stage = Main.getPrimaryStage();
+            stage.setX(200);
+            stage.setY(1);
+            stage.setScene(new Scene(root, 1000, 700));
         } catch (IOException ex) {
             Logger.getLogger(MenuPrincipalView.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-    @FXML
-    public void MCQuitter(MouseEvent event){
-        Main.getPrimaryStage().close();
     }
 }

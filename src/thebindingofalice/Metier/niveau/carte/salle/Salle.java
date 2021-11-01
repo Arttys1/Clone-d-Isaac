@@ -40,4 +40,6 @@ public abstract class Salle {
         
         public abstract TypeSalle getType();
         
+        protected int getTailleCote(){ return 10; }
+               
 }

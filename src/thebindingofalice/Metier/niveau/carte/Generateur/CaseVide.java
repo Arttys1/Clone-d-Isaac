@@ -5,13 +5,18 @@ package thebindingofalice.Metier.niveau.carte.Generateur;
  */
 public class CaseVide extends Case {
 
-    public CaseVide(int ligne, int colonne) {
-        super(ligne, colonne);
-    }
+    public CaseVide(int colonne, int ligne) {
+        super(colonne, ligne);
+    }    
 
     @Override
     public TypeCase getType() {
         return TypeCase.VIDE;
+    }
+
+    @Override
+    public String getSprite() {
+        return "";
     }
     
 }

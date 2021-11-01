@@ -5,13 +5,18 @@ package thebindingofalice.Metier.niveau.carte.Generateur;
  */
 public class CaseSol extends Case {
 
-    public CaseSol(int ligne, int colonne) {
-        super(ligne, colonne);
-    }
+    public CaseSol(int colonne, int ligne) {
+        super(colonne, ligne);
+    }    
 
     @Override
     public TypeCase getType() {
         return TypeCase.SOL;
+    }
+
+    @Override
+    public String getSprite() {
+        return "caseSol.png";
     }
     
     

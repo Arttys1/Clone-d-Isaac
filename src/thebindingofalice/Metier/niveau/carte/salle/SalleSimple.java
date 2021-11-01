@@ -5,6 +5,7 @@
  */
 package thebindingofalice.Metier.niveau.carte.salle;
 
+import thebindingofalice.Metier.niveau.carte.Generateur.CaseMur;
 import thebindingofalice.Metier.niveau.carte.Generateur.CaseSol;
 
 /**
@@ -15,8 +16,24 @@ public class SalleSimple extends Salle{
 
     public SalleSimple() {
         super();
-        AddCase(new CaseSol(0, 0));
-        AddCase(new CaseSol(0, 0));
+        generateSalle();
+    }
+    
+    private void generateSalle()
+    {
+        int tailleCote = getTailleCote();
+        for (int i = 0; i < tailleCote; i++) {
+            for (int j = 0; j < tailleCote; j++) {
+                if(i == 0 || i == tailleCote - 1 || j == 0 || j == tailleCote - 1)
+                {
+                    AddCase(new CaseMur(i, j));
+                }
+                else
+                {
+                    AddCase(new CaseSol(i, j));
+                }
+            }
+        }
     }
     
     @Override
