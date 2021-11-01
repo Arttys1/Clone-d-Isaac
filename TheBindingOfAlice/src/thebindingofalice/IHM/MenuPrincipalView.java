@@ -42,4 +42,9 @@ public class MenuPrincipalView implements Initializable {
             Logger.getLogger(MenuPrincipalView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    @FXML
+    public void MCQuitter(MouseEvent event){
+        Main.getPrimaryStage().close();
+    }
 }
