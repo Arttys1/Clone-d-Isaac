@@ -1,5 +1,6 @@
 package thebindingofalice.Metier.joueur;
 
+import javafx.scene.paint.Color;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Evoluable;
 import thebindingofalice.Metier.ICollision;
@@ -24,16 +25,37 @@ public class Joueur extends Evoluable implements ICollision {
 	private Salle salleCourante;
 	private Statistiques stats;
 
-    public Joueur(Coordonnee c) {
-        super(c);
+    public Joueur(Coordonnee c, int w, int h, Color color) {
+        super(c,w,h,color);
+        setTranslateX(this.getCoordonnee().getX());
+        setTranslateY(this.getCoordonnee().getY());
     }
 
     public void Tirer(DirectionTir tir) {
             throw new UnsupportedOperationException();
     }
 
+    /**
+     * Méthode qui fait bouger l'objet Joueur en fonction de la direction lu
+     * @param dir 
+     */
     public void Bouger(DirectionDeplacement dir) {
-            throw new UnsupportedOperationException();
+            switch(dir){
+                    case HAUT :
+                        setTranslateY(getTranslateY()-5);
+                        break;
+                    case BAS :
+                        setTranslateY(getTranslateY()+5);
+                        break;    
+                    case GAUCHE :
+                        setTranslateX(getTranslateX()-5);
+                        break;
+                    case DROITE :
+                        setTranslateX(getTranslateX()+5);
+                        break; 
+                    default:
+                        break;
+                }
     }
 
     public void PrendDegat(int nbDegat) {
