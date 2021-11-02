@@ -1,18 +1,22 @@
 package thebindingofalice.Metier;
 
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 /**
  * Classe abstraite, représentant les objets pouvant evoluer au cours du temps.
  */
-public abstract class Evoluable extends Rectangle{
+public abstract class Evoluable extends ImageView{
     private final Coordonnee coordonnee;
 
-    protected Evoluable(Coordonnee c,int w, int h, Color color) {
-        super(h,w,color);
-        coordonnee = c;
-        
+    protected Evoluable(Coordonnee c, Image img) {
+        super(img);
+        coordonnee = c;   
     }
         
     public Coordonnee getCoordonnee() { return coordonnee; }

@@ -20,7 +20,7 @@ public class Partie {
         //Coordonnees de départ du joueur
         Coordonnee c = new Coordonnee(300,300);
         //Création du joueur de la partie
-        this.joueur= new Joueur(c,40,40, Color.BLUE);
+        this.joueur= new Joueur(c, new Image("@../Images/Sprites/Alice.jpg\""));
         
     }
 

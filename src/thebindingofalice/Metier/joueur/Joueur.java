@@ -25,8 +25,8 @@ public class Joueur extends Evoluable implements ICollision {
 	private Salle salleCourante;
 	private Statistiques stats;
 
-    public Joueur(Coordonnee c, int w, int h, Color color) {
-        super(c,w,h,color);
+    public Joueur(Coordonnee c, Image img) {
+        super(c, img);
         setTranslateX(this.getCoordonnee().getX());
         setTranslateY(this.getCoordonnee().getY());
     }
