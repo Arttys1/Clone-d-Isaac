@@ -2,6 +2,7 @@ package thebindingofalice.Metier.niveau.carte.Generateur;
 
 /**
  * Classe, héritant de Case, représentant le sol
+ * @author Arnaud
  */
 public class CaseSol extends Case {
 

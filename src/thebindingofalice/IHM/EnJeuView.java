@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package thebindingofalice.IHM;
 
 import java.net.URL;
@@ -11,41 +6,45 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Rectangle;
 import thebindingofalice.Controller.ControlleurNiveau;
 import thebindingofalice.Controller.Observeur;
+import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.niveau.Niveau;
 import thebindingofalice.Metier.niveau.carte.Generateur.Case;
-import thebindingofalice.Metier.niveau.carte.salle.Salle;
-import thebindingofalice.Metier.niveau.carte.salle.SalleSimple;
 
 /**
  * FXML Controller class
- *
- * @author Pascaline
+ * Vue représentant la fenêtre de jeu.
+ * @author Pascaline, Arnaud
  */
 public class EnJeuView implements Initializable, Observeur{
-
-    private ControlleurNiveau controlleurNiveau;
-    private Niveau niveau;
     
+    private final Partie partie = Partie.get();     //partie de jeu
+    private ControlleurNiveau controlleurNiveau;    //controlleur du niveau
+    private Niveau niveau;                          //niveau
+
     @FXML
-    private AnchorPane anchorPane;
+    private AnchorPane anchorPane;  //objet qui dispose les objets à afficher
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {  
-        niveau = new Niveau();
+        niveau = partie.getNiveauCourant();
         controlleurNiveau = new ControlleurNiveau(niveau);
         displaySalle();
     }    
     
+    /**
+     * Méthode permettant d'afficher la salle en court.
+     */
     private void displaySalle()
     {  
+        anchorPane.getChildren().clear();
         int size = 60;
         for (Case c : niveau.getSalleCourante().getCases()) {
-            //Rectangle r = new Rectangle(200 + c.getColonne() * size, 50 + c.getLigne() * size, size, size);
+            
             ImageView img = new ImageView("C:/Users/Arnaud/Desktop/Cours/Semestre 3/Projet Tutoré/TheBindingOfAlice/src/thebindingofalice/Images/Salle/" + c.getSprite());
             img.setX(100 + c.getColonne() * size);
             img.setY(50 + c.getLigne() * size);

@@ -2,6 +2,7 @@ package thebindingofalice.Metier.niveau.carte.Generateur;
 
 /**
  * Classe, héritant de Case, représentant les murs
+ * @author Arnaud
  */
 public class CaseMur extends Case {
 

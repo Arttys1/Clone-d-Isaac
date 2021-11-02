@@ -2,6 +2,7 @@ package thebindingofalice.Metier.niveau.carte.Generateur;
 
 /**
  * Classe, héritant de Case, représentant les cases de vide
+ * @author Arnaud
  */
 public class CaseVide extends Case {
 
