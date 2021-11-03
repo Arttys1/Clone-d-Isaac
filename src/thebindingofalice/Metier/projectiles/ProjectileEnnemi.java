@@ -1,5 +1,7 @@
 package thebindingofalice.Metier.projectiles;
 
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.ICollision;
 import thebindingofalice.Metier.projectiles.DirectionTir;
@@ -9,8 +11,8 @@ import thebindingofalice.Metier.projectiles.DirectionTir;
  */
 public class ProjectileEnnemi extends Projectile {
 
-    public ProjectileEnnemi(Coordonnee coordonnee, DirectionTir dir) {
-        super(coordonnee, dir);
+    public ProjectileEnnemi(Coordonnee coordonnee, DirectionTir dir, Image img) {
+        super(coordonnee, dir,img);
     }
 
     /**

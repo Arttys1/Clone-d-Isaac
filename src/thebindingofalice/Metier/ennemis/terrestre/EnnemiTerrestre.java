@@ -1,5 +1,7 @@
 package thebindingofalice.Metier.ennemis.terrestre;
 
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.ennemis.Ennemi;
 
@@ -8,7 +10,7 @@ import thebindingofalice.Metier.ennemis.Ennemi;
  */
 public abstract class EnnemiTerrestre extends Ennemi {
 
-    public EnnemiTerrestre(Coordonnee c) {
-        super(c);
+    public EnnemiTerrestre(Coordonnee c, Image img) {
+        super(c,img);
     }
 }

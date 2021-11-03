@@ -1,12 +1,7 @@
 package thebindingofalice.Metier;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 
 /**
  * Classe abstraite, représentant les objets pouvant evoluer au cours du temps.
@@ -16,7 +11,8 @@ public abstract class Evoluable extends ImageView{
 
     protected Evoluable(Coordonnee c, Image img) {
         super(img);
-        coordonnee = c;   
+        coordonnee = c;
+        
     }
         
     public Coordonnee getCoordonnee() { return coordonnee; }

@@ -1,5 +1,7 @@
 package thebindingofalice.Metier.objet.poussable;
 
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.ICollision;
 import thebindingofalice.Metier.objet.TypeObjet;
@@ -9,8 +11,8 @@ import thebindingofalice.Metier.objet.TypeObjet;
  */
 public class Coffre extends ObjetPoussable {
 
-    public Coffre(Coordonnee c) {
-        super(c);
+    public Coffre(Coordonnee c, Image img) {
+        super(c,img);
     }
 
     /**

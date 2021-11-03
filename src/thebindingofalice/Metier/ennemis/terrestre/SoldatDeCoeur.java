@@ -1,5 +1,7 @@
 package thebindingofalice.Metier.ennemis.terrestre;
 
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.ICollision;
 import thebindingofalice.Metier.ennemis.TypeEnnemi;
@@ -9,8 +11,8 @@ import thebindingofalice.Metier.ennemis.TypeEnnemi;
  */
 public class SoldatDeCoeur extends EnnemiTerrestre {
 
-    public SoldatDeCoeur(Coordonnee c) {
-        super(c);
+    public SoldatDeCoeur(Coordonnee c, Image img) {
+        super(c,img);
     }
 
     /**

@@ -1,5 +1,7 @@
 package thebindingofalice.Metier.ennemis;
 
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.joueur.DirectionDeplacement;
 import thebindingofalice.Metier.Evoluable;
@@ -13,8 +15,8 @@ public abstract class Ennemi extends Evoluable implements ICollision {
     private int vie;
     private Statistiques statistiques;
 
-    public Ennemi(Coordonnee c) {
-        super(c);
+    public Ennemi(Coordonnee c, Image img) {
+        super(c,img);
     }
 
     public abstract TypeEnnemi getType();

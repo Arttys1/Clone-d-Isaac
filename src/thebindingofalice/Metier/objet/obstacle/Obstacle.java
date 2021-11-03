@@ -1,5 +1,7 @@
 package thebindingofalice.Metier.objet.obstacle;
 
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.objet.Objet;
 
@@ -8,8 +10,8 @@ import thebindingofalice.Metier.objet.Objet;
  */
 public abstract class Obstacle extends Objet {
 
-    protected Obstacle(Coordonnee c) {
-        super(c);
+    protected Obstacle(Coordonnee c, Image img) {
+        super(c,img);
     }
 	
 }

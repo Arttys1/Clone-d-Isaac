@@ -1,8 +1,13 @@
 package thebindingofalice.Metier;
+import java.io.File;
+import java.net.MalformedURLException;
 import thebindingofalice.Metier.joueur.Joueur;
 import thebindingofalice.Metier.niveau.carte.salle.DirectionSalle;
 import thebindingofalice.Metier.niveau.Niveau;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 /**
@@ -18,9 +23,17 @@ public class Partie {
         this.objetsCollision = new ArrayList<>();
         this.niveaux = new ArrayList<>();
         //Coordonnees de départ du joueur
-        Coordonnee c = new Coordonnee(300,300);
+        Coordonnee c = new Coordonnee(480,270);
         //Création du joueur de la partie
-        this.joueur= new Joueur(c, new Image("@../Images/Sprites/Alice.jpg\""));
+        File file = new File("src/thebindingofalice/Images/Sprites/chat.png");
+        String localUrl = null;
+        try {
+            localUrl = file.toURI().toURL().toString();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        this.joueur= new Joueur(c, new Image(localUrl));
         
     }
 
