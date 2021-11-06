@@ -6,9 +6,9 @@
 package thebindingofalice.Metier.fabrique;
 
 /**
- *
+ * Enumération représentant les différents types de fabriques
  * @author Arnaud
  */
 public enum TypeFabrique {
-    
+    CASE, PROJECTILE, PORTE, ENNEMI
 }
