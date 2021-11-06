@@ -45,7 +45,7 @@ public class EnJeuView implements Initializable, Observeur{
         int size = 60;
         for (Case c : niveau.getSalleCourante().getCases()) {
             
-            ImageView img = new ImageView("C:/Users/Arnaud/Desktop/Cours/Semestre 3/Projet Tutoré/TheBindingOfAlice/src/thebindingofalice/Images/Salle/" + c.getSprite());
+            ImageView img = new ImageView(System.getProperty("user.dir")+"/src/thebindingofalice/Images/Salle/" + c.getSprite());
             img.setX(100 + c.getColonne() * size);
             img.setY(50 + c.getLigne() * size);
             img.setFitHeight(size);
