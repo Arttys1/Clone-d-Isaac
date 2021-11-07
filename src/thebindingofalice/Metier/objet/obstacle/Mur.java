@@ -19,7 +19,7 @@ public class Mur extends Obstacle {
     }
 
     @Override
-    public void evoluer(long pas) {
+    public void evoluer(double pas) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

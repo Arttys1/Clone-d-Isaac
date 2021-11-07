@@ -18,7 +18,7 @@ public class Cle extends ObjetRamassable {
      *  * Méthode appelé à chaque frame du jeu. Le paramètre pas représente le pas de temps entre deux appel de la méthode.
      *  * /
      */
-    public void evoluer(long pas) {
+    public void evoluer(double pas) {
             throw new UnsupportedOperationException();
     }
 

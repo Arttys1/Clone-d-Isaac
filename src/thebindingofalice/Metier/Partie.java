@@ -19,6 +19,7 @@ public class Partie {
 
     private Partie() {        
         this.objetsCollision = new ArrayList<>();
+        joueur = new Joueur(new Coordonnee(1, 1));
         AlgoCreationNiveaux algo = new MockAlgoNiveaux();
         this.niveaux = algo.getNiveaux();
         niveauCourant = niveaux.get(0);

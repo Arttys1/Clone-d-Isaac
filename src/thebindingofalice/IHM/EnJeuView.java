@@ -5,24 +5,31 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import thebindingofalice.Controller.ControlleurNiveau;
+import thebindingofalice.Controller.ControlleurJoueur;
 import thebindingofalice.Controller.Observeur;
+import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Partie;
+import thebindingofalice.Metier.joueur.DirectionDeplacement;
+import thebindingofalice.Metier.joueur.Joueur;
+import thebindingofalice.Controller.ControlleurNiveau;
 import thebindingofalice.Metier.niveau.Niveau;
 import thebindingofalice.Metier.niveau.carte.Generateur.Case;
+
 
 /**
  * FXML Controller class
  * Vue représentant la fenêtre de jeu.
  * @author Pascaline, Arnaud
  */
-public class EnJeuView implements Initializable, Observeur{
-    
+public class EnJeuView implements Initializable, Observeur {
+    private final Joueur joueur = Partie.get().GetJoueur();
+    private ControlleurJoueur controllerJoueur;      
     private final Partie partie = Partie.get();     //partie de jeu
     private ControlleurNiveau controlleurNiveau;    //controlleur du niveau
     private Niveau niveau;                          //niveau
-
+    private ImageView imageJoueur;   
     @FXML
     private AnchorPane anchorPane;  //objet qui dispose les objets à afficher
     
@@ -30,11 +37,66 @@ public class EnJeuView implements Initializable, Observeur{
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {  
+    public void initialize(URL url, ResourceBundle rb) {
         niveau = partie.getNiveauCourant();
         controlleurNiveau = new ControlleurNiveau(niveau);
+        controlleurNiveau.Register(this);
+        controllerJoueur = new ControlleurJoueur(joueur);
+        controllerJoueur.Register(this);  
+        
         displaySalle();
-    }    
+        loadPlayer();
+        boucleDeJeu();
+    }
+    
+    private void boucleDeJeu() {
+        //TODO Boucle de jeu
+    }
+
+    private void moveSpriteJoueur()
+    {
+        Coordonnee coordonnee = joueur.getCoordonnee();
+        double x = coordonnee.getX();
+        double y = coordonnee.getY();
+        System.out.println("x" + x + " | y" + y);
+        imageJoueur.setTranslateX(x);
+        imageJoueur.setTranslateY(y);
+    }
+    
+    private void loadPlayer()
+    {
+        imageJoueur = new ImageView(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Sprites/aliceFront.png");
+        anchorPane.getChildren().add(imageJoueur);
+    }
+    
+    @Override
+    public void Update(String message) {
+        switch(message.toLowerCase())
+        {
+            case "joueur": moveSpriteJoueur(); break;
+            case "salle" : displaySalle(); break;
+            default: break;
+        }
+    }
+   
+    @FXML
+    public void handleOnKeyPressed(KeyEvent event)
+    {
+        switch(event.getCode())
+        {
+            case Z: controllerJoueur.bouger(DirectionDeplacement.HAUT); break;
+            case S: controllerJoueur.bouger(DirectionDeplacement.BAS); break;
+            case D: controllerJoueur.bouger(DirectionDeplacement.DROITE); break;
+            case Q: controllerJoueur.bouger(DirectionDeplacement.GAUCHE); break;
+            default : break;
+        }
+    }
+    
+    @FXML
+    public void handleKeyRelease(KeyEvent evt)
+    {
+        controllerJoueur.sArreter();
+    }
     
     /**
      * Méthode permettant d'afficher la salle en court.
@@ -54,14 +116,4 @@ public class EnJeuView implements Initializable, Observeur{
         }
         
     }
-
-    @Override
-    public void Update(String message) {
-        switch(message.toLowerCase())
-        {
-            case "salle" : displaySalle(); break;
-            default: break;
-        }
-    }
-    
 }
