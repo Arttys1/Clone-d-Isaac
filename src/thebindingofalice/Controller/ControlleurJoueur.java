@@ -22,12 +22,16 @@ public class ControlleurJoueur extends Observable{
     public void bouger(DirectionDeplacement dir)
     {
         joueur.Bouger(dir);
-        joueur.evoluer(0.5);
-        Notify("joueur");
     }
     
     public void sArreter()
     {
         joueur.sArreter();
+    }
+    
+    public void evoluer(double pas)
+    {
+        joueur.evoluer(pas);
+        Notify("joueur");
     }
 }

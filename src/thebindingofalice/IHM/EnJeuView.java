@@ -2,6 +2,7 @@ package thebindingofalice.IHM;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
@@ -49,8 +50,21 @@ public class EnJeuView implements Initializable, Observeur {
         boucleDeJeu();
     }
     
-    private void boucleDeJeu() {
-        //TODO Boucle de jeu
+    /**
+     * Méthode représentant la boucle de jeu.
+     * Ce n'est pour l'instant qu'une esquisse mais c'est un début.
+     */
+    private void boucleDeJeu() {        
+        AnimationTimer animationTimer = new AnimationTimer()
+        {
+            @Override
+            public void handle(long pas) {
+                //for some obscurs reasons pas must be equal to 1
+                controllerJoueur.evoluer(Double.valueOf(1));
+                System.err.println(Double.valueOf(pas));
+            }            
+        };
+        animationTimer.start();
     }
 
     private void moveSpriteJoueur()
