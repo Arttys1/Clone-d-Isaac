@@ -1,19 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package thebindingofalice.IHM;
 
-import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -23,27 +13,38 @@ import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.joueur.DirectionDeplacement;
 import thebindingofalice.Metier.joueur.Joueur;
+import thebindingofalice.Controller.ControlleurNiveau;
+import thebindingofalice.Metier.niveau.Niveau;
+import thebindingofalice.Metier.niveau.carte.Generateur.Case;
+
 
 /**
  * FXML Controller class
- *
- * @author Pascaline
+ * Vue représentant la fenêtre de jeu.
+ * @author Pascaline, Arnaud
  */
 public class EnJeuView implements Initializable, Observeur {
     private final Joueur joueur = Partie.get().GetJoueur();
-    private ControlleurJoueur controllerJoueur;
-    private ImageView imageJoueur;  
-    
+    private ControlleurJoueur controllerJoueur;      
+    private final Partie partie = Partie.get();     //partie de jeu
+    private ControlleurNiveau controlleurNiveau;    //controlleur du niveau
+    private Niveau niveau;                          //niveau
+    private ImageView imageJoueur;   
     @FXML
-    private AnchorPane anchorPane;
+    private AnchorPane anchorPane;  //objet qui dispose les objets à afficher
     
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {        
+    public void initialize(URL url, ResourceBundle rb) {
+        niveau = partie.getNiveauCourant();
+        controlleurNiveau = new ControlleurNiveau(niveau);
+        controlleurNiveau.Register(this);
         controllerJoueur = new ControlleurJoueur(joueur);
-        controllerJoueur.Register(this);   
+        controllerJoueur.Register(this);  
+        
+        displaySalle();
         loadPlayer();
         boucleDeJeu();
     }
@@ -73,6 +74,8 @@ public class EnJeuView implements Initializable, Observeur {
         switch(message.toLowerCase())
         {
             case "joueur": moveSpriteJoueur(); break;
+            case "salle" : displaySalle(); break;
+            default: break;
         }
     }
    
@@ -93,5 +96,24 @@ public class EnJeuView implements Initializable, Observeur {
     public void handleKeyRelease(KeyEvent evt)
     {
         controllerJoueur.sArreter();
+    }
+    
+    /**
+     * Méthode permettant d'afficher la salle en court.
+     */
+    private void displaySalle()
+    {  
+        anchorPane.getChildren().clear();
+        int size = 60;
+        for (Case c : niveau.getSalleCourante().getCases()) {
+            
+            ImageView img = new ImageView(System.getProperty("user.dir")+"/src/thebindingofalice/Images/Salle/" + c.getSprite());
+            img.setX(100 + c.getColonne() * size);
+            img.setY(50 + c.getLigne() * size);
+            img.setFitHeight(size);
+            img.setFitWidth(size);
+            anchorPane.getChildren().add(img);
+        }
+        
     }
 }
