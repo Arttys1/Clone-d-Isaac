@@ -1,6 +1,7 @@
 package thebindingofalice.Metier.objet.ramassable;
 
 import thebindingofalice.Metier.Coordonnee;
+import thebindingofalice.Metier.Hitbox;
 import thebindingofalice.Metier.ICollision;
 import thebindingofalice.Metier.objet.TypeObjet;
 
@@ -36,6 +37,11 @@ public class Cle extends ObjetRamassable {
 
     @Override
     public TypeObjet getType() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Hitbox getHitbox() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

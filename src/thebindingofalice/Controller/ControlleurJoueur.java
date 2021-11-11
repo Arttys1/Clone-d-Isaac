@@ -12,7 +12,7 @@ import thebindingofalice.Metier.joueur.Joueur;
  *
  * @author Arnaud
  */
-public class ControlleurJoueur extends Observable{
+public class ControlleurJoueur{
     private final Joueur joueur;
 
     public ControlleurJoueur(Joueur joueur) {
@@ -27,11 +27,5 @@ public class ControlleurJoueur extends Observable{
     public void sArreter()
     {
         joueur.sArreter();
-    }
-    
-    public void evoluer(double pas)
-    {
-        joueur.evoluer(pas);
-        Notify("joueur");
     }
 }

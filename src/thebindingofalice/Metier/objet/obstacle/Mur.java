@@ -1,6 +1,7 @@
 package thebindingofalice.Metier.objet.obstacle;
 
 import thebindingofalice.Metier.Coordonnee;
+import thebindingofalice.Metier.Hitbox;
 import thebindingofalice.Metier.ICollision;
 import thebindingofalice.Metier.objet.TypeObjet;
 
@@ -35,6 +36,11 @@ public class Mur extends Obstacle {
 
     @Override
     public boolean EstBloquant() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Hitbox getHitbox() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

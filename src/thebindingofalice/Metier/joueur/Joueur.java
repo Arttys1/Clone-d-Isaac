@@ -2,6 +2,7 @@ package thebindingofalice.Metier.joueur;
 
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Evoluable;
+import thebindingofalice.Metier.Hitbox;
 import thebindingofalice.Metier.ICollision;
 import thebindingofalice.Metier.Statistiques;
 import thebindingofalice.Metier.niveau.carte.salle.DirectionSalle;
@@ -14,17 +15,19 @@ import thebindingofalice.Metier.objet.ramassable.Cle;
  * Classe, héritant de Evoluable et de ICollision, représentant le joueur.
  */
 public class Joueur extends Evoluable implements ICollision {
-	private int vieMax;
-	private int[] vie;
-	private int vitesseX = 0;
-	private int vitesseY = 0;
-	private Cle[] cles;
-	private Salle salleCourante;
-	private Statistiques stats;
+    private int vieMax;
+    private int[] vie;
+    private int vitesseX = 0;
+    private int vitesseY = 0;
+    private Cle[] cles;
+    private Salle salleCourante;
+    private Statistiques stats;
+    private Hitbox hitbox;
 
     public Joueur(Coordonnee c) {
         super(c);
         stats = new Statistiques();
+        //hitbox = new Hitbox(200, 100);
     }
 
     public void Tirer(DirectionTir tir) {
@@ -94,24 +97,31 @@ public class Joueur extends Evoluable implements ICollision {
     /**
      * Méthode appelé à chaque frame du jeu. Le paramètre pas représente le pas
      * de temps entre deux appel de la méthode.
-     *
      * @param pas pas de temps de la boucle de jeu
      */
     @Override
     public void evoluer(double pas) {
         Coordonnee c = getCoordonnee();
         setCoordonnee(new Coordonnee(c.getX() + vitesseX * pas, c.getY() + vitesseY * pas));
+        hitbox.setPosition(c, 100, 10); //les valeurs seront à changé
+        Notify("joueur");
     }
 
+    @Override
     public void Collision(ICollision o) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public boolean EstLeJoueur() {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public boolean EstBloquant() {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    public Hitbox getHitbox() { return hitbox; }
 }

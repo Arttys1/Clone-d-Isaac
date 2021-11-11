@@ -4,9 +4,27 @@ package thebindingofalice.Metier;
  */
 public interface ICollision {
 
-	public void Collision(ICollision o);
+    /**
+     * Méthode appelé quand l'objet est touché par un autre ICollision
+     * @param o l'objet qui touche celui-ci
+     */
+    public void Collision(ICollision o);
 
-	public boolean EstLeJoueur();
+    /**
+     * Méthode retournant si l'objet est le joueur
+     * @return vrai si c'est le joueur, faux sinon
+     */
+    public boolean EstLeJoueur();
 
-	public boolean EstBloquant();
+    /**
+     * Méthode renvoyant si l'objet est bloquant.
+     * @return vrai si bloquant, faux sinon
+     */
+    public boolean EstBloquant();
+    
+    /**
+     * Accesseur de l'hitbox de l'objet
+     * @return l'hitbox de l'objet
+     */
+    public Hitbox getHitbox(); 
 }

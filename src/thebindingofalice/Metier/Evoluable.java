@@ -1,9 +1,12 @@
 package thebindingofalice.Metier;
 
+import thebindingofalice.Controller.Observable;
+
+
 /**
  * Classe abstraite, représentant les objets pouvant evoluer au cours du temps.
  */
-public abstract class Evoluable {
+public abstract class Evoluable extends Observable{
     private Coordonnee coordonnee;
 
     protected Evoluable(Coordonnee c) {
