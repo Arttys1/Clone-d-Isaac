@@ -32,8 +32,9 @@ public class EnJeuView implements Initializable, Observeur {
     private Niveau niveau;                          //niveau
     private ImageView imageJoueur;   
     @FXML
-    private AnchorPane anchorPane;  //objet qui dispose les objets à afficher
-    
+    private AnchorPane background;  //arrière plan
+    @FXML
+    private AnchorPane foreground;  //premier plan
     /**
      * Initializes the controller class.
      */
@@ -80,7 +81,7 @@ public class EnJeuView implements Initializable, Observeur {
     private void loadPlayer()
     {
         imageJoueur = new ImageView(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Sprites/aliceFront.png");
-        anchorPane.getChildren().add(imageJoueur);
+        foreground.getChildren().add(imageJoueur);
     }
     
     @Override
@@ -117,7 +118,7 @@ public class EnJeuView implements Initializable, Observeur {
      */
     private void displaySalle()
     {  
-        anchorPane.getChildren().clear();
+        background.getChildren().clear();
         int size = 60;
         for (Case c : niveau.getSalleCourante().getCases()) {
             
@@ -126,7 +127,7 @@ public class EnJeuView implements Initializable, Observeur {
             img.setY(50 + c.getLigne() * size);
             img.setFitHeight(size);
             img.setFitWidth(size);
-            anchorPane.getChildren().add(img);
+            background.getChildren().add(img);
         }
         
     }
