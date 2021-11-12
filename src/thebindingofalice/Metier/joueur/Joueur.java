@@ -27,7 +27,7 @@ public class Joueur extends Evoluable implements ICollision {
     public Joueur(Coordonnee c) {
         super(c);
         stats = new Statistiques();
-        hitbox = new Hitbox(c.getX(), c.getY(), 20, 10);
+        hitbox = new Hitbox(c.getX(), c.getY(), 30, 50);
     }
 
     public void Tirer(DirectionTir tir) {
@@ -103,7 +103,7 @@ public class Joueur extends Evoluable implements ICollision {
     public void evoluer(double pas) {
         Coordonnee c = getCoordonnee();
         setCoordonnee(new Coordonnee(c.getX() + vitesseX * pas, c.getY() + vitesseY * pas));
-        hitbox.setPosition(c, 10, 20); //les valeurs seront à changé
+        hitbox.setPosition(c, 10, 30); //les valeurs seront à changé
         Notify("joueur");
     }
 

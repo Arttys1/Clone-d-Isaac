@@ -4,5 +4,5 @@ package thebindingofalice.Metier.niveau.carte.Generateur;
  * @author Arnaud
  */
 public enum TypeCase {
-    MUR, SOL, VIDE
+    SOL, VIDE, MUR
 }

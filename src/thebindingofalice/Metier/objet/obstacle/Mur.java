@@ -14,7 +14,7 @@ public class Mur extends Obstacle {
 
     public Mur(Coordonnee c) {
         super(c);
-        hitbox = new Hitbox(c.getX(), c.getY(), 100, 100);
+        hitbox = new Hitbox(c.getX(), c.getY(), 50, 50);
     }
 
     @Override
@@ -32,6 +32,7 @@ public class Mur extends Obstacle {
         if(o.EstLeJoueur())
         {
             Partie.get().GetJoueur().sArreter();
+            System.out.println("joueur");
         }
     }
 

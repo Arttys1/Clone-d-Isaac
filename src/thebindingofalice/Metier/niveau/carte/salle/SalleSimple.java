@@ -5,11 +5,7 @@
  */
 package thebindingofalice.Metier.niveau.carte.salle;
 
-import thebindingofalice.Metier.fabrique.Fabrique;
 import thebindingofalice.Metier.fabrique.FabriqueCase;
-import thebindingofalice.Metier.fabrique.TypeFabrique;
-import thebindingofalice.Metier.niveau.carte.Generateur.CaseMur;
-import thebindingofalice.Metier.niveau.carte.Generateur.CaseSol;
 import thebindingofalice.Metier.niveau.carte.Generateur.TypeCase;
 
 /**
@@ -29,8 +25,7 @@ public class SalleSimple extends Salle{
      */
     private void generateSalle()
     {
-        int tailleCote = getTailleCote();
-        FabriqueCase fabriqueCase = (FabriqueCase) Fabrique.get(TypeFabrique.CASE);
+        int tailleCote = Salle.getTailleCote();
         for (int i = 0; i < tailleCote; i++) {
             for (int j = 0; j < tailleCote; j++) {
                 TypeCase type;
@@ -42,7 +37,7 @@ public class SalleSimple extends Salle{
                 {
                     type = TypeCase.SOL;
                 }
-                AddCase(fabriqueCase.Create(type, j, i));
+                AddCase(FabriqueCase.Create(type, j, i));
             }
         }
     }

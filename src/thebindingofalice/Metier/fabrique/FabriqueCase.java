@@ -1,36 +1,15 @@
 package thebindingofalice.Metier.fabrique;
 
-import java.util.HashMap;
-import java.util.Set;
-import thebindingofalice.Metier.fabrique.constructeurs.constructeurCase.ConstructeurCase;
-import thebindingofalice.Metier.fabrique.constructeurs.constructeurCase.ConstructeurCaseMur;
-import thebindingofalice.Metier.fabrique.constructeurs.constructeurCase.ConstructeurCaseSol;
-import thebindingofalice.Metier.fabrique.constructeurs.constructeurCase.ConstructeurCaseVide;
+import thebindingofalice.Metier.niveau.carte.Generateur.CaseMur;
 import thebindingofalice.Metier.niveau.carte.Generateur.Case;
+import thebindingofalice.Metier.niveau.carte.Generateur.CaseSol;
+import thebindingofalice.Metier.niveau.carte.Generateur.CaseVide;
 import thebindingofalice.Metier.niveau.carte.Generateur.TypeCase;
-
 /**
- * Fabrique abstraite, héritant de Fabrique, gérant la création des cases
+ * Fabrique gérant la création des cases
  * @author Arnaud
  */
-public class FabriqueCase extends Fabrique {      
-    private final HashMap<TypeCase, ConstructeurCase> constructeurs; //constructeurs de case
-
-    public FabriqueCase() {
-        this.constructeurs = new HashMap<>();
-        constructeurs.put(TypeCase.MUR, new ConstructeurCaseMur());
-        constructeurs.put(TypeCase.SOL, new ConstructeurCaseSol());
-        constructeurs.put(TypeCase.VIDE, new ConstructeurCaseVide());
-        Fabrique.register(TypeFabrique.CASE, this);
-    }
-
-    /**
-     * Méthode renvoyant les types supportés par la fabrique
-     * @return les types supportés par la fabrique
-     */
-    public Set<TypeCase> Types() {
-            return constructeurs.keySet();
-    }
+public class FabriqueCase {
 
     /**
      * Méthode permettant de creér un case
@@ -39,8 +18,19 @@ public class FabriqueCase extends Fabrique {
      * @param colonne la colonne de la case
      * @return la case ainsi créer
      */
-    public Case Create(TypeCase type, int colonne, int ligne) {
-        ConstructeurCase cons = constructeurs.get(type);
-        return cons.Create(colonne, ligne);
+    public static Case Create(TypeCase type, int colonne, int ligne) {
+        Case c = null;
+        
+        switch(type)
+        {
+            case MUR: c = new CaseMur(colonne, ligne); break; 
+            case SOL: c = new CaseSol(colonne, ligne); break; 
+            case VIDE: c = new CaseVide(colonne, ligne); break;
+            default:
+                throw new AssertionError(type.name());
+            
+        }
+        
+        return c;
     }
 }

@@ -68,7 +68,7 @@ public abstract class Salle {
      *
      * @return la taille de coté de la salle
      */
-    protected int getTailleCote() {
+    public static int getTailleCote() {
         return 10;
     }
 
