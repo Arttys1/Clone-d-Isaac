@@ -66,6 +66,7 @@ public class EnJeuView implements Initializable {
             @Override
             public void handle(long pas) {
                 //for some obscurs reasons pas must be equal to 1
+                partie.CheckCollides();
                 partie.Evoluer(1);  
             }            
         };
