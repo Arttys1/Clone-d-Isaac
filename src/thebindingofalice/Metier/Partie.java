@@ -54,10 +54,13 @@ public class Partie {
             Hitbox hitbox = objetsCollision.get(i).getHitbox();
             if (hitbox != null) {
                 for (int j = i + 1; j < objetsCollision.size(); j++) {
-                    Hitbox h2 = objetsCollision.get(j).getHitbox();
+                    ICollision c1 = objetsCollision.get(i);
+                    ICollision c2 = objetsCollision.get(j);
+                    Hitbox h2 = c2.getHitbox();
                     if (h2 != null) {
-                        if (hitbox.isCollide(h2)) {
-                            objetsCollision.get(i).Collision(objetsCollision.get(j));
+                        if (hitbox.isCollide(h2) || h2.isCollide(hitbox)) {
+                            c1.Collision(c2);
+                            c2.Collision(c1);
                         }
                     }
                 }

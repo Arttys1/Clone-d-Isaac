@@ -3,44 +3,50 @@ package thebindingofalice.Metier.objet.obstacle;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Hitbox;
 import thebindingofalice.Metier.ICollision;
+import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.objet.TypeObjet;
 
 /**
  * Classe, héritant de Obstacle, représentant les murs
  */
 public class Mur extends Obstacle {
+    private final Hitbox hitbox;
 
     public Mur(Coordonnee c) {
         super(c);
+        hitbox = new Hitbox(c.getX(), c.getY(), 100, 100);
     }
 
     @Override
     public TypeObjet getType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return TypeObjet.MUR;
     }
 
     @Override
     public void evoluer(double pas) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public void Collision(ICollision o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(o.EstLeJoueur())
+        {
+            Partie.get().GetJoueur().sArreter();
+        }
     }
 
     @Override
     public boolean EstLeJoueur() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 
     @Override
     public boolean EstBloquant() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return true;
     }
 
     @Override
     public Hitbox getHitbox() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hitbox;
     }
 }

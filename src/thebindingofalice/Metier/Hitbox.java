@@ -39,10 +39,10 @@ public class Hitbox {
     {
         boolean touche = false;
         
-        if ((h.x >= x && h.x <= getX2()) ||
-            (h.getX2() >= h.x && h.getX2() <= getX2()) ||
-            (h.y >= y && h.y <= getY2()) ||
-            (h.getY2() >= h.y && h.getY2() <= getY2()))
+        if((x >= h.x && x <= h.getX2() &&
+            y >= h.y && y <= h.getY2()) ||
+           (getX2() >= h.x && getX2() <= h.getX2() &&            
+            getY2() >= h.y && getY2() <= h.getY2()))
         {
             touche = true;
         }
@@ -59,4 +59,22 @@ public class Hitbox {
     {
         return y + height;
     }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+    
+    
 }
