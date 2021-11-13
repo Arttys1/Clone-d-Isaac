@@ -8,30 +8,18 @@ package thebindingofalice.Controller;
 import thebindingofalice.Metier.joueur.DirectionDeplacement;
 import thebindingofalice.Metier.joueur.Joueur;
 import thebindingofalice.Metier.projectiles.DirectionTir;
+import thebindingofalice.Metier.projectiles.ProjectileAllie;
 
 /**
  *
- * @author Arnaud
+ * @author johann
  */
-public class ControlleurJoueur{
-    private final Joueur joueur;
+public class ControlleurTirAllie {
+    private final ProjectileAllie Tir;
 
-    public ControlleurJoueur(Joueur joueur) {
-        this.joueur = joueur;
+    public ControlleurTirAllie(ProjectileAllie tir) {
+        this.Tir = tir;
     }
     
-    public void bouger(DirectionDeplacement dir)
-    {
-        joueur.Bouger(dir);
-    }
     
-    public void tirer(DirectionTir d)
-    {
-        joueur.Tirer(d);
-    }
-    
-    public void sArreter()
-    {
-        joueur.sArreter();
-    }
 }

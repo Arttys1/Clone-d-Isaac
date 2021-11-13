@@ -18,9 +18,13 @@ import thebindingofalice.Metier.joueur.DirectionDeplacement;
 import thebindingofalice.Metier.joueur.Joueur;
 import thebindingofalice.Controller.ControlleurNiveau;
 import thebindingofalice.IHM.view.JoueurView;
+import thebindingofalice.IHM.view.TirAllieView;
 import thebindingofalice.IHM.view.View;
 import thebindingofalice.Metier.niveau.Niveau;
 import thebindingofalice.Metier.niveau.carte.Generateur.Case;
+import thebindingofalice.Metier.projectiles.DirectionTir;
+import thebindingofalice.Metier.projectiles.ProjectileAllie;
+
 
 
 /**
@@ -84,6 +88,26 @@ public class EnJeuView implements Initializable {
             case S: joueurView.bouger(DirectionDeplacement.BAS); break;
             case D: joueurView.bouger(DirectionDeplacement.DROITE); break;
             case Q: joueurView.bouger(DirectionDeplacement.GAUCHE); break;
+            case UP: 
+            {
+                joueurView.tirer(DirectionTir.HAUT);
+                this.addView(new TirAllieView((ProjectileAllie)Partie.get().getNiveauCourant().getSalleCourante().getEvoluables().get(Partie.get().getNiveauCourant().getSalleCourante().getEvoluables().size() - 1)));
+            } break;
+            case DOWN: 
+            {
+                joueurView.tirer(DirectionTir.BAS);
+                this.addView(new TirAllieView((ProjectileAllie)Partie.get().getNiveauCourant().getSalleCourante().getEvoluables().get(Partie.get().getNiveauCourant().getSalleCourante().getEvoluables().size() - 1)));
+            } break;
+            case RIGHT: 
+            {
+                joueurView.tirer(DirectionTir.DROITE);
+                this.addView(new TirAllieView((ProjectileAllie)Partie.get().getNiveauCourant().getSalleCourante().getEvoluables().get(Partie.get().getNiveauCourant().getSalleCourante().getEvoluables().size() - 1)));
+            } break;
+            case LEFT:
+            { 
+                joueurView.tirer(DirectionTir.GAUCHE);
+                this.addView(new TirAllieView((ProjectileAllie)Partie.get().getNiveauCourant().getSalleCourante().getEvoluables().get(Partie.get().getNiveauCourant().getSalleCourante().getEvoluables().size() - 1)));
+            } break;
             default : break;
         }
     }
@@ -103,7 +127,7 @@ public class EnJeuView implements Initializable {
         int size = 60;
         for (Case c : partie.getNiveauCourant().getSalleCourante().getCases()) {
             
-            ImageView img = new ImageView(System.getProperty("user.dir")+"/src/thebindingofalice/Images/Salle/" + c.getSprite());
+            ImageView img = new ImageView(System.getProperty("user.dir")+"\\src\\thebindingofalice\\Images\\Salle\\" + c.getSprite());
             img.setX(100 + c.getColonne() * size);
             img.setY(50 + c.getLigne() * size);
             img.setFitHeight(size);

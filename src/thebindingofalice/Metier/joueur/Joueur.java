@@ -4,12 +4,14 @@ import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Evoluable;
 import thebindingofalice.Metier.Hitbox;
 import thebindingofalice.Metier.ICollision;
+import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.Statistiques;
 import thebindingofalice.Metier.niveau.carte.salle.DirectionSalle;
 import thebindingofalice.Metier.projectiles.DirectionTir;
 import thebindingofalice.Metier.objet.ramassable.TypeCoeur;
 import thebindingofalice.Metier.niveau.carte.salle.Salle;
 import thebindingofalice.Metier.objet.ramassable.Cle;
+import thebindingofalice.Metier.projectiles.ProjectileAllie;
 
 /**
  * Classe, héritant de Evoluable et de ICollision, représentant le joueur.
@@ -28,10 +30,14 @@ public class Joueur extends Evoluable implements ICollision {
         super(c);
         stats = new Statistiques();
         hitbox = new Hitbox(c.getX(), c.getY(), 30, 50);
+        
+        
     }
 
     public void Tirer(DirectionTir tir) {
-            throw new UnsupportedOperationException();
+        ProjectileAllie p = new ProjectileAllie(this.getCoordonnee(), tir);
+        Partie.get().getNiveauCourant().getSalleCourante().AddEvoluable(p);
+        Notify("TirAllié");
     }
 
     public void Bouger(DirectionDeplacement dir) {
