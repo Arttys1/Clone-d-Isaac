@@ -42,7 +42,7 @@ public class Joueur extends Evoluable implements ICollision {
     }
 
     public void Bouger(DirectionDeplacement dir) {
-        final int vitesseMax = 20;
+        final int vitesseMax = 10;
         int v = stats.getVitesseDeplacement();
         int coefY;
         int coefX;
