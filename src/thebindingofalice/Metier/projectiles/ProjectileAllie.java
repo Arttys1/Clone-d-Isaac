@@ -13,7 +13,7 @@ public class ProjectileAllie extends Projectile {
     
     private DirectionTir dirTir;
     
-    private int vitesse = 3;
+    private float vitesse = 2.5f;
     
     private TypeProjectile type;
 
@@ -54,8 +54,6 @@ public class ProjectileAllie extends Projectile {
                    break;
            
            }
-           //setCoordonnee(new Coordonnee(c.getX() + vitesseX * pas, c.getY() + vitesseY * pas));
-            //hitbox.setPosition(c, 10, 10); //les valeurs seront à changé
            Notify("tirallié"); 
     }
 
@@ -90,11 +88,11 @@ public class ProjectileAllie extends Projectile {
         this.type = type;
     }
 
-    public int getVitesse() {
+    public float getVitesse() {
         return vitesse;
     }
 
-    public void setVitesse(int vitesse) {
+    public void setVitesse(float vitesse) {
         this.vitesse = vitesse;
     }
 }
