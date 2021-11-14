@@ -11,6 +11,11 @@ public class Coordonnee {
         this.y = y;
     }
 
+    public Coordonnee(Coordonnee coordonnee) {
+        this.x = coordonnee.x;
+        this.y = coordonnee.y;
+    }
+
     public double getX() {
         return x;
     }

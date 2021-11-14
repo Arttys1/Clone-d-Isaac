@@ -24,8 +24,8 @@ public class ControlleurJoueur{
         joueur.Bouger(dir);
     }
     
-    public void sArreter()
+    public void sArreter(DirectionDeplacement d)
     {
-        joueur.sArreter();
+        joueur.sArreter(d);
     }
 }

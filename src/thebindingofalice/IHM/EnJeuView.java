@@ -2,7 +2,6 @@ package thebindingofalice.IHM;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
@@ -10,17 +9,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import thebindingofalice.Controller.ControlleurJoueur;
-import thebindingofalice.Controller.Observeur;
-import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.joueur.DirectionDeplacement;
-import thebindingofalice.Metier.joueur.Joueur;
-import thebindingofalice.Controller.ControlleurNiveau;
 import thebindingofalice.IHM.view.JoueurView;
+import thebindingofalice.IHM.view.MurView;
 import thebindingofalice.IHM.view.View;
-import thebindingofalice.Metier.niveau.Niveau;
+import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.niveau.carte.Generateur.Case;
+import thebindingofalice.Metier.niveau.carte.Generateur.TypeCase;
 
 
 /**
@@ -42,7 +38,7 @@ public class EnJeuView implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        objAAfficher = new ArrayList<>();
+        objAAfficher = new ArrayList<>();        
         joueurView = new JoueurView();               
         addView(joueurView);
         
@@ -65,15 +61,13 @@ public class EnJeuView implements Initializable {
         {
             @Override
             public void handle(long pas) {
-                //for some obscurs reasons pas must be equal to 1
                 partie.CheckCollides();
-                partie.Evoluer(1);  
+                //for some obscurs reasons pas must be equal to 1
+                partie.Evoluer(1);
             }            
         };
         animationTimer.start();
     }
-    
-
    
     @FXML
     public void handleOnKeyPressed(KeyEvent event)
@@ -91,7 +85,14 @@ public class EnJeuView implements Initializable {
     @FXML
     public void handleKeyRelease(KeyEvent evt)
     {
-        joueurView.sArreter();
+        switch(evt.getCode())
+        {
+            case Z: joueurView.sArreter(DirectionDeplacement.HAUT); break;
+            case S: joueurView.sArreter(DirectionDeplacement.BAS); break;
+            case D: joueurView.sArreter(DirectionDeplacement.DROITE); break;
+            case Q: joueurView.sArreter(DirectionDeplacement.GAUCHE); break;
+            default : break;
+        }
     }
     
     /**
@@ -102,14 +103,18 @@ public class EnJeuView implements Initializable {
         background.getChildren().clear();
         int size = 60;
         for (Case c : partie.getNiveauCourant().getSalleCourante().getCases()) {
-            
-            ImageView img = new ImageView(System.getProperty("user.dir")+"/src/thebindingofalice/Images/Salle/" + c.getSprite());
-            img.setX(100 + c.getColonne() * size);
-            img.setY(50 + c.getLigne() * size);
+            ImageView img = new ImageView(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Salle/" + c.getSprite());
+            int x = 100 + c.getColonne() * size;
+            int y = 50 + c.getLigne() * size;
+            img.setX(x);
+            img.setY(y);
             img.setFitHeight(size);
             img.setFitWidth(size);
             background.getChildren().add(img);
+            if (c.getType() == TypeCase.MUR) {
+                MurView mur = new MurView(new Coordonnee(x, y));
+                addView(mur);
+            }
         }
-        
     }
 }

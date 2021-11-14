@@ -31,8 +31,7 @@ public class Mur extends Obstacle {
     public void Collision(ICollision o) {
         if(o.EstLeJoueur())
         {
-            Partie.get().GetJoueur().sArreter();
-            System.out.println("joueur");
+            Partie.get().GetJoueur().stop();
         }
     }
 

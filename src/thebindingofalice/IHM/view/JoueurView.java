@@ -26,6 +26,7 @@ public class JoueurView extends View implements Observeur{
         joueur.Register(this); 
         controlleurJoueur = new ControlleurJoueur(joueur);        
         Partie.get().getNiveauCourant().getSalleCourante().AddEvoluable(joueur);
+        Partie.get().addICollision(joueur);
     }
     
     private void moveSpriteJoueur()
@@ -50,9 +51,9 @@ public class JoueurView extends View implements Observeur{
         controlleurJoueur.bouger(d);
     }
     
-    public void sArreter()
+    public void sArreter(DirectionDeplacement d)
     {
-        controlleurJoueur.sArreter();
+        controlleurJoueur.sArreter(d);
     }
     
 }
