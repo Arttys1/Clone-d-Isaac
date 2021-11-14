@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="700" prefWidth="1000" onKeyPressed="#handleOnKeyPressed" onKeyReleased="#handleKeyRelease" onKeyTyped="#handleKeyTyped"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="thebindingofalice.IHM.EnJeuView">
+<AnchorPane id="AnchorPane" prefHeight="700" prefWidth="1000" onKeyPressed="#handleOnKeyPressed" onKeyReleased="#handleKeyRelease" xmlns:fx="http://javafx.com/fxml/1" fx:controller="thebindingofalice.IHM.EnJeuView">
     <children>
         <AnchorPane fx:id="background" prefHeight="700" prefWidth="1000"/> 
                    
