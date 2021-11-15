@@ -42,43 +42,36 @@ public class Joueur extends Evoluable implements ICollision {
     }
 
     public void Bouger(DirectionDeplacement dir) {
-        final int vitesseMax = 10;
         int v = stats.getVitesseDeplacement();
-        int coefY;
-        int coefX;
         switch(dir)
         {
-            case HAUT:          coefY = -1; coefX = 0; break;
-            case HAUT_DROITE:   coefY = -1; coefX = 1; break; 
-            case DROITE:        coefY = 0; coefX = 1; break;
-            case BAS_DROITE:    coefY = 1; coefX = 1; break;
-            case BAS:           coefY = 1; coefX = 0; break;
-            case BAS_GAUCHE:    coefY = 1; coefX = -1; break;
-            case GAUCHE:        coefY = 0; coefX = -1; break;
-            case HAUT_GAUCHE:   coefY = -1; coefX = -1; break;
+            case HAUT: vitesseY = -v; break;
+            case HAUT_DROITE: break; 
+            case DROITE: vitesseX = v; break;
+            case BAS_DROITE:  break;
+            case BAS: vitesseY = v; break;
+            case BAS_GAUCHE:  break;
+            case GAUCHE: vitesseX = -v; break;
+            case HAUT_GAUCHE:  break;
             default:
                 throw new AssertionError(dir.name());                
         }
-        vitesseX += v * coefX;
-        vitesseY += v * coefY;
-
-        if (vitesseX > vitesseMax) {
-            vitesseX = vitesseMax;
-        }
-        if (vitesseX < -vitesseMax) {
-            vitesseX = -vitesseMax;
-        }
-        if (vitesseY > vitesseMax) {
-            vitesseY = vitesseMax;
-        }
-        if (vitesseY < -vitesseMax) {
-            vitesseY = -vitesseMax;
-        }
     }
 
-    public void sArreter() {
-        vitesseX = 0;
-        vitesseY = 0;
+    public void sArreter(DirectionDeplacement dir) {
+        switch(dir)
+        {
+            case HAUT: vitesseY = 0; break;
+            case HAUT_DROITE: break; 
+            case DROITE: vitesseX = 0; break;
+            case BAS_DROITE:  break;
+            case BAS: vitesseY = 0; break;
+            case BAS_GAUCHE:  break;
+            case GAUCHE: vitesseX = 0; break;
+            case HAUT_GAUCHE:  break;
+            default:
+                throw new AssertionError(dir.name());                
+        }
     }
 
     public void PrendDegat(int nbDegat) {
@@ -131,4 +124,9 @@ public class Joueur extends Evoluable implements ICollision {
 
     @Override
     public Hitbox getHitbox() { return hitbox; }
+
+    public void stop() {
+        vitesseX = 0;
+        vitesseY = 0;
+    }
 }

@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import thebindingofalice.IHM.view.JoueurView;
+import thebindingofalice.IHM.view.MurView;
 import thebindingofalice.IHM.view.View;
 import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.joueur.DirectionDeplacement;
@@ -64,7 +65,6 @@ public class EnJeuView implements Initializable {
                 partie.CheckCollides();
                 //for some obscurs reasons pas must be equal to 1
                 partie.Evoluer(1);
-                
             }            
         };
         animationTimer.start();
@@ -98,7 +98,14 @@ public class EnJeuView implements Initializable {
     @FXML
     public void handleKeyRelease(KeyEvent evt)
     {
-        joueurView.sArreter();
+        switch(evt.getCode())
+        {
+            case Z: joueurView.sArreter(DirectionDeplacement.HAUT); break;
+            case S: joueurView.sArreter(DirectionDeplacement.BAS); break;
+            case D: joueurView.sArreter(DirectionDeplacement.DROITE); break;
+            case Q: joueurView.sArreter(DirectionDeplacement.GAUCHE); break;
+            default : break;
+        }
     }
     
     /**
@@ -117,6 +124,10 @@ public class EnJeuView implements Initializable {
             img.setFitHeight(size);
             img.setFitWidth(size);
             background.getChildren().add(img);
+            if (c.getType() == TypeCase.MUR) {
+                MurView mur = new MurView(new Coordonnee(x, y));
+                addView(mur);
+            }
         }
     }
 }

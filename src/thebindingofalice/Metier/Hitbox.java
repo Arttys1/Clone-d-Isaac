@@ -1,5 +1,7 @@
 package thebindingofalice.Metier;
 
+import thebindingofalice.Metier.joueur.DirectionDeplacement;
+
 /**
  * Classe représentant les hitbox des ICollision.
  * Les hitbox sont modélisé en rectangle.

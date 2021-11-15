@@ -26,14 +26,14 @@ public class ControlleurJoueur{
     {
         joueur.Bouger(dir);
     }
-    
+  
     public TirAllieView tirer(DirectionTir d)
     {
         return new TirAllieView(joueur.Tirer(d));
     }
-    
-    public void sArreter()
+
+    public void sArreter(DirectionDeplacement d)
     {
-        joueur.sArreter();
+        joueur.sArreter(d);
     }
 }
