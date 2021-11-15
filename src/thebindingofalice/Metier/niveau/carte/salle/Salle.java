@@ -13,6 +13,10 @@ public abstract class Salle {
     private final ArrayList<Porte> portes;          //Liste des portes de la salle
     private final ArrayList<Evoluable> evoluables;  //Liste des evoluables présent dans la salle
 
+    public ArrayList<Evoluable> getEvoluables() {
+        return evoluables;
+    }
+
     public Salle() {
         this.evoluables = new ArrayList<>();
         this.portes = new ArrayList<>();

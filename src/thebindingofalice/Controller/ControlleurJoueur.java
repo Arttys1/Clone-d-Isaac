@@ -5,8 +5,11 @@
  */
 package thebindingofalice.Controller;
 
+import thebindingofalice.IHM.view.TirAllieView;
 import thebindingofalice.Metier.joueur.DirectionDeplacement;
 import thebindingofalice.Metier.joueur.Joueur;
+import thebindingofalice.Metier.projectiles.DirectionTir;
+import thebindingofalice.Metier.projectiles.ProjectileAllie;
 
 /**
  *
@@ -23,7 +26,12 @@ public class ControlleurJoueur{
     {
         joueur.Bouger(dir);
     }
-    
+  
+    public TirAllieView tirer(DirectionTir d)
+    {
+        return new TirAllieView(joueur.Tirer(d));
+    }
+
     public void sArreter(DirectionDeplacement d)
     {
         joueur.sArreter(d);

@@ -9,14 +9,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import thebindingofalice.Metier.Partie;
-import thebindingofalice.Metier.joueur.DirectionDeplacement;
 import thebindingofalice.IHM.view.JoueurView;
 import thebindingofalice.IHM.view.MurView;
 import thebindingofalice.IHM.view.View;
+import thebindingofalice.Metier.Partie;
+import thebindingofalice.Metier.joueur.DirectionDeplacement;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.niveau.carte.Generateur.Case;
 import thebindingofalice.Metier.niveau.carte.Generateur.TypeCase;
+import thebindingofalice.Metier.projectiles.DirectionTir;
 
 
 /**
@@ -79,6 +80,18 @@ public class EnJeuView implements Initializable {
             case D: joueurView.bouger(DirectionDeplacement.DROITE); break;
             case Q: joueurView.bouger(DirectionDeplacement.GAUCHE); break;
             default : break;
+        }
+    }
+    
+    @FXML
+    public void handleKeyTyped(KeyEvent evt)
+    {
+        switch(evt.getCharacter())
+        {
+            case "i": addView(joueurView.tirer(DirectionTir.HAUT)); break;
+            case "k": addView(joueurView.tirer(DirectionTir.BAS)); break;
+            case "j": addView(joueurView.tirer(DirectionTir.GAUCHE));break;
+            case "l": addView(joueurView.tirer(DirectionTir.DROITE));break;
         }
     }
     
