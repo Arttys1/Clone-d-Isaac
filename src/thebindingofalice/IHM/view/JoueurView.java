@@ -51,10 +51,9 @@ public class JoueurView extends View implements Observeur{
         controlleurJoueur.bouger(d);
     }
     
-    public void tirer(DirectionTir d)
+    public TirAllieView tirer(DirectionTir d)
     {
-        controlleurJoueur.tirer(d);
-        
+        return controlleurJoueur.tirer(d);        
     }
     
     public void sArreter()

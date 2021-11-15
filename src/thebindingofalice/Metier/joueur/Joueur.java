@@ -34,11 +34,11 @@ public class Joueur extends Evoluable implements ICollision {
         
     }
 
-    public void Tirer(DirectionTir tir) {
+    public ProjectileAllie Tirer(DirectionTir tir) {
         Coordonnee corTir = new Coordonnee(this.getCoordonnee().getX()+22,this.getCoordonnee().getY()+10);
         ProjectileAllie p = new ProjectileAllie(corTir, tir);
-        Partie.get().getNiveauCourant().getSalleCourante().AddEvoluable(p);
         Notify("TirAllié");
+        return p;
     }
 
     public void Bouger(DirectionDeplacement dir) {
