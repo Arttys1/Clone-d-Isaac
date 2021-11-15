@@ -3,6 +3,7 @@ package thebindingofalice.Metier.projectiles;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Hitbox;
 import thebindingofalice.Metier.ICollision;
+import thebindingofalice.Metier.Partie;
 
 /**
  * Classe, héritant de Projectile, représentant les projectiles alliés
@@ -14,16 +15,11 @@ public class ProjectileAllie extends Projectile {
     private DirectionTir dirTir;
     
     private float vitesse = 2.5f;
-    
-    private TypeProjectile type;
 
     public ProjectileAllie(Coordonnee coordonnee, DirectionTir dir) {
         super(coordonnee, dir);
         this.hitbox = new Hitbox(coordonnee.getX(),coordonnee.getY(),50,50);
-        this.dirTir = dir;
-        this.type = TypeProjectile.ProjectileAllie;
-        
-        
+        this.dirTir = dir;      
     }
 
     /**
@@ -54,12 +50,16 @@ public class ProjectileAllie extends Projectile {
                    break;
            
            }
-           Notify("tirallié"); 
+           Notify("tirallie"); 
     }
 
     @Override
     public void Collision(ICollision o) {
-            throw new UnsupportedOperationException();
+        if(!o.EstLeJoueur())
+        {
+            Partie.get().getNiveauCourant().getSalleCourante().RemoveEvoluable(this);
+            Notify("delete");
+        }
     }
 
     @Override
@@ -74,18 +74,12 @@ public class ProjectileAllie extends Projectile {
 
     @Override
     public TypeProjectile getType() {
-        
         return TypeProjectile.ProjectileAllie;
     }
 
     @Override
     public Hitbox getHitbox() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        //return hitbox;
-    }
-    
-    public void setType(TypeProjectile type) {
-        this.type = type;
+        return hitbox;
     }
 
     public float getVitesse() {
