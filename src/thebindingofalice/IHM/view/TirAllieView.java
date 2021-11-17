@@ -5,12 +5,10 @@
  */
 package thebindingofalice.IHM.view;
 
-import thebindingofalice.Controller.ControlleurJoueur;
 import thebindingofalice.Controller.ControlleurTirAllie;
 import thebindingofalice.Controller.Observeur;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Partie;
-import thebindingofalice.Metier.joueur.Joueur;
 import thebindingofalice.Metier.projectiles.ProjectileAllie;
 
 /**
@@ -18,17 +16,12 @@ import thebindingofalice.Metier.projectiles.ProjectileAllie;
  * @author johann
  */
 public class TirAllieView extends View implements Observeur{
-
-    private ProjectileAllie projectile;
-    
-    private Joueur joueur;
-    
-    private ControlleurTirAllie controlleurTir;
+    private final ProjectileAllie projectile;    
+    private final ControlleurTirAllie controlleurTir;
     
     public TirAllieView(ProjectileAllie p) {
         super(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Sprites/Tirs/Tir.png");
         this.projectile = p;
-        joueur = Partie.get().GetJoueur();
         projectile.Register(this); 
         controlleurTir = new ControlleurTirAllie(projectile);        
         Partie.get().getNiveauCourant().getSalleCourante().AddEvoluable(projectile);
@@ -44,9 +37,11 @@ public class TirAllieView extends View implements Observeur{
     }
     @Override
     public void Update(String message) {
-        if(message.toLowerCase().equals("tirallié"))
+        switch(message.toLowerCase())
         {
-            moveSpriteTir();
+            case "tirallie" : moveSpriteTir(); break;
+            case "delete" : break;
+            default: break;
         }
     }
     
