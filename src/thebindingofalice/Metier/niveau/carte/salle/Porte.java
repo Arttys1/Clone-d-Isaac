@@ -7,6 +7,6 @@ package thebindingofalice.Metier.niveau.carte.salle;
 public class Porte {        
         public TypePorte getType()
         {
-            throw new UnsupportedOperationException();
+            return null;
         }
 }

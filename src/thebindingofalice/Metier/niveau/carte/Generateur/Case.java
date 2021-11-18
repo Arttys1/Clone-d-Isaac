@@ -7,7 +7,6 @@ package thebindingofalice.Metier.niveau.carte.Generateur;
 public abstract class Case {
 	private final int ligne;            //ligne de la case
 	private final int colonne;          //colonne de la case
-
         
 	protected Case(int colonne, int ligne) {
 		this.ligne = ligne;

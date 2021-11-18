@@ -2,6 +2,7 @@ package thebindingofalice.Metier.fabrique;
 
 import thebindingofalice.Metier.niveau.carte.Generateur.CaseMur;
 import thebindingofalice.Metier.niveau.carte.Generateur.Case;
+import thebindingofalice.Metier.niveau.carte.Generateur.CasePorte;
 import thebindingofalice.Metier.niveau.carte.Generateur.CaseSol;
 import thebindingofalice.Metier.niveau.carte.Generateur.CaseVide;
 import thebindingofalice.Metier.niveau.carte.Generateur.TypeCase;
@@ -26,6 +27,7 @@ public class FabriqueCase {
             case MUR: c = new CaseMur(colonne, ligne); break; 
             case SOL: c = new CaseSol(colonne, ligne); break; 
             case VIDE: c = new CaseVide(colonne, ligne); break;
+            case PORTE: c = new CasePorte(colonne, ligne); break;
             default:
                 throw new AssertionError(type.name());
             
