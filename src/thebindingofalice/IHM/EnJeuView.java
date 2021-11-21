@@ -16,6 +16,7 @@ import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.joueur.DirectionDeplacement;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.niveau.carte.Generateur.Case;
+import thebindingofalice.Metier.niveau.carte.Generateur.CaseMur;
 import thebindingofalice.Metier.niveau.carte.Generateur.TypeCase;
 import thebindingofalice.Metier.projectiles.DirectionTir;
 
@@ -61,10 +62,10 @@ public class EnJeuView implements Initializable {
         AnimationTimer animationTimer = new AnimationTimer()
         {
             @Override
-            public void handle(long pas) {
-                partie.CheckCollides();
+            public void handle(long pas) {                
                 //for some obscurs reasons pas must be equal to 1
                 partie.Evoluer(1);
+                partie.CheckCollides();
             }            
         };
         animationTimer.start();
@@ -118,14 +119,14 @@ public class EnJeuView implements Initializable {
         for (Case c : partie.getNiveauCourant().getSalleCourante().getCases()) {
             ImageView img = new ImageView(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Salle/" + c.getSprite());
             int x = 100 + c.getColonne() * size;
-            int y = 50 + c.getLigne() * size;
+            int y = 20 + c.getLigne() * size;
             img.setX(x);
             img.setY(y);
             img.setFitHeight(size);
             img.setFitWidth(size);
             background.getChildren().add(img);
             if (c.getType() == TypeCase.MUR) {
-                MurView mur = new MurView(new Coordonnee(x, y));
+                MurView mur = new MurView(new Coordonnee(x, y), (CaseMur)c);
                 addView(mur);
             }
         }
