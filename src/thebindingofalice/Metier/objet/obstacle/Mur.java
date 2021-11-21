@@ -68,7 +68,7 @@ public class Mur extends Obstacle {
             {
                 case HAUT: coord.setY(hitbox.getY() + hitbox.getHeight());
                     break;
-                case BAS: coord.setY(hitbox.getY());
+                case BAS: coord.setY(hitbox.getY() - 60);   //valeurs en brut car horrible programmeur
                     break;
                 case GAUCHE: coord.setX(hitbox.getX() + hitbox.getWidth()); 
                     break;
