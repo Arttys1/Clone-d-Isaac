@@ -115,7 +115,7 @@ public class EnJeuView implements Initializable{
         for (Case c : partie.getNiveauCourant().getSalleCourante().getCases()) {
             ImageView img = new ImageView(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Salle/" + c.getSprite());
             int x = 100 + c.getColonne() * size;
-            int y = 50 + c.getLigne() * size;
+            int y = 20 + c.getLigne() * size;
             img.setX(x);
             img.setY(y);
             img.setFitHeight(size);
