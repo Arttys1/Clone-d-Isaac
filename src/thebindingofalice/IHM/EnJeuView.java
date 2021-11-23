@@ -18,6 +18,7 @@ import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.joueur.DirectionDeplacement;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.niveau.carte.Generateur.Case;
+import thebindingofalice.Metier.niveau.carte.Generateur.CaseMur;
 import thebindingofalice.Metier.niveau.carte.Generateur.TypeCase;
 import thebindingofalice.Metier.projectiles.DirectionTir;
 import thebindingofalice.Metier.projectiles.ProjectileAllie;
@@ -121,7 +122,7 @@ public class EnJeuView implements Initializable{
             img.setFitWidth(size);
             background.getChildren().add(img);
             if (c.getType() == TypeCase.MUR) {
-                MurView mur = new MurView(new Coordonnee(x, y));
+                MurView mur = new MurView(new Coordonnee(x, y), (CaseMur)c);
                 GamePane.get().addView(mur);
             }
         }
