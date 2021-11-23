@@ -73,13 +73,13 @@ public abstract class Salle {
      * @return la taille de coté de la salle
      */
     public static int getTailleCote() {
-        return 11;
+        return 10;
     }
 
     public void evoluer(double pas) {
-        for(Evoluable evo : evoluables)
+        for(int i = 0; i < evoluables.size(); i++)
         {
-            evo.evoluer(pas);
+            evoluables.get(i).evoluer(pas);
         }
     }
                

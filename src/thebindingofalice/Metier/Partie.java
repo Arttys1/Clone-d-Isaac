@@ -43,6 +43,7 @@ public class Partie {
      */
     public void Evoluer(double pas) {
         niveauCourant.getSalleCourante().evoluer(pas);
+        
     }
     
     /**

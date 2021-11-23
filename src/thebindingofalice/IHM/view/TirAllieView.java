@@ -9,6 +9,7 @@ import thebindingofalice.Controller.ControlleurTirAllie;
 import thebindingofalice.Controller.Observeur;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Partie;
+import thebindingofalice.Metier.joueur.Joueur;
 import thebindingofalice.Metier.projectiles.ProjectileAllie;
 
 /**
@@ -22,9 +23,11 @@ public class TirAllieView extends View implements Observeur{
     public TirAllieView(ProjectileAllie p) {
         super(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Sprites/Tirs/Tir.png");
         this.projectile = p;
-        projectile.Register(this); 
-        controlleurTir = new ControlleurTirAllie(projectile);        
+        projectile.Register(this);
+        controlleurTir = new ControlleurTirAllie(projectile);   
         Partie.get().getNiveauCourant().getSalleCourante().AddEvoluable(projectile);
+        Partie.get().addICollision(projectile);
+        
     }
     
     private void moveSpriteTir()

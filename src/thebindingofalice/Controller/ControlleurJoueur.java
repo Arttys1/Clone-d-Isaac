@@ -15,7 +15,7 @@ import thebindingofalice.Metier.projectiles.ProjectileAllie;
  *
  * @author Arnaud
  */
-public class ControlleurJoueur{
+public class ControlleurJoueur extends Observable{
     private final Joueur joueur;
 
     public ControlleurJoueur(Joueur joueur) {
@@ -25,13 +25,17 @@ public class ControlleurJoueur{
     public void bouger(DirectionDeplacement dir)
     {
         joueur.Bouger(dir);
+        
     }
   
-    public TirAllieView tirer(DirectionTir d)
+    public void tirer(DirectionTir d)
     {
-        return new TirAllieView(joueur.Tirer(d));
+        joueur.Tirer(d);
     }
 
+    public void stopTirer(DirectionTir d){
+        joueur.stopTirer(d);
+    }
     public void sArreter(DirectionDeplacement d)
     {
         joueur.sArreter(d);

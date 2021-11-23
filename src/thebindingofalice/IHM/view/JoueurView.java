@@ -12,6 +12,7 @@ import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.joueur.DirectionDeplacement;
 import thebindingofalice.Metier.joueur.Joueur;
 import thebindingofalice.Metier.projectiles.DirectionTir;
+import thebindingofalice.Metier.projectiles.ProjectileAllie;
 
 /**
  * Classe IHM représentant la vue du joueur.
@@ -52,9 +53,13 @@ public class JoueurView extends View implements Observeur{
         controlleurJoueur.bouger(d);
     }  
 
-    public TirAllieView tirer(DirectionTir d)
+    public void tirer(DirectionTir d)
     {
-        return controlleurJoueur.tirer(d);        
+        controlleurJoueur.tirer(d);        
+    }
+    
+    public void stopTirer(DirectionTir d){
+        controlleurJoueur.stopTirer(d);
     }
   
     public void sArreter(DirectionDeplacement d)
