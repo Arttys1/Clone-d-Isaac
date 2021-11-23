@@ -75,6 +75,8 @@ public class Partie {
      */
     public void addICollision(ICollision o) { objetsCollision.add(o); }
     
+    public void RemoveICollision(ICollision o) { objetsCollision.remove(o); }
+    
     /**
      * Accesseur du joueur
      * @return le joueur

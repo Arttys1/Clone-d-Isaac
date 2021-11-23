@@ -20,7 +20,7 @@ public class ProjectileAllie extends Projectile {
 
     public ProjectileAllie(Coordonnee coordonnee, DirectionTir dir) {
         super(coordonnee, dir);
-        this.hitbox = new Hitbox(coordonnee.getX(),coordonnee.getY(),50,50);
+        this.hitbox = new Hitbox(coordonnee.getX(),coordonnee.getY(),10,10);
         this.dirTir = dir;      
     }
 
@@ -57,7 +57,6 @@ public class ProjectileAllie extends Projectile {
     public void Collision(ICollision o) {
         if(o.EstBloquant())
         {
-            //Partie.get().getNiveauCourant().getSalleCourante().RemoveEvoluable(this);
             Notify("delete");
         }
     }

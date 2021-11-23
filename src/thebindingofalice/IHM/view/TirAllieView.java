@@ -7,6 +7,7 @@ package thebindingofalice.IHM.view;
 
 import thebindingofalice.Controller.ControlleurTirAllie;
 import thebindingofalice.Controller.Observeur;
+import thebindingofalice.IHM.GamePane;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.joueur.Joueur;
@@ -43,9 +44,16 @@ public class TirAllieView extends View implements Observeur{
         switch(message.toLowerCase())
         {
             case "tirallie" : moveSpriteTir(); break;
-            case "delete" : break;
+            case "delete" : destroy(); break;
             default: break;
         }
+    }
+    
+    public void destroy()
+    {
+        Partie.get().getNiveauCourant().getSalleCourante().RemoveEvoluable(projectile);
+        Partie.get().RemoveICollision(projectile);
+        GamePane.get().removeView(this);
     }
     
 }

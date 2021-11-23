@@ -22,20 +22,21 @@ public class GamePane{
     }
     
     public static GamePane get() {
-        if(instance == null)
-        {
+        if (instance == null) {
             instance = new GamePane();
         }
         return instance;
     }
-    
-     public void addView(View v)
-    {
-        foreground.getChildren().add(v);  
-        
+
+    public void addView(View v) {
+        foreground.getChildren().add(v);
     }
     
-     public AnchorPane getForeground(){
+    public void removeView(View v) {
+        foreground.getChildren().remove(v);
+    }
+
+    public AnchorPane getForeground(){
          return foreground;
      }
 }

@@ -43,8 +43,7 @@ public class Mur extends Obstacle {
         {
             dir = DirectionSalle.BAS;
         }
-    }
-    
+    }   
     
     @Override
     public TypeObjet getType() {
