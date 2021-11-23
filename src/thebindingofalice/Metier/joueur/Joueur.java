@@ -136,41 +136,35 @@ public class Joueur extends Evoluable implements ICollision {
         }
 
         if(shootingNorth){
-            Coordonnee corTir = new Coordonnee(this.getCoordonnee().getX()+22,this.getCoordonnee().getY()+10);
-            ProjectileAllie p = new ProjectileAllie(corTir, DirectionTir.HAUT);
-            TirAllieView tirView= new TirAllieView(p);
-            GamePane.get().addView(tirView);
+            instancierTir(DirectionTir.HAUT);  
         }
         if(shootingSouth){
-            Coordonnee corTir = new Coordonnee(this.getCoordonnee().getX()+22,this.getCoordonnee().getY()+10);
-            ProjectileAllie p = new ProjectileAllie(corTir, DirectionTir.BAS);
-            TirAllieView tirView= new TirAllieView(p);
-            GamePane.get().addView(tirView);
+            instancierTir(DirectionTir.BAS);  
         }
         if(shootingWest){
-            Coordonnee corTir = new Coordonnee(this.getCoordonnee().getX()+22,this.getCoordonnee().getY()+10);
-            ProjectileAllie p = new ProjectileAllie(corTir, DirectionTir.GAUCHE);
-            TirAllieView tirView= new TirAllieView(p);
-            GamePane.get().addView(tirView);
+            instancierTir(DirectionTir.GAUCHE);  
         }
         if(shootingEast){
-            Coordonnee corTir = new Coordonnee(this.getCoordonnee().getX()+22,this.getCoordonnee().getY()+10);
-            ProjectileAllie p = new ProjectileAllie(corTir, DirectionTir.DROITE);
-            TirAllieView tirView= new TirAllieView(p);
-            GamePane.get().addView(tirView);
-            
+            instancierTir(DirectionTir.DROITE);            
         }
         
         
         Coordonnee c = getCoordonnee();
         setCoordonnee(new Coordonnee(c.getX() + vitesseX * pas, c.getY() + vitesseY * pas));
         hitbox.setPosition(c, 10, 30); //les valeurs seront à changé
-        Notify("joueur");
-        Notify("tirallie");
-        
+        Notify("joueur");       
         
     }
 
+    private void instancierTir(DirectionTir dir)
+    {
+        Coordonnee coord = new Coordonnee(this.getCoordonnee().getX()+22,this.getCoordonnee().getY()+10);
+        ProjectileAllie p = new ProjectileAllie(coord, dir);
+        TirAllieView tirView = new TirAllieView(p);        
+        GamePane.get().addView(tirView);   
+    }
+    
+    
     @Override
     public void Collision(ICollision o) {
         

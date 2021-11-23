@@ -19,14 +19,14 @@ import thebindingofalice.Metier.projectiles.ProjectileAllie;
 public class TirAllieView extends View implements Observeur{
     private final ProjectileAllie projectile;    
     private final ControlleurTirAllie controlleurTir;
-    private final Joueur joueur=Partie.get().GetJoueur();
     
     public TirAllieView(ProjectileAllie p) {
         super(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Sprites/Tirs/Tir.png");
         this.projectile = p;
         projectile.Register(this);
-        joueur.Register(this);
-        controlleurTir = new ControlleurTirAllie(projectile);        
+        controlleurTir = new ControlleurTirAllie(projectile);   
+        Partie.get().getNiveauCourant().getSalleCourante().AddEvoluable(projectile);
+        Partie.get().addICollision(projectile);
         
     }
     

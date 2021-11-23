@@ -31,19 +31,18 @@ import thebindingofalice.Metier.projectiles.ProjectileAllie;
 public class EnJeuView implements Initializable{  
     private final Partie partie = Partie.get();     //partie de jeu
     private JoueurView joueurView;    
-    
+    private final GamePane gamePane = GamePane.get();
     @FXML
     private AnchorPane background;  //arrière plan
     @FXML
-    private AnchorPane root;  //premier plan
+    private AnchorPane root;  //racine
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-               
+    public void initialize(URL url, ResourceBundle rb) {    
         joueurView = new JoueurView();  
-        root.getChildren().add(GamePane.get().getForeground());
+        root.getChildren().add(gamePane.getForeground());
         GamePane.get().addView(joueurView);
         
         
@@ -61,11 +60,11 @@ public class EnJeuView implements Initializable{
         AnimationTimer animationTimer = new AnimationTimer()
         {
             @Override
-            public void handle(long pas) {
-                                
-                partie.CheckCollides();
+            public void handle(long pas) {      
+                
                 //for some obscurs reasons pas must be equal to 1
                 partie.Evoluer(1);
+                partie.CheckCollides();
             }            
         };
         animationTimer.start();

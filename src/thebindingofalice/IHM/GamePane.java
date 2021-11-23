@@ -15,7 +15,7 @@ import thebindingofalice.IHM.view.View;
  */
 public class GamePane{
     private static GamePane instance = null;
-    private AnchorPane foreground;
+    private final AnchorPane foreground;
     
     private GamePane(){ 
         foreground= new AnchorPane();

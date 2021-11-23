@@ -1,5 +1,7 @@
 package thebindingofalice.Metier.projectiles;
 
+import thebindingofalice.IHM.GamePane;
+import thebindingofalice.IHM.view.TirAllieView;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Hitbox;
 import thebindingofalice.Metier.ICollision;
@@ -19,8 +21,7 @@ public class ProjectileAllie extends Projectile {
     public ProjectileAllie(Coordonnee coordonnee, DirectionTir dir) {
         super(coordonnee, dir);
         this.hitbox = new Hitbox(coordonnee.getX(),coordonnee.getY(),50,50);
-        this.dirTir = dir;    
-        Partie.get().getNiveauCourant().getSalleCourante().AddEvoluable(this);
+        this.dirTir = dir;      
     }
 
     /**
@@ -35,30 +36,28 @@ public class ProjectileAllie extends Projectile {
            {
                case HAUT:
                    setCoordonnee(new Coordonnee(c.getX(), c.getY() - vitesse * pas));
-                   hitbox.setPosition(c, 10, 10);
                    break;
                case BAS:
-                   setCoordonnee(new Coordonnee(c.getX(), c.getY() + vitesse * pas));
-                   hitbox.setPosition(c, 10, 10);
+                   setCoordonnee(new Coordonnee(c.getX(), c.getY() + vitesse * pas));                   
                    break;
                case GAUCHE:
                    setCoordonnee(new Coordonnee(c.getX() - vitesse * pas, c.getY()));
-                   hitbox.setPosition(c, 10, 10);
                    break;
                case DROITE:
                    setCoordonnee(new Coordonnee(c.getX() + vitesse * pas, c.getY()));
-                   hitbox.setPosition(c, 10, 10);
                    break;
            
            }
+           
+           hitbox.setPosition(c, 10, 10);
            Notify("tirallie"); 
     }
 
     @Override
     public void Collision(ICollision o) {
-        if(!o.EstLeJoueur())
+        if(o.EstBloquant())
         {
-            Partie.get().getNiveauCourant().getSalleCourante().RemoveEvoluable(this);
+            //Partie.get().getNiveauCourant().getSalleCourante().RemoveEvoluable(this);
             Notify("delete");
         }
     }

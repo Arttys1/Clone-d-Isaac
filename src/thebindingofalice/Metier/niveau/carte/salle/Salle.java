@@ -77,9 +77,9 @@ public abstract class Salle {
     }
 
     public void evoluer(double pas) {
-        for(Evoluable evo : evoluables)
+        for(int i = 0; i < evoluables.size(); i++)
         {
-            evo.evoluer(pas);
+            evoluables.get(i).evoluer(pas);
         }
     }
                
