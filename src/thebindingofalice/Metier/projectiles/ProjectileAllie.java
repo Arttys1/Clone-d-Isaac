@@ -19,7 +19,8 @@ public class ProjectileAllie extends Projectile {
     public ProjectileAllie(Coordonnee coordonnee, DirectionTir dir) {
         super(coordonnee, dir);
         this.hitbox = new Hitbox(coordonnee.getX(),coordonnee.getY(),50,50);
-        this.dirTir = dir;      
+        this.dirTir = dir;    
+        Partie.get().getNiveauCourant().getSalleCourante().AddEvoluable(this);
     }
 
     /**

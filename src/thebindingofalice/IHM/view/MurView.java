@@ -3,7 +3,6 @@ package thebindingofalice.IHM.view;
 import thebindingofalice.Controller.Observeur;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Partie;
-import thebindingofalice.Metier.niveau.carte.Generateur.CaseMur;
 import thebindingofalice.Metier.objet.obstacle.Mur;
 
 /**
@@ -13,9 +12,9 @@ import thebindingofalice.Metier.objet.obstacle.Mur;
 public class MurView extends View implements Observeur{
     private final Mur mur;
     
-    public MurView(Coordonnee coordonnee, CaseMur caseMur) {
+    public MurView(Coordonnee coordonnee) {
         super(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Salle/mur.png");
-        mur = new Mur(coordonnee, caseMur); 
+        mur = new Mur(coordonnee); 
         setFitHeight(60);
         setFitWidth(60);  
         translate(coordonnee.getX(), coordonnee.getY());              
@@ -23,7 +22,7 @@ public class MurView extends View implements Observeur{
         partie.addICollision(mur);
         partie.getNiveauCourant().getSalleCourante().AddEvoluable(mur);
     }
-    
+
     @Override
     public void Update(String message) {
         if(message.equals("mur"))

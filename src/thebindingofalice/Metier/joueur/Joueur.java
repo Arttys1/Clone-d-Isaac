@@ -1,5 +1,8 @@
 package thebindingofalice.Metier.joueur;
 
+import javafx.animation.AnimationTimer;
+import thebindingofalice.IHM.GamePane;
+import thebindingofalice.IHM.view.TirAllieView;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Evoluable;
 import thebindingofalice.Metier.Hitbox;
@@ -25,34 +28,48 @@ public class Joueur extends Evoluable implements ICollision {
     private Salle salleCourante;
     private Statistiques stats;
     private Hitbox hitbox;
+    private boolean goNorth, goSouth, goEast,goWest,shootingNorth,shootingSouth,shootingEast,shootingWest;
 
     public Joueur(Coordonnee c) {
         super(c);
         stats = new Statistiques();
-        hitbox = new Hitbox(c.getX(), c.getY(), 30, 30);
+        hitbox = new Hitbox(c.getX(), c.getY(), 30, 50);
         
         
     }
 
-    public ProjectileAllie Tirer(DirectionTir tir) {
-        Coordonnee corTir = new Coordonnee(this.getCoordonnee().getX()+22,this.getCoordonnee().getY()+10);
-        ProjectileAllie p = new ProjectileAllie(corTir, tir);
-        Notify("TirAllié");
-        return p;
+    public void Tirer(DirectionTir dir) {
+        switch(dir)
+        {
+            case HAUT:    shootingNorth = true; break;
+            case BAS:     shootingSouth = true; break;
+            case GAUCHE:  shootingEast  = true; break;
+            case DROITE:  shootingWest  = true; break;
+            default:
+                throw new AssertionError(dir.name());                
+        }
+    }
+    
+    public void stopTirer(DirectionTir dir) {
+        switch(dir)
+        {
+            case HAUT:    shootingNorth = false; break;
+            case BAS:     shootingSouth = false; break;
+            case GAUCHE:  shootingEast  = false; break;
+            case DROITE:  shootingWest  = false; break;
+            default:
+                throw new AssertionError(dir.name());                
+        }
     }
 
     public void Bouger(DirectionDeplacement dir) {
         int v = stats.getVitesseDeplacement();
         switch(dir)
         {
-            case HAUT: vitesseY = -v; break;
-            case HAUT_DROITE: break; 
-            case DROITE: vitesseX = v; break;
-            case BAS_DROITE:  break;
-            case BAS: vitesseY = v; break;
-            case BAS_GAUCHE:  break;
-            case GAUCHE: vitesseX = -v; break;
-            case HAUT_GAUCHE:  break;
+            case HAUT:    goNorth = true; break;
+            case BAS:     goSouth = true; break;
+            case GAUCHE:  goWest  = true; break;
+            case DROITE:  goEast  = true; break;
             default:
                 throw new AssertionError(dir.name());                
         }
@@ -61,14 +78,10 @@ public class Joueur extends Evoluable implements ICollision {
     public void sArreter(DirectionDeplacement dir) {
         switch(dir)
         {
-            case HAUT: vitesseY = 0; break;
-            case HAUT_DROITE: break; 
-            case DROITE: vitesseX = 0; break;
-            case BAS_DROITE:  break;
-            case BAS: vitesseY = 0; break;
-            case BAS_GAUCHE:  break;
-            case GAUCHE: vitesseX = 0; break;
-            case HAUT_GAUCHE:  break;
+            case HAUT:    goNorth = false; break;
+            case BAS:     goSouth = false; break;
+            case GAUCHE:  goWest  = false; break;
+            case DROITE:  goEast  = false; break;
             default:
                 throw new AssertionError(dir.name());                
         }
@@ -101,10 +114,61 @@ public class Joueur extends Evoluable implements ICollision {
      */
     @Override
     public void evoluer(double pas) {
+        
+        int v = stats.getVitesseDeplacement();
+        if(goNorth){
+            vitesseY = -v;
+        }
+        else{
+            vitesseY =0;
+        }
+        if(goSouth){
+            vitesseY = v;
+        }
+        if(goWest){
+            vitesseX = -v;
+        }
+        else{
+            vitesseX=0;
+        }
+        if(goEast){
+            vitesseX = v;
+        }
+
+        if(shootingNorth){
+            Coordonnee corTir = new Coordonnee(this.getCoordonnee().getX()+22,this.getCoordonnee().getY()+10);
+            ProjectileAllie p = new ProjectileAllie(corTir, DirectionTir.HAUT);
+            TirAllieView tirView= new TirAllieView(p);
+            GamePane.get().addView(tirView);
+        }
+        if(shootingSouth){
+            Coordonnee corTir = new Coordonnee(this.getCoordonnee().getX()+22,this.getCoordonnee().getY()+10);
+            ProjectileAllie p = new ProjectileAllie(corTir, DirectionTir.BAS);
+            TirAllieView tirView= new TirAllieView(p);
+            GamePane.get().addView(tirView);
+        }
+        if(shootingWest){
+            Coordonnee corTir = new Coordonnee(this.getCoordonnee().getX()+22,this.getCoordonnee().getY()+10);
+            ProjectileAllie p = new ProjectileAllie(corTir, DirectionTir.GAUCHE);
+            TirAllieView tirView= new TirAllieView(p);
+            GamePane.get().addView(tirView);
+        }
+        if(shootingEast){
+            Coordonnee corTir = new Coordonnee(this.getCoordonnee().getX()+22,this.getCoordonnee().getY()+10);
+            ProjectileAllie p = new ProjectileAllie(corTir, DirectionTir.DROITE);
+            TirAllieView tirView= new TirAllieView(p);
+            GamePane.get().addView(tirView);
+            
+        }
+        
+        
         Coordonnee c = getCoordonnee();
         setCoordonnee(new Coordonnee(c.getX() + vitesseX * pas, c.getY() + vitesseY * pas));
-        hitbox.setPosition(c, 10, 20); //les valeurs seront à changé
+        hitbox.setPosition(c, 10, 30); //les valeurs seront à changé
         Notify("joueur");
+        Notify("tirallie");
+        
+        
     }
 
     @Override
@@ -129,4 +193,5 @@ public class Joueur extends Evoluable implements ICollision {
         vitesseX = 0;
         vitesseY = 0;
     }
+    
 }

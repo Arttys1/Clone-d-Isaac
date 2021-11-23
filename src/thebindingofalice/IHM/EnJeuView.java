@@ -9,16 +9,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import thebindingofalice.Controller.Observeur;
 import thebindingofalice.IHM.view.JoueurView;
 import thebindingofalice.IHM.view.MurView;
+import thebindingofalice.IHM.view.TirAllieView;
 import thebindingofalice.IHM.view.View;
 import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.joueur.DirectionDeplacement;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.niveau.carte.Generateur.Case;
-import thebindingofalice.Metier.niveau.carte.Generateur.CaseMur;
 import thebindingofalice.Metier.niveau.carte.Generateur.TypeCase;
 import thebindingofalice.Metier.projectiles.DirectionTir;
+import thebindingofalice.Metier.projectiles.ProjectileAllie;
 
 
 /**
@@ -26,33 +28,30 @@ import thebindingofalice.Metier.projectiles.DirectionTir;
  * Vue représentant la fenêtre de jeu.
  * @author Pascaline, Arnaud
  */
-public class EnJeuView implements Initializable {  
+public class EnJeuView implements Initializable{  
     private final Partie partie = Partie.get();     //partie de jeu
     private JoueurView joueurView;    
-    private ArrayList<View> objAAfficher;
     
     @FXML
     private AnchorPane background;  //arrière plan
     @FXML
-    private AnchorPane foreground;  //premier plan
+    private AnchorPane root;  //premier plan
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        objAAfficher = new ArrayList<>();        
-        joueurView = new JoueurView();               
-        addView(joueurView);
+               
+        joueurView = new JoueurView();  
+        root.getChildren().add(GamePane.get().getForeground());
+        GamePane.get().addView(joueurView);
+        
         
         displaySalle();
         boucleDeJeu();
     }
     
-    private void addView(View v)
-    {
-        objAAfficher.add(v);
-        foreground.getChildren().add(v);        
-    }
+   
     
     /**
      * Méthode représentant la boucle de jeu.
@@ -62,10 +61,11 @@ public class EnJeuView implements Initializable {
         AnimationTimer animationTimer = new AnimationTimer()
         {
             @Override
-            public void handle(long pas) {                
+            public void handle(long pas) {
+                                
+                partie.CheckCollides();
                 //for some obscurs reasons pas must be equal to 1
                 partie.Evoluer(1);
-                partie.CheckCollides();
             }            
         };
         animationTimer.start();
@@ -76,35 +76,31 @@ public class EnJeuView implements Initializable {
     {
         switch(event.getCode())
         {
-            case Z: joueurView.bouger(DirectionDeplacement.HAUT); break;
-            case S: joueurView.bouger(DirectionDeplacement.BAS); break;
-            case D: joueurView.bouger(DirectionDeplacement.DROITE); break;
-            case Q: joueurView.bouger(DirectionDeplacement.GAUCHE); break;
+            case Z:  joueurView.bouger(DirectionDeplacement.HAUT); break;
+            case S:  joueurView.bouger(DirectionDeplacement.BAS); break;
+            case Q:  joueurView.bouger(DirectionDeplacement.GAUCHE); break;
+            case D:  joueurView.bouger(DirectionDeplacement.DROITE); break;
+            case I:  joueurView.tirer(DirectionTir.HAUT); break;
+            case K:  joueurView.tirer(DirectionTir.BAS); break;
+            case J:  joueurView.tirer(DirectionTir.GAUCHE); break;
+            case L:  joueurView.tirer(DirectionTir.DROITE); break;
             default : break;
         }
     }
-    
-    @FXML
-    public void handleKeyTyped(KeyEvent evt)
-    {
-        switch(evt.getCharacter())
-        {
-            case "i": addView(joueurView.tirer(DirectionTir.HAUT)); break;
-            case "k": addView(joueurView.tirer(DirectionTir.BAS)); break;
-            case "j": addView(joueurView.tirer(DirectionTir.GAUCHE));break;
-            case "l": addView(joueurView.tirer(DirectionTir.DROITE));break;
-        }
-    }
-    
+       
     @FXML
     public void handleKeyRelease(KeyEvent evt)
     {
         switch(evt.getCode())
         {
-            case Z: joueurView.sArreter(DirectionDeplacement.HAUT); break;
-            case S: joueurView.sArreter(DirectionDeplacement.BAS); break;
-            case D: joueurView.sArreter(DirectionDeplacement.DROITE); break;
-            case Q: joueurView.sArreter(DirectionDeplacement.GAUCHE); break;
+            case Z:  joueurView.sArreter(DirectionDeplacement.HAUT); break;
+            case S:  joueurView.sArreter(DirectionDeplacement.BAS); break;
+            case Q:  joueurView.sArreter(DirectionDeplacement.GAUCHE); break;
+            case D:  joueurView.sArreter(DirectionDeplacement.DROITE); break;
+            case I:  joueurView.stopTirer(DirectionTir.HAUT); break;
+            case K:  joueurView.stopTirer(DirectionTir.BAS); break;
+            case J:  joueurView.stopTirer(DirectionTir.GAUCHE); break;
+            case L:  joueurView.stopTirer(DirectionTir.DROITE); break;
             default : break;
         }
     }
@@ -119,16 +115,20 @@ public class EnJeuView implements Initializable {
         for (Case c : partie.getNiveauCourant().getSalleCourante().getCases()) {
             ImageView img = new ImageView(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Salle/" + c.getSprite());
             int x = 100 + c.getColonne() * size;
-            int y = 20 + c.getLigne() * size;
+            int y = 50 + c.getLigne() * size;
             img.setX(x);
             img.setY(y);
             img.setFitHeight(size);
             img.setFitWidth(size);
             background.getChildren().add(img);
             if (c.getType() == TypeCase.MUR) {
-                MurView mur = new MurView(new Coordonnee(x, y), (CaseMur)c);
-                addView(mur);
+                MurView mur = new MurView(new Coordonnee(x, y));
+                GamePane.get().addView(mur);
             }
         }
     }
+
+    
+
+    
 }

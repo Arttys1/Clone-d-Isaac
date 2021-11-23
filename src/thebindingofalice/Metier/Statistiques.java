@@ -1,7 +1,7 @@
 package thebindingofalice.Metier;
 
 public class Statistiques {
-    private int vitesseDeplacement = 10;
+    private int vitesseDeplacement = 5;
     private int degats;
     private int cadenveTir;
     private int porteeTir;
