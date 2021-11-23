@@ -43,8 +43,8 @@ public class Joueur extends Evoluable implements ICollision {
         {
             case HAUT:    shootingNorth = true; break;
             case BAS:     shootingSouth = true; break;
-            case GAUCHE:  shootingEast  = true; break;
-            case DROITE:  shootingWest  = true; break;
+            case GAUCHE:  shootingWest  = true; break;
+            case DROITE:  shootingEast  = true; break;
             default:
                 throw new AssertionError(dir.name());                
         }
@@ -55,8 +55,8 @@ public class Joueur extends Evoluable implements ICollision {
         {
             case HAUT:    shootingNorth = false; break;
             case BAS:     shootingSouth = false; break;
-            case GAUCHE:  shootingEast  = false; break;
-            case DROITE:  shootingWest  = false; break;
+            case GAUCHE:  shootingWest  = false; break;
+            case DROITE:  shootingEast  = false; break;
             default:
                 throw new AssertionError(dir.name());                
         }
@@ -136,15 +136,27 @@ public class Joueur extends Evoluable implements ICollision {
         }
 
         if(shootingNorth){
+            shootingSouth=false;
+            shootingWest=false;
+            shootingEast=false;
             instancierTir(DirectionTir.HAUT);  
         }
         if(shootingSouth){
+            shootingNorth=false;
+            shootingWest=false;
+            shootingEast=false;
             instancierTir(DirectionTir.BAS);  
         }
         if(shootingWest){
+            shootingSouth=false;
+            shootingNorth=false;
+            shootingEast=false;
             instancierTir(DirectionTir.GAUCHE);  
         }
         if(shootingEast){
+            shootingSouth=false;
+            shootingWest=false;
+            shootingNorth=false;
             instancierTir(DirectionTir.DROITE);            
         }
         
