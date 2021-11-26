@@ -46,8 +46,6 @@ public class EnJeuView implements Initializable{
         boucleDeJeu();
     }
     
-   
-    
     /**
      * Méthode représentant la boucle de jeu.
      * Ce n'est pour l'instant qu'une esquisse mais c'est un début.

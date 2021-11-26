@@ -2,6 +2,7 @@ package thebindingofalice.Metier.joueur;
 
 import javafx.animation.AnimationTimer;
 import thebindingofalice.IHM.GamePane;
+import thebindingofalice.IHM.view.CoeurView;
 import thebindingofalice.IHM.view.TirAllieView;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Evoluable;
@@ -14,6 +15,7 @@ import thebindingofalice.Metier.projectiles.DirectionTir;
 import thebindingofalice.Metier.objet.ramassable.TypeCoeur;
 import thebindingofalice.Metier.niveau.carte.salle.Salle;
 import thebindingofalice.Metier.objet.ramassable.Cle;
+import thebindingofalice.Metier.objet.ramassable.Coeur;
 import thebindingofalice.Metier.projectiles.ProjectileAllie;
 
 /**
@@ -174,6 +176,12 @@ public class Joueur extends Evoluable implements ICollision {
         ProjectileAllie p = new ProjectileAllie(coord, dir);
         TirAllieView tirView = new TirAllieView(p);        
         GamePane.get().addView(tirView);   
+        
+        
+        Coordonnee coor = new Coordonnee(500,400);
+        Coeur c = new Coeur(coor);
+        CoeurView coeurView = new CoeurView(c);        
+        GamePane.get().addView(coeurView); 
     }
     
     
