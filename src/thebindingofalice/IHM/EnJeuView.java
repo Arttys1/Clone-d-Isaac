@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import thebindingofalice.IHM.view.CoeurView;
 import thebindingofalice.IHM.view.JoueurView;
 import thebindingofalice.IHM.view.MurView;
 import thebindingofalice.Metier.Partie;
@@ -16,6 +17,7 @@ import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.niveau.carte.Generateur.Case;
 import thebindingofalice.Metier.niveau.carte.Generateur.CaseMur;
 import thebindingofalice.Metier.niveau.carte.Generateur.TypeCase;
+import thebindingofalice.Metier.objet.ramassable.Coeur;
 import thebindingofalice.Metier.projectiles.DirectionTir;
 
 
@@ -43,10 +45,9 @@ public class EnJeuView implements Initializable{
         
         
         displaySalle();
+        instancierDesCoeurs();  //A supprimer plus tard
         boucleDeJeu();
     }
-    
-   
     
     /**
      * Méthode représentant la boucle de jeu.
@@ -99,6 +100,19 @@ public class EnJeuView implements Initializable{
             default : break;
         }
     }
+    
+    /**
+     * Méthode qui provisoire servant uniqement à montrer l'affichage de trois coeurs
+     */
+    private void instancierDesCoeurs() {
+        for (int i = 0; i < 3; i++) {
+            Coordonnee coor = new Coordonnee(200 + i * 100 , 500);
+            Coeur c = new Coeur(coor);
+            CoeurView coeurView = new CoeurView(c);            
+            GamePane.get().addView(coeurView);
+        }
+    }
+    
     
     /**
      * Méthode permettant d'afficher la salle en court.
