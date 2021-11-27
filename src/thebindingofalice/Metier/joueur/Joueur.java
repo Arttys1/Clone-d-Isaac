@@ -94,7 +94,7 @@ public class Joueur extends Evoluable implements ICollision {
     }
 
     public void AddCoeur(TypeCoeur type, int nb) {
-        throw new UnsupportedOperationException();
+        
     }
 
     public void AddCle(Cle cle) {
@@ -176,12 +176,6 @@ public class Joueur extends Evoluable implements ICollision {
         ProjectileAllie p = new ProjectileAllie(coord, dir);
         TirAllieView tirView = new TirAllieView(p);        
         GamePane.get().addView(tirView);   
-        
-        
-        Coordonnee coor = new Coordonnee(500,400);
-        Coeur c = new Coeur(coor);
-        CoeurView coeurView = new CoeurView(c);        
-        GamePane.get().addView(coeurView); 
     }
     
     

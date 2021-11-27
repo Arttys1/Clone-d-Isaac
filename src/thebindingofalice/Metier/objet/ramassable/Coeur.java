@@ -3,6 +3,7 @@ package thebindingofalice.Metier.objet.ramassable;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Hitbox;
 import thebindingofalice.Metier.ICollision;
+import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.objet.TypeObjet;
 
 /**
@@ -32,6 +33,7 @@ public class Coeur extends ObjetRamassable {
         if(o.EstLeJoueur())
         {
             Notify("heal");
+            Partie.get().GetJoueur().AddCoeur(TypeCoeur.ROUGE, 2);
         }
     }
 
