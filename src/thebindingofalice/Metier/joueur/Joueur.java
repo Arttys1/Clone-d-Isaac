@@ -24,23 +24,25 @@ import thebindingofalice.Metier.projectiles.ProjectileAllie;
 public class Joueur extends Evoluable implements ICollision {
     private int vieMax;
     private int[] vie;
-    private int vitesseX = 0;
-    private int vitesseY = 0;
+    private double vitesseX = 0;
+    private double vitesseY = 0;
     private Cle[] cles;
     private Salle salleCourante;
     private Statistiques stats;
     private Hitbox hitbox;
-    private boolean goNorth, goSouth, goEast,goWest,shootingNorth,shootingSouth,shootingEast,shootingWest;
+    private boolean goNorth, goSouth, goEast,goWest,shootingNorth,shootingSouth,shootingEast,shootingWest, canShoot;
+    private double cadTir;
 
     public Joueur(Coordonnee c) {
         super(c);
         stats = new Statistiques();
         hitbox = new Hitbox(c.getX(), c.getY(), 30, 30);
-        
-        
+        this.canShoot = true;
+        cadTir = -1;        
     }
 
     public void Tirer(DirectionTir dir) {
+        
         switch(dir)
         {
             case HAUT:    shootingNorth = true; break;
@@ -48,7 +50,8 @@ public class Joueur extends Evoluable implements ICollision {
             case GAUCHE:  shootingWest  = true; break;
             case DROITE:  shootingEast  = true; break;
             default:
-                throw new AssertionError(dir.name());                
+                
+                throw new AssertionError(dir.name());            
         }
     }
     
@@ -60,12 +63,13 @@ public class Joueur extends Evoluable implements ICollision {
             case GAUCHE:  shootingWest  = false; break;
             case DROITE:  shootingEast  = false; break;
             default:
+                
                 throw new AssertionError(dir.name());                
         }
     }
 
     public void Bouger(DirectionDeplacement dir) {
-        int v = stats.getVitesseDeplacement();
+        double v = stats.getVitesseDeplacement();
         switch(dir)
         {
             case HAUT:    goNorth = true; break;
@@ -117,7 +121,7 @@ public class Joueur extends Evoluable implements ICollision {
     @Override
     public void evoluer(double pas) {
         
-        int v = stats.getVitesseDeplacement();
+        double v = stats.getVitesseDeplacement();
         if(goNorth){
             vitesseY = -v;
         }
@@ -136,33 +140,48 @@ public class Joueur extends Evoluable implements ICollision {
         if(goEast){
             vitesseX = v;
         }
+        
+        if (canShoot) {
+            if (shootingNorth) {
+                shootingSouth = false;
+                shootingWest = false;
+                shootingEast = false;
+                instancierTir(DirectionTir.HAUT);
+                this.canShoot = false;
+            }
+            if(shootingSouth){
+                shootingNorth=false;
+                shootingWest=false;
+                shootingEast=false;
+                instancierTir(DirectionTir.BAS);
+                this.canShoot = false;
+            }
+            if(shootingWest){
+                shootingSouth=false;
+                shootingNorth=false;
+                shootingEast=false;
+                instancierTir(DirectionTir.GAUCHE);
+                this.canShoot = false;
+            }
+            if(shootingEast){
+                shootingSouth=false;
+                shootingWest=false;
+                shootingNorth=false;
+                instancierTir(DirectionTir.DROITE);
+                this.canShoot = false;
+            }
+        }        
+        if(!canShoot) {
+            if (this.cadTir == -1) {
+                cadTir = this.stats.getCadenveTir();
+            } else if (this.cadTir > 0) {
+                this.cadTir--;
+            } else if (this.cadTir == 0) {
+                this.cadTir--;
+                this.canShoot = true;
+            }
+        }
 
-        if(shootingNorth){
-            shootingSouth=false;
-            shootingWest=false;
-            shootingEast=false;
-            instancierTir(DirectionTir.HAUT);  
-        }
-        if(shootingSouth){
-            shootingNorth=false;
-            shootingWest=false;
-            shootingEast=false;
-            instancierTir(DirectionTir.BAS);  
-        }
-        if(shootingWest){
-            shootingSouth=false;
-            shootingNorth=false;
-            shootingEast=false;
-            instancierTir(DirectionTir.GAUCHE);  
-        }
-        if(shootingEast){
-            shootingSouth=false;
-            shootingWest=false;
-            shootingNorth=false;
-            instancierTir(DirectionTir.DROITE);            
-        }
-        
-        
         Coordonnee c = getCoordonnee();
         setCoordonnee(new Coordonnee(c.getX() + vitesseX * pas, c.getY() + vitesseY * pas));
         hitbox.setPosition(c, 10, 20); //les valeurs seront à changé
@@ -173,7 +192,7 @@ public class Joueur extends Evoluable implements ICollision {
     private void instancierTir(DirectionTir dir)
     {
         Coordonnee coord = new Coordonnee(this.getCoordonnee().getX()+22,this.getCoordonnee().getY()+10);
-        ProjectileAllie p = new ProjectileAllie(coord, dir);
+        ProjectileAllie p = new ProjectileAllie(coord, dir, this.stats.getVitesseProjectile());
         TirAllieView tirView = new TirAllieView(p);        
         GamePane.get().addView(tirView);   
     }
