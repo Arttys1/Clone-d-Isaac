@@ -3,5 +3,5 @@ package thebindingofalice.Metier.objet;
  * Enumération représentant les différents type d'objet
  */
 public enum TypeObjet {
-    MUR,COEUR
+    MUR, COEUR_DROIT, COEUR_GAUCHE,
 }

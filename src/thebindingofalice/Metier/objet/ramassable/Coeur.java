@@ -3,19 +3,15 @@ package thebindingofalice.Metier.objet.ramassable;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Hitbox;
 import thebindingofalice.Metier.ICollision;
-import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.objet.TypeObjet;
 
 /**
  * Classe, héritant de ObjetRamassable, représentant les coeurs
  */
 public class Coeur extends ObjetRamassable {
-    
-    private final Hitbox hitbox;
 
     public Coeur(Coordonnee c) {
         super(c);
-        this.hitbox = new Hitbox(c.getX(),c.getY(),10,10);
     }
 
     /**
@@ -23,41 +19,29 @@ public class Coeur extends ObjetRamassable {
      *  * Méthode appelé à chaque frame du jeu. Le paramètre pas représente le pas de temps entre deux appel de la méthode.
      *  * /
      */
-    @Override
     public void evoluer(double pas) {
-            
+            throw new UnsupportedOperationException();
     }
 
-    @Override
     public void Collision(ICollision o) {
-        if(o.EstLeJoueur())
-        {
-            Notify("heal");
-            Partie.get().GetJoueur().AddCoeur(TypeCoeur.ROUGE, 2);
-        }
+            throw new UnsupportedOperationException();
     }
 
-    @Override
     public boolean EstLeJoueur() {
-            return false;
+            throw new UnsupportedOperationException();
     }
 
-    @Override
     public boolean EstBloquant() {
-            return false;
+            throw new UnsupportedOperationException();
     }
 
     @Override
     public TypeObjet getType() {
-        return TypeObjet.COEUR;
-    }
-    
-    public TypeCoeur getTypeCoeur(){
-        return TypeCoeur.ROUGE;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Hitbox getHitbox() {
-        return this.hitbox;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

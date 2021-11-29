@@ -8,7 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import thebindingofalice.IHM.view.CoeurView;
+import thebindingofalice.IHM.view.CoeurHUDDroitView;
+import thebindingofalice.IHM.view.CoeurHUDGaucheView;
 import thebindingofalice.IHM.view.JoueurView;
 import thebindingofalice.IHM.view.MurView;
 import thebindingofalice.Metier.Partie;
@@ -17,7 +18,8 @@ import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.niveau.carte.Generateur.Case;
 import thebindingofalice.Metier.niveau.carte.Generateur.CaseMur;
 import thebindingofalice.Metier.niveau.carte.Generateur.TypeCase;
-import thebindingofalice.Metier.objet.ramassable.Coeur;
+import thebindingofalice.Metier.objet.HUD.CoeurHUDDroit;
+import thebindingofalice.Metier.objet.HUD.CoeurHUDGauche;
 import thebindingofalice.Metier.projectiles.DirectionTir;
 
 
@@ -28,7 +30,8 @@ import thebindingofalice.Metier.projectiles.DirectionTir;
  */
 public class EnJeuView implements Initializable{  
     private final Partie partie = Partie.get();     //partie de jeu
-    private JoueurView joueurView;    
+    private JoueurView joueurView;
+    
     private final GamePane gamePane = GamePane.get();
     @FXML
     private AnchorPane background;  //arrière plan
@@ -45,9 +48,11 @@ public class EnJeuView implements Initializable{
         
         
         displaySalle();
-        instancierDesCoeurs();  //A supprimer plus tard
+        InstanceVie();
         boucleDeJeu();
     }
+    
+   
     
     /**
      * Méthode représentant la boucle de jeu.
@@ -102,19 +107,6 @@ public class EnJeuView implements Initializable{
     }
     
     /**
-     * Méthode qui provisoire servant uniqement à montrer l'affichage de trois coeurs
-     */
-    private void instancierDesCoeurs() {
-        for (int i = 0; i < 3; i++) {
-            Coordonnee coor = new Coordonnee(200 + i * 100 , 500);
-            Coeur c = new Coeur(coor);
-            CoeurView coeurView = new CoeurView(c);            
-            GamePane.get().addView(coeurView);
-        }
-    }
-    
-    
-    /**
      * Méthode permettant d'afficher la salle en court.
      */
     private void displaySalle()
@@ -134,6 +126,41 @@ public class EnJeuView implements Initializable{
                 MurView mur = new MurView(new Coordonnee(x, y), (CaseMur)c);
                 GamePane.get().addView(mur);
             }
+        }
+    }
+    
+    private void InstanceVie() {
+        float posx = 0;
+        //float espaceEntreCoeur = 2.5f;
+        float ligne = 20;
+        int nbmaxvieLigne = 4;
+        int vieActu = 0;
+        for(int x = 0 ; x < this.partie.GetJoueur().getVie().size(); x++)
+        {
+            Coordonnee coord = new Coordonnee(posx,ligne);
+            if(x % 2 == 0 || x == 0)
+            {
+                //Paire soit gauche
+            //peut-etre faire le cas pour le 0
+                CoeurHUDGauche cg = new CoeurHUDGauche(coord);
+                CoeurHUDGaucheView CoeurGauche = new CoeurHUDGaucheView(cg);  
+                GamePane.get().addView(CoeurGauche);
+                posx += CoeurGauche.getImage().getWidth();
+            }else
+            {
+                //Impaire soit droite
+                CoeurHUDDroit cd = new CoeurHUDDroit(coord);
+                CoeurHUDDroitView CoeurDroit = new CoeurHUDDroitView(cd);
+                GamePane.get().addView(CoeurDroit); 
+                posx += CoeurDroit.getImage().getWidth();
+                vieActu +=1;
+                if(vieActu == nbmaxvieLigne)
+                {
+                    ligne += CoeurDroit.getImage().getHeight();
+                    posx = 0;
+                }
+            }
+        
         }
     }
 

@@ -1,58 +1,58 @@
 package thebindingofalice.Metier;
 
 public class Statistiques {
-    private double vitesseDeplacement = 5;
-    private double degats;
-    private double cadenveTir = 50.0;
-    private double porteeTir;
-    private double vitesseProjectile = 2.5;
-    private double chance;
+    private int vitesseDeplacement = 5;
+    private int degats;
+    private int cadenveTir;
+    private int porteeTir;
+    private int vitesseProjectile;
+    private int chance;
     
-    public double getVitesseDeplacement() {
+    public int getVitesseDeplacement() {
         return vitesseDeplacement;
     }
 
-    public void setVitesseDeplacement(double vitesseDeplacement) {
+    public void setVitesseDeplacement(int vitesseDeplacement) {
         this.vitesseDeplacement = vitesseDeplacement;
     }
 
-    public double getDegats() {
+    public int getDegats() {
         return degats;
     }
 
-    public void setDegats(double degats) {
+    public void setDegats(int degats) {
         this.degats = degats;
     }
 
-    public double getCadenveTir() {
+    public int getCadenveTir() {
         return cadenveTir;
     }
 
-    public void setCadenveTir(double cadenveTir) {
+    public void setCadenveTir(int cadenveTir) {
         this.cadenveTir = cadenveTir;
     }
 
-    public double getPorteeTir() {
+    public int getPorteeTir() {
         return porteeTir;
     }
 
-    public void setPorteeTir(double porteeTir) {
+    public void setPorteeTir(int porteeTir) {
         this.porteeTir = porteeTir;
     }
 
-    public double getVitesseProjectile() {
+    public int getVitesseProjectile() {
         return vitesseProjectile;
     }
 
-    public void setVitesseProjectile(double vitesseProjectile) {
+    public void setVitesseProjectile(int vitesseProjectile) {
         this.vitesseProjectile = vitesseProjectile;
     }
 
-    public double getChance() {
+    public int getChance() {
         return chance;
     }
 
-    public void setChance(double chance) {
+    public void setChance(int chance) {
         this.chance = chance;
     }
 

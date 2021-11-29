@@ -16,13 +16,12 @@ public class ProjectileAllie extends Projectile {
     
     private DirectionTir dirTir;
     
-    private double vitesse;
+    private float vitesse = 2.5f;
 
-    public ProjectileAllie(Coordonnee coordonnee, DirectionTir dir, double vitesse) {
+    public ProjectileAllie(Coordonnee coordonnee, DirectionTir dir) {
         super(coordonnee, dir);
         this.hitbox = new Hitbox(coordonnee.getX(),coordonnee.getY(),10,10);
-        this.dirTir = dir; 
-        this.vitesse = vitesse;
+        this.dirTir = dir;      
     }
 
     /**
@@ -82,7 +81,7 @@ public class ProjectileAllie extends Projectile {
         return hitbox;
     }
 
-    public double getVitesse() {
+    public float getVitesse() {
         return vitesse;
     }
 
