@@ -29,15 +29,14 @@ public class Joueur extends Evoluable implements ICollision {
     private Statistiques stats;
     private Hitbox hitbox;
     private boolean goNorth, goSouth, goEast,goWest,shootingNorth,shootingSouth,shootingEast,shootingWest, canShoot;
-    private double cadTir = -1;
+    private double cadTir;
 
     public Joueur(Coordonnee c) {
         super(c);
         stats = new Statistiques();
         hitbox = new Hitbox(c.getX(), c.getY(), 30, 30);
         this.canShoot = true;
-        
-        
+        cadTir = -1;        
     }
 
     public void Tirer(DirectionTir dir) {
@@ -139,53 +138,48 @@ public class Joueur extends Evoluable implements ICollision {
         if(goEast){
             vitesseX = v;
         }
+        
+        if (canShoot) {
+            if (shootingNorth) {
+                shootingSouth = false;
+                shootingWest = false;
+                shootingEast = false;
+                instancierTir(DirectionTir.HAUT);
+                this.canShoot = false;
+            }
+            if(shootingSouth){
+                shootingNorth=false;
+                shootingWest=false;
+                shootingEast=false;
+                instancierTir(DirectionTir.BAS);
+                this.canShoot = false;
+            }
+            if(shootingWest){
+                shootingSouth=false;
+                shootingNorth=false;
+                shootingEast=false;
+                instancierTir(DirectionTir.GAUCHE);
+                this.canShoot = false;
+            }
+            if(shootingEast){
+                shootingSouth=false;
+                shootingWest=false;
+                shootingNorth=false;
+                instancierTir(DirectionTir.DROITE);
+                this.canShoot = false;
+            }
+        }        
+        if(!canShoot) {
+            if (this.cadTir == -1) {
+                cadTir = this.stats.getCadenveTir();
+            } else if (this.cadTir > 0) {
+                this.cadTir--;
+            } else if (this.cadTir == 0) {
+                this.cadTir--;
+                this.canShoot = true;
+            }
+        }
 
-        if(shootingNorth && this.canShoot){
-            shootingSouth=false;
-            shootingWest=false;
-            shootingEast=false;
-            instancierTir(DirectionTir.HAUT);
-            this.canShoot = false;
-        }
-        if(shootingSouth && this.canShoot){
-            shootingNorth=false;
-            shootingWest=false;
-            shootingEast=false;
-            instancierTir(DirectionTir.BAS);
-            this.canShoot = false;
-        }
-        if(shootingWest && this.canShoot){
-            shootingSouth=false;
-            shootingNorth=false;
-            shootingEast=false;
-            instancierTir(DirectionTir.GAUCHE);
-            this.canShoot = false;
-        }
-        if(shootingEast && this.canShoot){
-            shootingSouth=false;
-            shootingWest=false;
-            shootingNorth=false;
-            instancierTir(DirectionTir.DROITE);
-            this.canShoot = false;
-        }
-        if(this.cadTir == -1 && !this.canShoot){
-            cadTir = this.stats.getCadenveTir();
-            System.out.println("plus tirer");
-        }
-        if(this.cadTir > 0 && !this.canShoot)
-        {
-            this.cadTir -= 1;
-        }else if(this.cadTir == 0 && !this.canShoot)
-        {
-            this.cadTir = -1;
-            this.canShoot = true;
-            System.out.println("peut tirer");
-        }
-        
-        
-
-        
-        
         Coordonnee c = getCoordonnee();
         setCoordonnee(new Coordonnee(c.getX() + vitesseX * pas, c.getY() + vitesseY * pas));
         hitbox.setPosition(c, 10, 20); //les valeurs seront à changé
