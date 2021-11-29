@@ -33,7 +33,10 @@ public class SalleSimple extends Salle{
         for (int i = 0; i < tailleCote; i++) {
             for (int j = 0; j < tailleCote; j++) {
                 TypeCase type;
-                if(i == 0 && j == 5)
+                if(i == 0 && j == 5 ||
+                   i == tailleCote -1 && j == 5 ||
+                   i == 5 && j == 0 ||
+                   i == 5 && j == tailleCote -1)
                 {
                     type = TypeCase.PORTE;
                 }
