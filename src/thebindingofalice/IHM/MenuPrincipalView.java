@@ -10,24 +10,18 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import static javafx.scene.input.KeyCode.Z;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import thebindingofalice.Main;
-import thebindingofalice.Metier.Partie;
-import thebindingofalice.Metier.joueur.DirectionDeplacement;
 
 /**
  * FXML Controller class
- *
+ * Classe IHM qui est le menu principal du jeu
  * @author Pascaline
  */
 public class MenuPrincipalView implements Initializable {
@@ -40,6 +34,9 @@ public class MenuPrincipalView implements Initializable {
     }    
     
     @FXML
+    /**
+     * Lance le jeu en changeant la fenêtre afficher
+     */
     public void MCJouer(MouseEvent event){
         
         try {
@@ -55,6 +52,9 @@ public class MenuPrincipalView implements Initializable {
     }
     
     @FXML
+    /**
+     * Quitte le jeu
+     */
     public void MCQuitter(MouseEvent event){
         Main.getPrimaryStage().close();
     }

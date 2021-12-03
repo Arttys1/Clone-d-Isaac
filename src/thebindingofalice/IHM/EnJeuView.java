@@ -8,7 +8,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import thebindingofalice.IHM.view.CoeurView;
+import thebindingofalice.IHM.view.HitboxView;
 import thebindingofalice.IHM.view.JoueurView;
 import thebindingofalice.IHM.view.MurView;
 import thebindingofalice.Metier.Partie;
@@ -43,9 +45,19 @@ public class EnJeuView implements Initializable{
         root.getChildren().add(gamePane.getForeground());
         GamePane.get().addView(joueurView);
         
+        HitboxView hitboxJoueur = new HitboxView(Partie.get().GetJoueur().getHitbox());
+        //ligne à commenter si on veut rendre l'hitbox du joueur transparente
+        hitboxJoueur.setStroke(Color.RED);
+        //ajoute la hitbox du joueur sur l'affichage
+        GamePane.get().addView(hitboxJoueur);
         
+        //Affiche la salle avec les murs et les portes
         displaySalle();
-        instancierDesCoeurs();  //A supprimer plus tard
+        
+        //Créer des coeurs dans la salle A supprimer plus tard
+        instancierDesCoeurs();  
+        
+        //Lance la boucle du jeu
         boucleDeJeu();
     }
     
@@ -60,7 +72,10 @@ public class EnJeuView implements Initializable{
             public void handle(long pas) {      
                 
                 //for some obscurs reasons pas must be equal to 1
+                
+                //Fait évoluer tout les éléments de liste d'évoluable de la partie
                 partie.Evoluer(1);
+                //Vérifie si chacun des éléments collisionable est en collision
                 partie.CheckCollides();
             }            
         };
@@ -68,6 +83,9 @@ public class EnJeuView implements Initializable{
     }
    
     @FXML
+    /**
+     * Handler des appuies sur clavier 
+     */
     public void handleOnKeyPressed(KeyEvent event)
     {
         switch(event.getCode())
@@ -85,6 +103,9 @@ public class EnJeuView implements Initializable{
     }
        
     @FXML
+    /**
+     * Handler de la relâche des touches
+     */
     public void handleKeyRelease(KeyEvent evt)
     {
         switch(evt.getCode())
@@ -108,7 +129,8 @@ public class EnJeuView implements Initializable{
         for (int i = 0; i < 3; i++) {
             Coordonnee coor = new Coordonnee(200 + i * 100 , 500);
             Coeur c = new Coeur(coor);
-            CoeurView coeurView = new CoeurView(c);            
+            CoeurView coeurView = new CoeurView(c);  
+            
             GamePane.get().addView(coeurView);
         }
     }
@@ -135,9 +157,5 @@ public class EnJeuView implements Initializable{
                 GamePane.get().addView(mur);
             }
         }
-    }
-
-    
-
-    
+    }  
 }

@@ -1,13 +1,14 @@
 package thebindingofalice.Metier;
 
-import thebindingofalice.Metier.joueur.DirectionDeplacement;
+import thebindingofalice.Controller.Observable;
+
 
 /**
  * Classe représentant les hitbox des ICollision.
  * Les hitbox sont modélisé en rectangle.
  * @author Arnaud 
  */
-public class Hitbox {
+public class Hitbox extends Observable{
     private double x;                   //position en X du point en haut à gauche de la hitbox
     private double y;                   //position en Y du poin en haut à gauche de la hitbox
     private final double height;        //hauteur de la hitbox
@@ -30,6 +31,7 @@ public class Hitbox {
     {
         x = coordonnee.getX() + plusX;
         y = coordonnee.getY() + plusY;
+        Notify("hitbox");
     }
     
     /**
@@ -77,6 +79,7 @@ public class Hitbox {
     public double getWidth() {
         return width;
     }
-    
+
+
     
 }

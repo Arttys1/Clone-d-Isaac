@@ -11,6 +11,7 @@ import thebindingofalice.Metier.objet.TypeObjet;
  */
 public class Coeur extends ObjetRamassable {
     
+    //Hitbox du coueur
     private final Hitbox hitbox;
 
     public Coeur(Coordonnee c) {

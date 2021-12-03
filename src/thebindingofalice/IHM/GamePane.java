@@ -5,22 +5,31 @@
  */
 package thebindingofalice.IHM;
 
-import java.util.ArrayList;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
-import thebindingofalice.IHM.view.View;
 
 /**
  *
  * @author Noa BARBOSA
+ * Classe représentant la fenêtre du jeu contient toutes les autres vue dans son premier plan
+ * La classe est un singleton pour faciliter l'ajout des vues
  */
 public class GamePane{
     private static GamePane instance = null;
+    //Premier plan de la fenêtre qui contient toutes les vues 
     private final AnchorPane foreground;
     
+    /**
+     * Constructeur de la fenêtre
+     */
     private GamePane(){ 
         foreground= new AnchorPane();
     }
     
+    /**
+     * Assesseur de la fenêtre
+     * @return la fenêtre
+     */
     public static GamePane get() {
         if (instance == null) {
             instance = new GamePane();
@@ -28,14 +37,26 @@ public class GamePane{
         return instance;
     }
 
-    public void addView(View v) {
-        foreground.getChildren().add(v);
+    /**
+     * Ajoute un élément au premier plan de la fenêtre
+     * @param n élément à ajouter (peut être tout objet Node)
+     */
+    public void addView(Node n) {
+        foreground.getChildren().add(n);
     }
     
-    public void removeView(View v) {
-        foreground.getChildren().remove(v);
+    /**
+     * Supprime un élément du premier plan
+     * @param n élément à supprimer
+     */
+    public void removeView(Node n) {
+        foreground.getChildren().remove(n);
     }
 
+    /**
+     * Assesseur du premier plan
+     * @return le premier de la fenêtre
+     */
     public AnchorPane getForeground(){
          return foreground;
      }

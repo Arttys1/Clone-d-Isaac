@@ -17,6 +17,11 @@ public abstract class View extends ImageView{
         super(string);
     }    
     
+    /**
+     * Déplace la vue 
+     * @param x déplacement sur les abscisses
+     * @param y et les ordonnées
+     */
     protected void translate(double x, double y)
     {
         setTranslateX(x);

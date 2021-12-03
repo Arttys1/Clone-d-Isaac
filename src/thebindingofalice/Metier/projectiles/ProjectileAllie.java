@@ -1,11 +1,8 @@
 package thebindingofalice.Metier.projectiles;
 
-import thebindingofalice.IHM.GamePane;
-import thebindingofalice.IHM.view.TirAllieView;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Hitbox;
 import thebindingofalice.Metier.ICollision;
-import thebindingofalice.Metier.Partie;
 
 /**
  * Classe, héritant de Projectile, représentant les projectiles alliés
@@ -20,7 +17,7 @@ public class ProjectileAllie extends Projectile {
 
     public ProjectileAllie(Coordonnee coordonnee, DirectionTir dir) {
         super(coordonnee, dir);
-        this.hitbox = new Hitbox(coordonnee.getX(),coordonnee.getY(),10,10);
+        this.hitbox = new Hitbox(coordonnee.getX(),coordonnee.getY(),16,16);
         this.dirTir = dir;      
     }
 
@@ -49,7 +46,7 @@ public class ProjectileAllie extends Projectile {
            
            }
            
-           hitbox.setPosition(c, 10, 10);
+           hitbox.setPosition(c, 4, 4);
            Notify("tirallie"); 
     }
 

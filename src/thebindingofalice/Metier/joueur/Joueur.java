@@ -1,13 +1,11 @@
 package thebindingofalice.Metier.joueur;
 
-import javafx.animation.AnimationTimer;
 import thebindingofalice.IHM.GamePane;
 import thebindingofalice.IHM.view.TirAllieView;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Evoluable;
 import thebindingofalice.Metier.Hitbox;
 import thebindingofalice.Metier.ICollision;
-import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.Statistiques;
 import thebindingofalice.Metier.niveau.carte.salle.DirectionSalle;
 import thebindingofalice.Metier.projectiles.DirectionTir;
@@ -20,17 +18,27 @@ import thebindingofalice.Metier.projectiles.ProjectileAllie;
  * Classe, héritant de Evoluable et de ICollision, représentant le joueur.
  */
 public class Joueur extends Evoluable implements ICollision {
+    //Statistique du joueur
+    private Statistiques stats;
     private int vieMax;
     private int[] vie;
     private double vitesseX = 0;
     private double vitesseY = 0;
-    private Cle[] cles;
-    private Salle salleCourante;
-    private Statistiques stats;
-    private Hitbox hitbox;
-    private boolean goNorth, goSouth, goEast,goWest,shootingNorth,shootingSouth,shootingEast,shootingWest, canShoot;
     private double cadTir;
-
+    private Cle[] cles;
+    
+    private Salle salleCourante; //utile ?
+    
+    //Hitbox du joueur
+    private final Hitbox hitbox;
+    
+    //Booléen gérant les déplacements et le tir
+    private boolean goNorth, goSouth, goEast,goWest,shootingNorth,shootingSouth,shootingEast,shootingWest, canShoot;
+    
+    /**
+     * Constructeur du joueur
+     * @param c coordonnée du joueur
+     */
     public Joueur(Coordonnee c) {
         super(c);
         stats = new Statistiques();
@@ -39,6 +47,10 @@ public class Joueur extends Evoluable implements ICollision {
         cadTir = -1;        
     }
 
+    /**
+     * Met les booléens nécessaires à true
+     * @param dir ceux correspondant à la direction donnée
+     */
     public void Tirer(DirectionTir dir) {
         
         switch(dir)
@@ -53,6 +65,10 @@ public class Joueur extends Evoluable implements ICollision {
         }
     }
     
+    /**
+     * Met les booléens de tir nécessaires à false
+     * @param dir ceux correspondant à la direction donnée
+     */
     public void stopTirer(DirectionTir dir) {
         switch(dir)
         {
@@ -66,6 +82,10 @@ public class Joueur extends Evoluable implements ICollision {
         }
     }
 
+    /**
+     * Met les booléens de déplacement nécessaires à true
+     * @param dir ceux correspondant à la direction donnée
+     */
     public void Bouger(DirectionDeplacement dir) {
         double v = stats.getVitesseDeplacement();
         switch(dir)
@@ -79,6 +99,10 @@ public class Joueur extends Evoluable implements ICollision {
         }
     }
 
+    /**
+     * Met les booléens de déplacement nécessaires à false
+     * @param dir ceux correspondant à la direction donnée
+     */
     public void sArreter(DirectionDeplacement dir) {
         switch(dir)
         {
@@ -96,7 +120,7 @@ public class Joueur extends Evoluable implements ICollision {
     }
 
     public void AddCoeur(TypeCoeur type, int nb) {
-        
+        //TO DO
     }
 
     public void AddCle(Cle cle) {
@@ -119,6 +143,7 @@ public class Joueur extends Evoluable implements ICollision {
     @Override
     public void evoluer(double pas) {
         
+        //Change la vitesse en x et en y selon la direction dans laquelle on se déplace
         double v = stats.getVitesseDeplacement();
         if(goNorth){
             vitesseY = -v;
@@ -139,6 +164,7 @@ public class Joueur extends Evoluable implements ICollision {
             vitesseX = v;
         }
         
+        //Si on peut tirer, tir dans la direction adéquate
         if (canShoot) {
             if (shootingNorth) {
                 shootingSouth = false;
@@ -169,6 +195,8 @@ public class Joueur extends Evoluable implements ICollision {
                 this.canShoot = false;
             }
         }        
+        
+        //Si on ne peut pas tirer change la valeur du cooldown de tir
         if(!canShoot) {
             if (this.cadTir == -1) {
                 cadTir = this.stats.getCadenveTir();
@@ -182,16 +210,20 @@ public class Joueur extends Evoluable implements ICollision {
 
         Coordonnee c = getCoordonnee();
         setCoordonnee(new Coordonnee(c.getX() + vitesseX * pas, c.getY() + vitesseY * pas));
-        hitbox.setPosition(c, 10, 20); //les valeurs seront à changé
+        hitbox.setPosition(c, 17, 20); //les valeurs seront à changé
         Notify("joueur");       
         
     }
 
+    /**
+     * Créer un tir allié
+     * @param dir dans la direction donnée
+     */
     private void instancierTir(DirectionTir dir)
     {
         Coordonnee coord = new Coordonnee(this.getCoordonnee().getX()+22,this.getCoordonnee().getY()+10);
         ProjectileAllie p = new ProjectileAllie(coord, dir);
-        TirAllieView tirView = new TirAllieView(p);        
+        TirAllieView tirView = new TirAllieView(p);
         GamePane.get().addView(tirView);   
     }
     
@@ -212,8 +244,11 @@ public class Joueur extends Evoluable implements ICollision {
     }
 
     @Override
-    public Hitbox getHitbox() { return hitbox; }
+    public Hitbox getHitbox() { 
+        return hitbox; 
+    }
 
+    //utile ?
     public void stop() {
         vitesseX = 0;
         vitesseY = 0;
