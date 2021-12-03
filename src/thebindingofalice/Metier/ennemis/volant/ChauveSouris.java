@@ -1,5 +1,6 @@
 package thebindingofalice.Metier.ennemis.volant;
 
+import java.util.Random;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Hitbox;
 import thebindingofalice.Metier.ICollision;
@@ -10,38 +11,55 @@ import thebindingofalice.Metier.ennemis.TypeEnnemi;
  */
 public class ChauveSouris extends EnnemiVolant {
 
+    private int frame;
+    
     public ChauveSouris(Coordonnee c) {
         super(c);
+        frame = 25;
     }
 
     /**
-     * /**
-     *  * Méthode appelé à chaque frame du jeu. Le paramètre pas représente le pas de temps entre deux appel de la méthode.
-     *  * /
+     * Méthode appelé à chaque frame du jeu.
+     * Le paramètre pas représente le pas de temps entre deux appel de la méthode.
+     * @param pas 
      */
     public void evoluer(double pas) {
-            throw new UnsupportedOperationException();
+        if (frame <= 0) {
+            Random r = new Random();
+            int v = getStatistiques().getVitesseDeplacement();
+            setVitesseX(r.nextDouble() % v);
+            setVitesseY(r.nextDouble() % v);
+            frame = 25;
+        }
+        else
+        {
+            frame--;
+        }
+        
+        Coordonnee c = getCoordonnee();
+        setCoordonnee(new Coordonnee(c.getX() * getVitesseX() * pas, c.getY() * getVitesseY() * pas));
+        System.out.println("x :" + getCoordonnee().getX() + "| y :" + getCoordonnee().getY());
     }
 
     public void Collision(ICollision o) {
-            throw new UnsupportedOperationException();
+        
     }
 
     public boolean EstLeJoueur() {
-            throw new UnsupportedOperationException();
+        return false;
     }
 
     public boolean EstBloquant() {
-            throw new UnsupportedOperationException();
+        return false;
     }
 
     @Override
     public TypeEnnemi getType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
     public Hitbox getHitbox() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 }
