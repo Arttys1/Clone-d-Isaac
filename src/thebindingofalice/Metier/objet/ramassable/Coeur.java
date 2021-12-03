@@ -16,17 +16,16 @@ public class Coeur extends ObjetRamassable {
 
     public Coeur(Coordonnee c) {
         super(c);
-        this.hitbox = new Hitbox(c.getX(),c.getY(),10,10);
+        this.hitbox = new Hitbox(c.getX(), c.getY(), 15, 15);
     }
 
     /**
-     * /**
-     *  * Méthode appelé à chaque frame du jeu. Le paramètre pas représente le pas de temps entre deux appel de la méthode.
-     *  * /
+     * Méthode appelé à chaque frame du jeu. Le paramètre pas représente le
+     * pas de temps entre deux appel de la méthode.
      */
     @Override
     public void evoluer(double pas) {
-            
+        
     }
 
     @Override

@@ -16,10 +16,10 @@ import thebindingofalice.Metier.objet.TypeObjet;
 public class Mur extends Obstacle {
     private final Hitbox hitbox;
     private DirectionSalle dir = null;
-    
+    private int i = 0;
     public Mur(Coordonnee c) {
         super(c);
-        hitbox = new Hitbox(c.getX(), c.getY(), 50, 50);
+        hitbox = new Hitbox(c.getX(), c.getY(), 60, 60);
     }
     
     public Mur(Coordonnee c, CaseMur caseMur)
@@ -52,7 +52,7 @@ public class Mur extends Obstacle {
 
     @Override
     public void evoluer(double pas) {
-
+        
     }
 
     @Override

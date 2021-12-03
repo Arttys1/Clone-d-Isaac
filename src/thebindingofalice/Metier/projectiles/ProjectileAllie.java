@@ -46,7 +46,7 @@ public class ProjectileAllie extends Projectile {
            
            }
            
-           hitbox.setPosition(c, 4, 4);
+           hitbox.setPosition(c, 1, 0);
            Notify("tirallie"); 
     }
 

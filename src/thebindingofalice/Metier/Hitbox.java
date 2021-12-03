@@ -43,10 +43,14 @@ public class Hitbox extends Observable{
     {
         boolean touche = false;
         
-        if((x >= h.x && x <= h.getX2() &&
+        if((x >= h.x && x <= h.getX2() &&               //coin haut droite
             y >= h.y && y <= h.getY2()) ||
-           (getX2() >= h.x && getX2() <= h.getX2() &&            
-            getY2() >= h.y && getY2() <= h.getY2()))
+           (getX2() >= h.x && getX2() <= h.getX2() &&   //coin HautGauche      
+            y >= h.y && y <= h.getY2()) ||
+            getY2() >= h.y && getY2() <= h.getY2() &&   //Coin bas droite
+            x >= h.x && x <= h.getX2()  ||
+            getY2() >= h.y && getY2() <= h.getY2() &&   //Coin bas gauche
+            getX2() >= h.x && getX2() <= h.getX2())
         {
             touche = true;
         }
