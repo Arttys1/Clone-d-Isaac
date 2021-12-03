@@ -1,5 +1,6 @@
 package thebindingofalice.Metier.joueur;
 
+import java.util.ArrayList;
 import thebindingofalice.IHM.GamePane;
 import thebindingofalice.IHM.view.TirAllieView;
 import thebindingofalice.Metier.Coordonnee;
@@ -21,7 +22,7 @@ public class Joueur extends Evoluable implements ICollision {
     //Statistique du joueur
     private Statistiques stats;
     private int vieMax;
-    private int[] vie;
+    private ArrayList<TypeCoeur> vie;
     private double vitesseX = 0;
     private double vitesseY = 0;
     private double cadTir;
@@ -44,7 +45,9 @@ public class Joueur extends Evoluable implements ICollision {
         stats = new Statistiques();
         hitbox = new Hitbox(c.getX(), c.getY(), 30, 30);
         this.canShoot = true;
-        cadTir = -1;        
+        cadTir = -1;
+        this.vie = new ArrayList<>();
+        InstanceVie();
     }
 
     /**
@@ -118,9 +121,22 @@ public class Joueur extends Evoluable implements ICollision {
     public void PrendDegat(int nbDegat) {
         throw new UnsupportedOperationException();
     }
-
+    /**
+     * Méthode pour ajouter des coeurs au personnage
+     * @param type
+     * @param nb correspond aux demi-coeur
+     */
     public void AddCoeur(TypeCoeur type, int nb) {
-        //TO DO
+        for(int nbDemiCoeur = 0; nbDemiCoeur < nb;nbDemiCoeur++)
+        {
+            switch (type) 
+            {
+                case ROUGE:
+                    this.vie.add(type);
+                    Notify("healRouge");
+                    break;
+            }
+        }
     }
 
     public void AddCle(Cle cle) {
@@ -252,6 +268,23 @@ public class Joueur extends Evoluable implements ICollision {
     public void stop() {
         vitesseX = 0;
         vitesseY = 0;
+    }
+    /**
+     * Initialise la liste de vie
+     */
+    private void InstanceVie() {
+        for(int x = 0 ; x < 12; x++)
+        {
+            this.vie.add(TypeCoeur.ROUGE);
+        
+        }
+    }
+    /**
+     * retourne la liste de vie
+     * @return 
+     */
+    public ArrayList<TypeCoeur> getVie() {
+        return vie;
     }
     
 }
