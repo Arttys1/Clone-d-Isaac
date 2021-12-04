@@ -4,6 +4,10 @@ import thebindingofalice.Metier.niveau.carte.salle.DirectionSalle;
 import thebindingofalice.Metier.niveau.carte.salle.Salle;
 import thebindingofalice.Metier.niveau.Niveau;
 import java.util.ArrayList;
+import thebindingofalice.IHM.GamePane;
+import thebindingofalice.IHM.view.ChauveSourisView;
+import thebindingofalice.Metier.Coordonnee;
+import thebindingofalice.Metier.ennemis.volant.ChauveSouris;
 import thebindingofalice.Metier.niveau.carte.salle.SalleSimple;
 
 /**
@@ -17,6 +21,7 @@ public class Carte {
     public Carte() {
         this.salles = new ArrayList<>();
         salleCourante = new SalleSimple();
+
     }
 
     /**

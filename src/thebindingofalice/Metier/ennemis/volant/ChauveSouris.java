@@ -4,14 +4,27 @@ import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Hitbox;
 import thebindingofalice.Metier.ICollision;
 import thebindingofalice.Metier.ennemis.TypeEnnemi;
+import thebindingofalice.Metier.niveau.carte.salle.Salle;
 
 /**
  * Classe ,héritant de Ennemi Volant, représentant les chauves souris
  */
 public class ChauveSouris extends EnnemiVolant {
 
+    //Statistique
+    private int vie = 3;
+    private double vitesseX = 0;
+    private double vitesseY = 0;
+    private double cadTir;
+    
+    //Hitbox de l'ennemi
+    private final Hitbox hitbox;
+    
+    private Salle salleCourante; //utile ?
+    
     public ChauveSouris(Coordonnee c) {
         super(c);
+        hitbox = new Hitbox(c.getX(), c.getY(), 27, 36);
     }
 
     /**
@@ -20,28 +33,30 @@ public class ChauveSouris extends EnnemiVolant {
      *  * /
      */
     public void evoluer(double pas) {
-            throw new UnsupportedOperationException();
+            
     }
 
     public void Collision(ICollision o) {
-            throw new UnsupportedOperationException();
+            if(o.EstLeJoueur()){
+                
+            }
     }
 
     public boolean EstLeJoueur() {
-            throw new UnsupportedOperationException();
+            return false;
     }
 
     public boolean EstBloquant() {
-            throw new UnsupportedOperationException();
+            return false;
     }
 
     @Override
     public TypeEnnemi getType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return TypeEnnemi.VOLANT;
     }
 
     @Override
     public Hitbox getHitbox() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hitbox;
     }
 }

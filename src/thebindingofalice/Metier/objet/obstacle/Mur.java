@@ -4,6 +4,7 @@ import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Hitbox;
 import thebindingofalice.Metier.ICollision;
 import thebindingofalice.Metier.Partie;
+import thebindingofalice.Metier.ennemis.Ennemi;
 import thebindingofalice.Metier.joueur.Joueur;
 import thebindingofalice.Metier.niveau.carte.Generateur.CaseMur;
 import thebindingofalice.Metier.niveau.carte.salle.DirectionSalle;
@@ -77,6 +78,9 @@ public class Mur extends Obstacle {
                     throw new AssertionError(dir.name());
                 
             }
+        }
+        if(o instanceof Ennemi){
+            
         }
     }
 

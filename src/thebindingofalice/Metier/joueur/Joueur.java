@@ -227,7 +227,8 @@ public class Joueur extends Evoluable implements ICollision {
         Coordonnee c = getCoordonnee();
         setCoordonnee(new Coordonnee(c.getX() + vitesseX * pas, c.getY() + vitesseY * pas));
         hitbox.setPosition(c, 17, 20); //les valeurs seront à changé
-        Notify("joueur");       
+        Notify("joueur"); 
+        
         
     }
 
