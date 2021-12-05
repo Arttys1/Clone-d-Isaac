@@ -145,7 +145,7 @@ public class EnJeuView implements Initializable{
      */
     private void instancierEnnemis(){
         for (int i = 0; i < 3; i++) {
-            Coordonnee coord = new Coordonnee(200 + i * 100 , 100);
+            Coordonnee coord = new Coordonnee(200 + i * 100 , 300);
             ChauveSouris cS = new ChauveSouris(coord);
             ChauveSourisView csv = new ChauveSourisView(cS);
             GamePane.get().addView(csv);

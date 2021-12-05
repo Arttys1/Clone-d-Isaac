@@ -12,9 +12,12 @@ import thebindingofalice.Metier.Statistiques;
 public abstract class Ennemi extends Evoluable implements ICollision {
     private int vie;
     private Statistiques statistiques;
+    private double vitesseX;
+    private double vitesseY;
 
     public Ennemi(Coordonnee c) {
         super(c);
+        statistiques = new Statistiques();
     }
 
     public abstract TypeEnnemi getType();
@@ -22,4 +25,26 @@ public abstract class Ennemi extends Evoluable implements ICollision {
     public void Bouger(DirectionDeplacement dir) {
             throw new UnsupportedOperationException();
     }
+
+    protected Statistiques getStatistiques() {
+        return statistiques;
+    }
+
+    protected double getVitesseX() {
+        return vitesseX;
+    }
+
+    protected void setVitesseX(double vitesseX) {
+        this.vitesseX = vitesseX;
+    }
+
+    protected double getVitesseY() {
+        return vitesseY;
+    }
+
+    protected void setVitesseY(double vitesseY) {
+        this.vitesseY = vitesseY;
+    }
+    
+    
 }

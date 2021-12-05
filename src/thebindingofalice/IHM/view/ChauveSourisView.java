@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import thebindingofalice.Controller.ControlleurChauveSouris;
 import thebindingofalice.Controller.Observeur;
 import thebindingofalice.IHM.GamePane;
+import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.ennemis.volant.ChauveSouris;
 
@@ -38,18 +39,25 @@ public class ChauveSourisView extends View implements Observeur{
         
         //ajoute la chauvesouris à la liste des evoluable et des collisions de la partie
         Partie.get().getNiveauCourant().getSalleCourante().AddEvoluable(chauveSouris);
-        Partie.get().addICollision(chauveSouris);  
-        
-        //Affiche le coeur au bon endroit
-        translate(chauveSouris.getCoordonnee().getX(),chauveSouris.getCoordonnee().getY());
+        Partie.get().addICollision(chauveSouris);
         
         this.controlleurChauveSouris = new ControlleurChauveSouris(chauveSouris);
         
     }
 
+    public void moveSprite()
+    {
+        Coordonnee coordonnee = chauveSouris.getCoordonnee();
+        translate(coordonnee.getX() , coordonnee.getY());
+    }
+    
     @Override
     public void Update(String message) {
-        
+        switch(message.toLowerCase())
+        {
+            case "chauvesourisdeplacement": moveSprite(); break;
+            default : break;
+        }
     }
     
     
