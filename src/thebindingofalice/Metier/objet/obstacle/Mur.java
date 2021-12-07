@@ -98,4 +98,9 @@ public class Mur extends Obstacle {
     public Hitbox getHitbox() {
         return hitbox;
     }
+    
+    @Override
+    public boolean estUnProjectileAllie() {
+        return false;
+    }
 }

@@ -80,6 +80,10 @@ public class JoueurView extends View implements Observeur{
         {
             AddCoeur(TypeCoeur.ROUGE);
         }
+        else if(message.toLowerCase().equals("degat"))
+        {
+            prendDegat();
+        }
     }
     
     /**
@@ -190,5 +194,13 @@ public class JoueurView extends View implements Observeur{
         }
     
     }
-    
+
+    private void prendDegat() {
+        for (View coeur : listeVie) {
+            GamePane.get().removeView(coeur);
+        }
+        this.listeVie.clear();
+        this.InstanceVieHUD();
+    }
+
 }

@@ -19,20 +19,28 @@ public class SoldatDeCoeur extends EnnemiTerrestre {
      *  * Méthode appelé à chaque frame du jeu. Le paramètre pas représente le pas de temps entre deux appel de la méthode.
      *  * /
      */
+    @Override
     public void evoluer(double pas) {
             throw new UnsupportedOperationException();
     }
 
+    @Override
     public void Collision(ICollision o) {
             throw new UnsupportedOperationException();
     }
 
+    @Override
     public boolean EstLeJoueur() {
             throw new UnsupportedOperationException();
     }
 
+    @Override
     public boolean EstBloquant() {
             throw new UnsupportedOperationException();
+    }
+    @Override
+    public boolean estUnProjectileAllie() {
+        return false;
     }
 
     @Override

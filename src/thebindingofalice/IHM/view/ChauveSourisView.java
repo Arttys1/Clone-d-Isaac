@@ -56,8 +56,16 @@ public class ChauveSourisView extends View implements Observeur{
         switch(message.toLowerCase())
         {
             case "chauvesourisdeplacement": moveSprite(); break;
+            case "destroy" : destroy(); break;
             default : break;
         }
+    }
+
+    private void destroy() {
+        Partie.get().RemoveICollision(chauveSouris);
+        Partie.get().getNiveauCourant().getSalleCourante().RemoveEvoluable(chauveSouris);
+        GamePane.get().removeView(hitboxChauveSouris);
+        GamePane.get().removeView(this);
     }
     
     

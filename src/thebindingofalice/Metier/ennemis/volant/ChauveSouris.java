@@ -4,6 +4,7 @@ import java.util.Random;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Hitbox;
 import thebindingofalice.Metier.ICollision;
+import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.ennemis.TypeEnnemi;
 import thebindingofalice.Metier.niveau.carte.salle.Salle;
 
@@ -42,14 +43,27 @@ public class ChauveSouris extends EnnemiVolant {
         Notify("ChauveSourisDeplacement");
     }
 
+    @Override
     public void Collision(ICollision o) {
-            if(o.EstLeJoueur()){
-                
-            }
+        if (o.EstLeJoueur()) {
+            Partie.get().GetJoueur().PrendDegat(1);
+        }
+        else if(o.estUnProjectileAllie())
+        {
+            mourir();
+        }
     }
 
+    private void mourir() {
+        Notify("destroy");
+    }
+    
     public boolean EstLeJoueur() {
             return false;
+    }
+    @Override
+    public boolean estUnProjectileAllie() {
+        return false;
     }
 
     public boolean EstBloquant() {
