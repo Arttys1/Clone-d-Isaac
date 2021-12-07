@@ -36,6 +36,9 @@ public class Joueur extends Evoluable implements ICollision {
     //Booléen gérant les déplacements et le tir
     private boolean goNorth, goSouth, goEast,goWest,shootingNorth,shootingSouth,shootingEast,shootingWest, canShoot;
     
+    private int frameInvicibilite = 0;
+    private boolean invincible = false;
+    
     /**
      * Constructeur du joueur
      * @param c coordonnée du joueur
@@ -119,8 +122,18 @@ public class Joueur extends Evoluable implements ICollision {
     }
 
     public void PrendDegat(int nbDegat) {
-        throw new UnsupportedOperationException();
+        if (!invincible) {
+            for (int i = 0; i < nbDegat; i++) {
+                if (!vie.isEmpty()) {
+                    vie.remove(0);
+                }
+            }
+            invincible = true;
+            frameInvicibilite = 25;
+            Notify("degat");
+        }
     }
+
     /**
      * Méthode pour ajouter des coeurs au personnage
      * @param type
@@ -158,6 +171,13 @@ public class Joueur extends Evoluable implements ICollision {
      */
     @Override
     public void evoluer(double pas) {
+        if (invincible) {            
+            frameInvicibilite--;
+            if (frameInvicibilite < 0) {
+                frameInvicibilite = 25;
+                invincible = false;
+            }
+        }
         
         //Change la vitesse en x et en y selon la direction dans laquelle on se déplace
         double v = stats.getVitesseDeplacement();
@@ -227,7 +247,8 @@ public class Joueur extends Evoluable implements ICollision {
         Coordonnee c = getCoordonnee();
         setCoordonnee(new Coordonnee(c.getX() + vitesseX * pas, c.getY() + vitesseY * pas));
         hitbox.setPosition(c, 17, 20); //les valeurs seront à changé
-        Notify("joueur");       
+        Notify("joueur"); 
+        
         
     }
 
@@ -257,6 +278,11 @@ public class Joueur extends Evoluable implements ICollision {
     @Override
     public boolean EstBloquant() {
        return false;
+    }
+    
+    @Override
+    public boolean estUnProjectileAllie() {
+        return false;
     }
 
     @Override

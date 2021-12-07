@@ -85,4 +85,9 @@ public class ProjectileAllie extends Projectile {
     public void setVitesse(float vitesse) {
         this.vitesse = vitesse;
     }
+
+    @Override
+    public boolean estUnProjectileAllie() {
+        return true;
+    }
 }

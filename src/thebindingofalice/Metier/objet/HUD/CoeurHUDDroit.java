@@ -53,5 +53,8 @@ public class CoeurHUDDroit extends Obstacle{
     public Hitbox getHitbox() {
        return null;
     }
-    
+    @Override
+    public boolean estUnProjectileAllie() {
+        return false;
+    }
 }

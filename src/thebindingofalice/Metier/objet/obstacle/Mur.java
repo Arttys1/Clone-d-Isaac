@@ -4,6 +4,7 @@ import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Hitbox;
 import thebindingofalice.Metier.ICollision;
 import thebindingofalice.Metier.Partie;
+import thebindingofalice.Metier.ennemis.Ennemi;
 import thebindingofalice.Metier.joueur.Joueur;
 import thebindingofalice.Metier.niveau.carte.Generateur.CaseMur;
 import thebindingofalice.Metier.niveau.carte.salle.DirectionSalle;
@@ -78,6 +79,9 @@ public class Mur extends Obstacle {
                 
             }
         }
+        if(o instanceof Ennemi){
+            
+        }
     }
 
     @Override
@@ -93,5 +97,10 @@ public class Mur extends Obstacle {
     @Override
     public Hitbox getHitbox() {
         return hitbox;
+    }
+    
+    @Override
+    public boolean estUnProjectileAllie() {
+        return false;
     }
 }

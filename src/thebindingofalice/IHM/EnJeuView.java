@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import thebindingofalice.IHM.view.ChauveSourisView;
 import thebindingofalice.IHM.view.CoeurView;
 import thebindingofalice.IHM.view.HitboxView;
 import thebindingofalice.IHM.view.JoueurView;
@@ -16,6 +17,7 @@ import thebindingofalice.IHM.view.MurView;
 import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.joueur.DirectionDeplacement;
 import thebindingofalice.Metier.Coordonnee;
+import thebindingofalice.Metier.ennemis.volant.ChauveSouris;
 import thebindingofalice.Metier.niveau.carte.Generateur.Case;
 import thebindingofalice.Metier.niveau.carte.Generateur.CaseMur;
 import thebindingofalice.Metier.niveau.carte.Generateur.TypeCase;
@@ -56,6 +58,9 @@ public class EnJeuView implements Initializable{
         
         //Créer des coeurs dans la salle A supprimer plus tard
         instancierDesCoeurs();  
+        
+        //Créer des ennemis dans la salle A supprimer plus tard
+        instancierEnnemis();  
         
         //Lance la boucle du jeu
         boucleDeJeu();
@@ -132,6 +137,18 @@ public class EnJeuView implements Initializable{
             CoeurView coeurView = new CoeurView(c);  
             
             GamePane.get().addView(coeurView);
+        }
+    }
+    
+    /**
+     * Méthode provisoire servant uniqement à montrer l'affichage d'ennemis
+     */
+    private void instancierEnnemis(){
+        for (int i = 0; i < 3; i++) {
+            Coordonnee coord = new Coordonnee(200 + i * 100 , 300);
+            ChauveSouris cS = new ChauveSouris(coord);
+            ChauveSourisView csv = new ChauveSourisView(cS);
+            GamePane.get().addView(csv);
         }
     }
     

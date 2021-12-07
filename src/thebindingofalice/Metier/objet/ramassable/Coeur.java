@@ -60,4 +60,9 @@ public class Coeur extends ObjetRamassable {
     public Hitbox getHitbox() {
         return this.hitbox;
     }
+    
+    @Override
+    public boolean estUnProjectileAllie() {
+        return false;
+    }
 }
