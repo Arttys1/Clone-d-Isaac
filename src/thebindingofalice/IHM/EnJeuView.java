@@ -14,6 +14,7 @@ import thebindingofalice.IHM.view.CoeurView;
 import thebindingofalice.IHM.view.HitboxView;
 import thebindingofalice.IHM.view.JoueurView;
 import thebindingofalice.IHM.view.MurView;
+import thebindingofalice.IHM.view.RocherView;
 import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.joueur.DirectionDeplacement;
 import thebindingofalice.Metier.Coordonnee;
@@ -21,6 +22,7 @@ import thebindingofalice.Metier.ennemis.volant.ChauveSouris;
 import thebindingofalice.Metier.niveau.carte.Generateur.Case;
 import thebindingofalice.Metier.niveau.carte.Generateur.CaseMur;
 import thebindingofalice.Metier.niveau.carte.Generateur.TypeCase;
+import thebindingofalice.Metier.objet.obstacle.Rocher;
 import thebindingofalice.Metier.objet.ramassable.Coeur;
 import thebindingofalice.Metier.projectiles.DirectionTir;
 
@@ -42,7 +44,8 @@ public class EnJeuView implements Initializable{
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {    
+    public void initialize(URL url, ResourceBundle rb) {
+        instancierRocher();
         joueurView = new JoueurView();  
         root.getChildren().add(gamePane.getForeground());
         GamePane.get().addView(joueurView);
@@ -140,6 +143,11 @@ public class EnJeuView implements Initializable{
         }
     }
     
+    private void instancierRocher() {
+        RocherView rocher = new RocherView(new Rocher(new Coordonnee(500, 200)));
+        GamePane.get().addView(rocher);
+    }
+
     /**
      * Méthode provisoire servant uniqement à montrer l'affichage d'ennemis
      */
@@ -170,9 +178,10 @@ public class EnJeuView implements Initializable{
             img.setFitWidth(size);
             background.getChildren().add(img);
             if (c.getType() == TypeCase.MUR) {
-                MurView mur = new MurView(new Coordonnee(x, y), (CaseMur)c);
+                MurView mur = new MurView(new Coordonnee(x, y));
                 GamePane.get().addView(mur);
             }
         }
     }  
+
 }

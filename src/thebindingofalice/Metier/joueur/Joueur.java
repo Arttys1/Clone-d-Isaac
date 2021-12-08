@@ -38,6 +38,7 @@ public class Joueur extends Evoluable implements ICollision {
     
     private int frameInvicibilite = 0;
     private boolean invincible = false;
+    private int dernierDept = 0;
     
     /**
      * Constructeur du joueur
@@ -267,7 +268,94 @@ public class Joueur extends Evoluable implements ICollision {
     
     @Override
     public void Collision(ICollision o) {
-        
+        if (o.EstBloquant()) {
+            Coordonnee co = new Coordonnee(this.getCoordonnee());
+            //info sur le joueur (des points qui se situe sur un côté de la hitbox)
+            double droite = hitbox.getX() + hitbox.getWidth();
+            double haut = hitbox.getY();
+            double gauche = hitbox.getX();
+            double bas = hitbox.getY() + hitbox.getHeight();
+           
+            double joueurX = this.getCoordonnee().getX();
+            double joueurY = this.getCoordonnee().getY();
+            double absX = Math.abs(vitesseX);
+            double absY = Math.abs(vitesseY);
+            
+            //info sur l'objet (les même points que pour le joueur)
+            double hautMur = o.getHitbox().getY();
+            double basMur = o.getHitbox().getY() + o.getHitbox().getHeight();
+            double droiteMur = o.getHitbox().getX() + o.getHitbox().getWidth();
+            double gaucheMur = o.getHitbox().getX();            
+            
+            if (absX>absY) { //gauche et droite
+                if (vitesseX > 0 && gaucheMur < droite  && droite < droiteMur) {//vers la droite
+                    co.setX(joueurX - (droite - gaucheMur));
+                    dernierDept = 1;
+                } else if (vitesseX < 0 && gaucheMur < gauche  && gauche < droiteMur){ //vers la gauche
+                    co.setX(joueurX - (gauche-droiteMur));
+                    dernierDept = 2;
+                }
+            } else if (absY>absX) { // haut et bas
+                if(vitesseY < 0 && hautMur < haut  && haut < basMur){ //haut
+                    co.setY(joueurY - (haut - basMur));
+                    dernierDept=3;
+                } else if (vitesseY>0 && hautMur < bas  && bas < basMur) { //bas
+                    co.setY(joueurY - (bas - hautMur));
+                    dernierDept=4;
+                }
+
+            } else if(absX==0 && absY==0){ //Quand on est immobile mais en collision "à cause" du pas de temps
+                switch(dernierDept){
+                    case 1: co.setX(joueurX - (droite - gaucheMur) - 1);
+                            dernierDept = 0;
+                            break;
+                    case 2: co.setX(joueurX - (gauche-droiteMur) + 1);
+                            dernierDept = 0;
+                            break;
+                    case 3: co.setY(joueurY - (haut - basMur) + 1);
+                            dernierDept = 0;
+                            break;
+                    case 4: co.setY(joueurY - (bas - hautMur) - 1);
+                            dernierDept = 0;
+                            break;
+                }
+            } else { //diagonale
+                if (vitesseX>0 && vitesseY<0){//diagonale haut droite
+                    if(gauche<gaucheMur && gauche<droiteMur){//Touche à droite
+                        co.setX(joueurX - (droite - gaucheMur));
+                        dernierDept = 1;
+                    } else if (bas>basMur && bas>hautMur){//touche en haut
+                        co.setY(joueurY - (haut - basMur));
+                        dernierDept=3;
+                    }
+                } else if (vitesseX>0 && vitesseY>0){//diagonale bas droite
+                    if(gauche<gaucheMur && gauche<droiteMur){//Touche à droite
+                        co.setX(joueurX - (droite - gaucheMur));
+                        dernierDept = 1;
+                    } else if (hautMur < bas  && bas < basMur) { //Touche en bas 
+                        co.setY(joueurY - (bas - hautMur));
+                        dernierDept=4;
+                    }                    
+                } else if (vitesseX<0 && vitesseY<0){ //diagonale haut gauche
+                    if (bas>basMur && bas>hautMur){//touche en haut
+                        co.setY(joueurY - (haut - basMur));
+                        dernierDept=3;
+                    } else if (gaucheMur < gauche  && gauche < droiteMur){ //touche à gauche
+                        co.setX(joueurX - (gauche-droiteMur));
+                        dernierDept = 2;
+                    }
+                } else if (vitesseX<0 && vitesseY>0){//diagonale bas gauche
+                    if (hautMur < bas  && bas < basMur) { //Touche en bas 
+                        co.setY(joueurY - (bas - hautMur));
+                        dernierDept=4;
+                    } else if (gaucheMur < gauche  && gauche < droiteMur){ //touche à gauche
+                        co.setX(joueurX - (gauche-droiteMur));
+                        dernierDept = 2;
+                    }
+                }
+            }
+            this.setCoordonnee(co);
+        }
     }
 
     @Override

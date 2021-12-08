@@ -16,9 +16,9 @@ public class MurView extends View implements Observeur{
     private final Mur mur;
     private final HitboxView hitboxMur;
     
-    public MurView(Coordonnee coordonnee, CaseMur caseMur) {
+    public MurView(Coordonnee coordonnee) {
         super(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Salle/mur.png");
-        mur = new Mur(coordonnee, caseMur); 
+        mur = new Mur(coordonnee); 
         setFitHeight(60);
         setFitWidth(60); 
         
