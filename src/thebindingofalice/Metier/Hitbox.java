@@ -84,6 +84,30 @@ public class Hitbox extends Observable{
         return width;
     }
 
-
+    /**
+     * Méthode renvoyant le centre de la hitbox sur l'axe X.
+     * @return Le centre de la hitbox sur l'axe X.
+     */
+    public double getXCenter()
+    {
+        return x + (width / 2);
+    }
     
+    /**
+     * Méthode renvoyant le centre de la hitbox sur l'axe Y.
+     * @return Le centre de la hitbox sur l'axe Y.
+     */
+    public double getYCenter()
+    {
+        return y + (height / 2);
+    }
+    
+    /**
+     * Méthode renvoyant la coordonnée du centre de la hitbox.
+     * @return le centre de la hitbox.
+     */
+    public Coordonnee getCenter()
+    {
+        return new Coordonnee(getXCenter(), getYCenter());
+    }
 }
