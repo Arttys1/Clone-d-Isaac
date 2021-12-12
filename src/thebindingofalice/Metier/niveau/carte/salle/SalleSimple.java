@@ -6,11 +6,11 @@
 package thebindingofalice.Metier.niveau.carte.salle;
 
 import thebindingofalice.IHM.GamePane;
-import thebindingofalice.IHM.view.CoeurView;
+import thebindingofalice.IHM.view.ChauveSourisView;
 import thebindingofalice.Metier.Coordonnee;
+import thebindingofalice.Metier.ennemis.volant.ChauveSouris;
 import thebindingofalice.Metier.fabrique.FabriqueCase;
 import thebindingofalice.Metier.niveau.carte.Generateur.TypeCase;
-import thebindingofalice.Metier.objet.ramassable.Coeur;
 
 /**
  * Classe, héritant de Salle, représentant une salle de base.
@@ -50,9 +50,10 @@ public class SalleSimple extends Salle{
                 }
                 AddCase(FabriqueCase.Create(type, j, i));
             }
-        }        
+        } 
+        
     }
-
+    
     @Override
     public TypeSalle getType() {
         return TypeSalle.Simple;

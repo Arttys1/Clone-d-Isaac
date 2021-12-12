@@ -39,6 +39,7 @@ public class ChauveSourisView extends View implements Observeur{
         
         //ajoute la chauvesouris à la liste des evoluable et des collisions de la partie
         Partie.get().getNiveauCourant().getSalleCourante().AddEvoluable(chauveSouris);
+        Partie.get().getNiveauCourant().getSalleCourante().addEnnemi(chauveSouris);
         Partie.get().addICollision(chauveSouris);
         
         this.controlleurChauveSouris = new ControlleurChauveSouris(chauveSouris);
@@ -64,6 +65,7 @@ public class ChauveSourisView extends View implements Observeur{
     private void destroy() {
         Partie.get().RemoveICollision(chauveSouris);
         Partie.get().getNiveauCourant().getSalleCourante().RemoveEvoluable(chauveSouris);
+        Partie.get().getNiveauCourant().getSalleCourante().removeEnnemi(chauveSouris);
         GamePane.get().removeView(hitboxChauveSouris);
         GamePane.get().removeView(this);
     }

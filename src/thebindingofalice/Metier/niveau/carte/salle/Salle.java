@@ -1,17 +1,20 @@
 package thebindingofalice.Metier.niveau.carte.salle;
 
 import java.util.ArrayList;
+import thebindingofalice.Controller.Observable;
 import thebindingofalice.Metier.Evoluable;
+import thebindingofalice.Metier.ennemis.Ennemi;
 import thebindingofalice.Metier.niveau.carte.Generateur.Case;
 
 /**
  * Classe abstraite représentant les salles. Elle est composé de cases.
  * @author Arnaud
  */
-public abstract class Salle {
+public abstract class Salle extends Observable{
     private final ArrayList<Case> cases;            //Liste des cases composant la salle
     private final ArrayList<Porte> portes;          //Liste des portes de la salle
     private final ArrayList<Evoluable> evoluables;  //Liste des evoluables présent dans la salle
+    private final ArrayList<Ennemi> ennemies;
 
     public ArrayList<Evoluable> getEvoluables() {
         return evoluables;
@@ -21,8 +24,19 @@ public abstract class Salle {
         this.evoluables = new ArrayList<>();
         this.portes = new ArrayList<>();
         this.cases = new ArrayList<>();
+        this.ennemies = new ArrayList<>();
     }
 
+    public void addEnnemi(Ennemi e) { ennemies.add(e); }
+    
+    public void removeEnnemi(Ennemi e) {
+        ennemies.remove(e); 
+        if(ennemies.isEmpty())
+        {
+            Notify("loot");
+        }
+    }
+    
     /**
      * Méthode permettant d'ajouter un évoluable à la salle.
      *
