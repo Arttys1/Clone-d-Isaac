@@ -7,6 +7,7 @@ import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Evoluable;
 import thebindingofalice.Metier.Hitbox;
 import thebindingofalice.Metier.ICollision;
+import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.Statistiques;
 import thebindingofalice.Metier.niveau.carte.salle.DirectionSalle;
 import thebindingofalice.Metier.projectiles.DirectionTir;
@@ -26,7 +27,7 @@ public class Joueur extends Evoluable implements ICollision {
     private double vitesseX = 0;
     private double vitesseY = 0;
     private double cadTir;
-    private Cle[] cles;
+    private ArrayList<Cle> cles;
     
     private Salle salleCourante; //utile ?
     
@@ -51,6 +52,7 @@ public class Joueur extends Evoluable implements ICollision {
         this.canShoot = true;
         cadTir = -1;
         this.vie = new ArrayList<>();
+        
         InstanceVie();
     }
 
@@ -126,7 +128,10 @@ public class Joueur extends Evoluable implements ICollision {
         if (!invincible) {
             for (int i = 0; i < nbDegat; i++) {
                 if (!vie.isEmpty()) {
-                    vie.remove(0);
+                    vie.remove(i);
+                    if(vie.isEmpty()){
+                        Notify("mortjoueur");
+                    }  
                 }
             }
             invincible = true;
@@ -141,7 +146,7 @@ public class Joueur extends Evoluable implements ICollision {
      * @param nb correspond aux demi-coeur
      */
     public void AddCoeur(TypeCoeur type, int nb) {
-        for(int nbDemiCoeur = 0; nbDemiCoeur < nb;nbDemiCoeur++)
+        for(int nbDemiCoeur = 0; nbDemiCoeur < nb; nbDemiCoeur++)
         {
             switch (type) 
             {
@@ -154,7 +159,7 @@ public class Joueur extends Evoluable implements ICollision {
     }
 
     public void AddCle(Cle cle) {
-        throw new UnsupportedOperationException();
+        cles.add(cle);
     }
 
     public void ChangerSalle(DirectionSalle d) {
@@ -249,6 +254,8 @@ public class Joueur extends Evoluable implements ICollision {
         setCoordonnee(new Coordonnee(c.getX() + vitesseX * pas, c.getY() + vitesseY * pas));
         hitbox.setPosition(c, 17, 20); //les valeurs seront à changé
         Notify("joueur"); 
+        
+        
         
         
     }
@@ -356,6 +363,7 @@ public class Joueur extends Evoluable implements ICollision {
             }
             this.setCoordonnee(co);
         }
+        
     }
 
     @Override
@@ -384,10 +392,10 @@ public class Joueur extends Evoluable implements ICollision {
         vitesseY = 0;
     }
     /**
-     * Initialise la liste de vie
+     * Initialise la liste de vie à 12 demi-coeur rouge
      */
     private void InstanceVie() {
-        for(int x = 0 ; x < 12; x++)
+        for(int x = 0 ; x < 6; x++)
         {
             this.vie.add(TypeCoeur.ROUGE);
         
@@ -399,6 +407,10 @@ public class Joueur extends Evoluable implements ICollision {
      */
     public ArrayList<TypeCoeur> getVie() {
         return vie;
+    }
+
+    public void mourir() {
+        Notify("mortjoueur");
     }
     
 }

@@ -17,6 +17,7 @@ public class ChauveSouris extends EnnemiVolant {
     
     private int frame = 20;
     
+    
     public ChauveSouris(Coordonnee c) {
         super(c);
         hitbox = new Hitbox(c.getX(), c.getY(), 27, 36);
@@ -27,6 +28,7 @@ public class ChauveSouris extends EnnemiVolant {
      * de temps entre deux appel de la méthode.
      */
     public void evoluer(double pas) {
+        
         if(frame < 0)
         {
             Random r = new Random();
@@ -40,7 +42,9 @@ public class ChauveSouris extends EnnemiVolant {
         Coordonnee c = getCoordonnee();
         setCoordonnee(new Coordonnee(c.getX() + getVitesseX() * pas, c.getY() + getVitesseY() * pas));
         hitbox.setPosition(c, 0, 0);
+        
         Notify("ChauveSourisDeplacement");
+        
     }
 
     @Override

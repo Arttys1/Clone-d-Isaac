@@ -1,26 +1,35 @@
 package thebindingofalice.IHM;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import thebindingofalice.Controller.Observeur;
 import thebindingofalice.IHM.view.ChauveSourisView;
 import thebindingofalice.IHM.view.CoeurView;
 import thebindingofalice.IHM.view.HitboxView;
 import thebindingofalice.IHM.view.JoueurView;
 import thebindingofalice.IHM.view.MurView;
 import thebindingofalice.IHM.view.RocherView;
+import thebindingofalice.IHM.view.SalleView;
+import thebindingofalice.Main;
 import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.joueur.DirectionDeplacement;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.ennemis.volant.ChauveSouris;
 import thebindingofalice.Metier.niveau.carte.Generateur.Case;
-import thebindingofalice.Metier.niveau.carte.Generateur.CaseMur;
 import thebindingofalice.Metier.niveau.carte.Generateur.TypeCase;
 import thebindingofalice.Metier.objet.obstacle.Rocher;
 import thebindingofalice.Metier.objet.ramassable.Coeur;
@@ -30,27 +39,35 @@ import thebindingofalice.Metier.projectiles.DirectionTir;
 /**
  * FXML Controller class
  * Vue représentant la fenêtre de jeu.
+ * La vue implémente observeur pour voir les modifications du métier
+ * au final cette classe correspond à la salleView j'ai l'impression
  * @author Pascaline, Arnaud
  */
-public class EnJeuView implements Initializable{  
-    private final Partie partie = Partie.get();     //partie de jeu
+public class EnJeuView implements Observeur, Initializable{  
+    private Partie partie = Partie.get();     //partie de jeu
     private JoueurView joueurView;    
     private final GamePane gamePane = GamePane.get();
     @FXML
     private AnchorPane background;  //arrière plan
     @FXML
     private AnchorPane root;  //racine
+    private HitboxView hitboxJoueur;
+    private SalleView salle;
+    AnimationTimer animationTimer;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        salle = new SalleView();
+        Partie.get().GetJoueur().Register(this);
         instancierRocher();
         joueurView = new JoueurView();  
         root.getChildren().add(gamePane.getForeground());
+        
         GamePane.get().addView(joueurView);
         
-        HitboxView hitboxJoueur = new HitboxView(Partie.get().GetJoueur().getHitbox());
+        hitboxJoueur = new HitboxView(Partie.get().GetJoueur().getHitbox());
         //ligne à commenter si on veut rendre l'hitbox du joueur transparente
         hitboxJoueur.setStroke(Color.RED);
         //ajoute la hitbox du joueur sur l'affichage
@@ -62,8 +79,6 @@ public class EnJeuView implements Initializable{
         //Créer des coeurs dans la salle A supprimer plus tard
         instancierDesCoeurs();  
         
-        //Créer des ennemis dans la salle A supprimer plus tard
-        instancierEnnemis();  
         
         //Lance la boucle du jeu
         boucleDeJeu();
@@ -74,7 +89,7 @@ public class EnJeuView implements Initializable{
      * Ce n'est pour l'instant qu'une esquisse mais c'est un début.
      */
     private void boucleDeJeu() {        
-        AnimationTimer animationTimer = new AnimationTimer()
+        animationTimer = new AnimationTimer()
         {
             @Override
             public void handle(long pas) {      
@@ -148,17 +163,7 @@ public class EnJeuView implements Initializable{
         GamePane.get().addView(rocher);
     }
 
-    /**
-     * Méthode provisoire servant uniqement à montrer l'affichage d'ennemis
-     */
-    private void instancierEnnemis(){
-        for (int i = 0; i < 3; i++) {
-            Coordonnee coord = new Coordonnee(200 + i * 100 , 300);
-            ChauveSouris cS = new ChauveSouris(coord);
-            ChauveSourisView csv = new ChauveSourisView(cS);
-            GamePane.get().addView(csv);
-        }
-    }
+    
     
     
     /**
@@ -183,5 +188,40 @@ public class EnJeuView implements Initializable{
             }
         }
     }  
+
+    @FXML
+    /**
+     * Lance le menu de game over (pour l'instant quasi identique au menu principal
+     * à modifier par les gens qui vont des trucs jolis et tout
+     */
+    public void AffMenuGameOver(){
+        try { 
+            Parent root = FXMLLoader.load(getClass().getResource("MenuGameOver.fxml"));
+            Stage stage = Main.getPrimaryStage();
+            stage.setX(200);
+            stage.setY(1);
+            stage.setScene(new Scene(root, 800.0, 453.0));
+            root.requestFocus(); //I don't know why but this is necessary to keep event working
+        } catch (IOException ex) {
+            Logger.getLogger(MenuPrincipalView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * La vue est un observeur d'un peu tout
+     * @param message 
+     */
+    @Override
+    public void Update(String message) {
+        //Si on reçoit le message de la mort du joueur
+        if(message.toLowerCase().equals("mortjoueur"))
+        {           
+            Partie.get().PartiePerdu(); //on clear la liste des collisionables, des ennemis et des evoluables (appelle sur le métier depuis la vue à changer plus tard)
+            
+            GamePane.get().getForeground().getChildren().clear(); //on clear la liste des vues affichée
+            this.animationTimer.stop(); //on stop la boucle de jeu 
+            AffMenuGameOver(); // on affiche le menu de game over
+        }
+    }
 
 }

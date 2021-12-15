@@ -3,6 +3,7 @@ package thebindingofalice.Metier.objet.ramassable;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Hitbox;
 import thebindingofalice.Metier.ICollision;
+import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.objet.TypeObjet;
 
 /**
@@ -10,8 +11,10 @@ import thebindingofalice.Metier.objet.TypeObjet;
  */
 public class Cle extends ObjetRamassable {
 
+    private Hitbox hitbox;
     public Cle(Coordonnee c) {
         super(c);
+        this.hitbox = new Hitbox(c.getX(), c.getY(), 60, 60);
     }
 
     /**
@@ -20,29 +23,33 @@ public class Cle extends ObjetRamassable {
      *  * /
      */
     public void evoluer(double pas) {
-            throw new UnsupportedOperationException();
+
     }
 
     public void Collision(ICollision o) {
-            throw new UnsupportedOperationException();
+        if(o.EstLeJoueur())
+            {
+                Notify("giveclé");
+                Partie.get().GetJoueur().AddCle(this);
+            }
     }
 
     public boolean EstLeJoueur() {
-            throw new UnsupportedOperationException();
+            return false;
     }
 
     public boolean EstBloquant() {
-            throw new UnsupportedOperationException();
+            return false;
     }
 
     @Override
     public TypeObjet getType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return TypeObjet.CLE;
     }
 
     @Override
     public Hitbox getHitbox() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.hitbox;
     }
     
     @Override

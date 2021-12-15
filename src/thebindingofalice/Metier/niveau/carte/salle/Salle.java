@@ -37,6 +37,11 @@ public abstract class Salle extends Observable{
         }
     }
     
+    public void removeOne()
+    {
+        removeEnnemi(ennemies.get(0));
+    }
+    
     /**
      * Méthode permettant d'ajouter un évoluable à la salle.
      *
@@ -95,6 +100,15 @@ public abstract class Salle extends Observable{
         {
             evoluables.get(i).evoluer(pas);
         }
+    }
+
+    /**
+     * Méthode appelé lors d'un game over,
+     * vide la liste des ennemies et celle des evoluables
+     */
+    public void PartiePerdu() {
+        this.ennemies.clear();
+        this.evoluables.clear();
     }
                
 }

@@ -13,7 +13,7 @@ import thebindingofalice.Metier.niveau.algoNiveau.MockAlgoNiveaux;
 public class Partie {
     private static Partie instance = null;                  //Instance de la partie
     private final ArrayList<Niveau> niveaux;                //listes des niveaux
-    private Niveau niveauCourant;                           //niveau courant
+    private final Niveau niveauCourant;                           //niveau courant
     private final ArrayList<ICollision> objetsCollision;    //ICollision de la partie
     private final Joueur joueur;                                  //le joueur
 
@@ -103,4 +103,15 @@ public class Partie {
      * @return le niveau courant
      */
     public Niveau getNiveauCourant() { return niveauCourant; }
+    
+    /**
+     * Méthode appelé lors d'un game over qui vide la liste des objets, collisionnables,
+     * remet le joueur à sa position d'origine,
+     * dans la salle courante vide la liste des ennemis et des objets evoluables
+     */
+    public void PartiePerdu(){
+        this.joueur.setCoordonnee(new Coordonnee(350, 300));
+        this.objetsCollision.clear();
+        this.niveauCourant.getSalleCourante().PartiePerdu();
+    }
 }
