@@ -32,12 +32,11 @@ public class SalleView implements Observeur{
         switch(message.toLowerCase())
         {
             case "loot" : InstanciateLoot(); break;
-            case "destroy" : ennemiMort(); break;
         }
     }
 
     private void InstanciateLoot() {
-        CléView cle = new CléView(new Cle(new Coordonnee(200, 200)));
+        CléView cle = new CléView(new Cle(new Coordonnee(350, 200)));
         GamePane.get().addView(cle);
     }
 
@@ -46,17 +45,11 @@ public class SalleView implements Observeur{
      */
     private void instancierEnnemis(){
         for (int i = 0; i < 3; i++) {
-            Coordonnee coord = new Coordonnee(200 + i * 200 , 300);
+            Coordonnee coord = new Coordonnee(300 + i * 200 , 300);
             ChauveSouris cS = new ChauveSouris(coord);
             ChauveSourisView csv = new ChauveSourisView(cS);
             GamePane.get().addView(csv);
-            salle.addEnnemi(cS);
-            cS.Register(this);
         }
-    }
-
-    private void ennemiMort() {
-        salle.removeOne();
     }
     
     

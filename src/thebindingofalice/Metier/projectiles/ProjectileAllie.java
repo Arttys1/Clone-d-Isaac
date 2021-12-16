@@ -13,7 +13,7 @@ public class ProjectileAllie extends Projectile {
     
     private DirectionTir dirTir;
     
-    private float vitesse = 2.5f;
+    private float vitesse = 5f;
 
     public ProjectileAllie(Coordonnee coordonnee, DirectionTir dir) {
         super(coordonnee, dir);

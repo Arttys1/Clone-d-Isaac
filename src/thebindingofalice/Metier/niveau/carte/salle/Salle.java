@@ -37,11 +37,6 @@ public abstract class Salle extends Observable{
         }
     }
     
-    public void removeOne()
-    {
-        removeEnnemi(ennemies.get(0));
-    }
-    
     /**
      * Méthode permettant d'ajouter un évoluable à la salle.
      *
