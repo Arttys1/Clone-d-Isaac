@@ -4,8 +4,10 @@ import thebindingofalice.Metier.joueur.Joueur;
 import thebindingofalice.Metier.niveau.carte.salle.DirectionSalle;
 import thebindingofalice.Metier.niveau.Niveau;
 import java.util.ArrayList;
+import thebindingofalice.Metier.joueur.DirectionDeplacement;
 import thebindingofalice.Metier.niveau.algoNiveau.AlgoCreationNiveaux;
 import thebindingofalice.Metier.niveau.algoNiveau.MockAlgoNiveaux;
+import thebindingofalice.Metier.objet.ramassable.TypeCoeur;
 
 /**
  * Classe représentant une partie du jeu. Elle est le point d'entrée de la couche métier
@@ -111,6 +113,14 @@ public class Partie {
      */
     public void PartiePerdu(){
         this.joueur.setCoordonnee(new Coordonnee(350, 300));
+        if(this.joueur.getVie().isEmpty()){ //quand le joueur meurt et qu'on relance une partie l'HUD des clés ne peut pas être créer car il utilise la taille de la listevie - 1
+            this.joueur.AddCoeur(TypeCoeur.ROUGE, 6); //donc si le joueur n'a plus de vie on lui donne 6 coeurs
+        }
+        //il y a aussi un bug avec les déplacements si on appuie et on meurt ça garde la dernière touche appuyée du coup j'ai mis des arrêter
+        this.joueur.sArreter(DirectionDeplacement.BAS);
+        this.joueur.sArreter(DirectionDeplacement.HAUT);
+        this.joueur.sArreter(DirectionDeplacement.GAUCHE);
+        this.joueur.sArreter(DirectionDeplacement.DROITE);
         this.objetsCollision.clear();
         this.niveauCourant.getSalleCourante().PartiePerdu();
     }

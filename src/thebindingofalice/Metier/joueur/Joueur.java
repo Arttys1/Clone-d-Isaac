@@ -419,5 +419,13 @@ public class Joueur extends Evoluable implements ICollision {
         return vieMax;
     }
     
+    public double getVitesseX(){
+        return this.vitesseX;
+    }
+    
+    public double getVitesseY(){
+        return this.vitesseY;
+    }
+    
     
 }
