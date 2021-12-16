@@ -52,7 +52,8 @@ public class Joueur extends Evoluable implements ICollision {
         this.canShoot = true;
         cadTir = -1;
         this.vie = new ArrayList<>();
-        
+        this.cles = new ArrayList<>();
+        this.vieMax = 16;
         InstanceVie();
     }
 
@@ -160,6 +161,7 @@ public class Joueur extends Evoluable implements ICollision {
 
     public void AddCle(Cle cle) {
         cles.add(cle);
+        Notify("cle");
     }
 
     public void ChangerSalle(DirectionSalle d) {
@@ -392,7 +394,7 @@ public class Joueur extends Evoluable implements ICollision {
         vitesseY = 0;
     }
     /**
-     * Initialise la liste de vie à 12 demi-coeur rouge
+     * Initialise la liste de vie à 6 demi-coeur rouge
      */
     private void InstanceVie() {
         for(int x = 0 ; x < 6; x++)
@@ -412,5 +414,10 @@ public class Joueur extends Evoluable implements ICollision {
     public void mourir() {
         Notify("mortjoueur");
     }
+
+    public int getVieMax() {
+        return vieMax;
+    }
+    
     
 }
