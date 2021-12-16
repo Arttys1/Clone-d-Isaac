@@ -18,10 +18,12 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import thebindingofalice.Controller.Observeur;
 import thebindingofalice.IHM.view.ChauveSourisView;
+import thebindingofalice.IHM.view.CléView;
 import thebindingofalice.IHM.view.CoeurView;
 import thebindingofalice.IHM.view.HitboxView;
 import thebindingofalice.IHM.view.JoueurView;
 import thebindingofalice.IHM.view.MurView;
+import thebindingofalice.IHM.view.PorteView;
 import thebindingofalice.IHM.view.RocherView;
 import thebindingofalice.IHM.view.SalleView;
 import thebindingofalice.Main;
@@ -32,6 +34,7 @@ import thebindingofalice.Metier.ennemis.volant.ChauveSouris;
 import thebindingofalice.Metier.niveau.carte.Generateur.Case;
 import thebindingofalice.Metier.niveau.carte.Generateur.TypeCase;
 import thebindingofalice.Metier.objet.obstacle.Rocher;
+import thebindingofalice.Metier.objet.ramassable.Cle;
 import thebindingofalice.Metier.objet.ramassable.Coeur;
 import thebindingofalice.Metier.projectiles.DirectionTir;
 
@@ -79,7 +82,8 @@ public class EnJeuView implements Observeur, Initializable{
         //Créer des coeurs dans la salle A supprimer plus tard
         instancierDesCoeurs();  
         
-        
+        //Créer des clé dans la salle A supprimer plus tard
+        instancierclé();
         //Lance la boucle du jeu
         boucleDeJeu();
     }
@@ -150,7 +154,7 @@ public class EnJeuView implements Observeur, Initializable{
      */
     private void instancierDesCoeurs() {
         for (int i = 0; i < 3; i++) {
-            Coordonnee coor = new Coordonnee(200 + i * 100 , 500);
+            Coordonnee coor = new Coordonnee(300 + i * 100 , 500);
             Coeur c = new Coeur(coor);
             CoeurView coeurView = new CoeurView(c);  
             
@@ -159,7 +163,7 @@ public class EnJeuView implements Observeur, Initializable{
     }
     
     private void instancierRocher() {
-        RocherView rocher = new RocherView(new Rocher(new Coordonnee(500, 200)));
+        RocherView rocher = new RocherView(new Rocher(new Coordonnee(600, 200)));
         GamePane.get().addView(rocher);
     }
 
@@ -175,7 +179,7 @@ public class EnJeuView implements Observeur, Initializable{
         int size = 60;
         for (Case c : partie.getNiveauCourant().getSalleCourante().getCases()) {
             ImageView img = new ImageView(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Salle/" + c.getSprite());
-            int x = 100 + c.getColonne() * size;
+            int x = 200 + c.getColonne() * size;
             int y = 20 + c.getLigne() * size;
             img.setX(x);
             img.setY(y);
@@ -185,6 +189,10 @@ public class EnJeuView implements Observeur, Initializable{
             if (c.getType() == TypeCase.MUR) {
                 MurView mur = new MurView(new Coordonnee(x, y));
                 GamePane.get().addView(mur);
+            }
+            else if (c.getType() == TypeCase.PORTE) {
+                PorteView porte = new PorteView(new Coordonnee(x, y),c.getColonne(),c.getLigne());
+                GamePane.get().addView(porte);
             }
         }
     }  
@@ -221,6 +229,18 @@ public class EnJeuView implements Observeur, Initializable{
             GamePane.get().getForeground().getChildren().clear(); //on clear la liste des vues affichée
             this.animationTimer.stop(); //on stop la boucle de jeu 
             AffMenuGameOver(); // on affiche le menu de game over
+        }
+    }
+    
+    /**
+     * méthode pour ajouter des clés dans la salle
+     */
+    private void instancierclé() {
+        for (int i = 0; i < 3; i++) {
+            Coordonnee coord = new Coordonnee(400 + i * 100 , 400);
+            Cle cle = new Cle(coord);
+            CléView cléview = new CléView(cle);
+            GamePane.get().addView(cléview);
         }
     }
 
