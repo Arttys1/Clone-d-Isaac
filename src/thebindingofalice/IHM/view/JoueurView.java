@@ -5,7 +5,10 @@
  */
 package thebindingofalice.IHM.view;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.paint.Color;
 import thebindingofalice.Controller.ControlleurJoueur;
 import thebindingofalice.Controller.Observeur;
@@ -16,6 +19,8 @@ import thebindingofalice.Metier.joueur.DirectionDeplacement;
 import thebindingofalice.Metier.joueur.Joueur;
 import thebindingofalice.Metier.objet.HUD.CoeurHUDDroit;
 import thebindingofalice.Metier.objet.HUD.CoeurHUDGauche;
+import thebindingofalice.Metier.objet.HUD.ValeurHUD;
+import thebindingofalice.Metier.objet.ramassable.Cle;
 import thebindingofalice.Metier.objet.ramassable.TypeCoeur;
 import thebindingofalice.Metier.projectiles.DirectionTir;
 
@@ -32,7 +37,11 @@ public class JoueurView extends View implements Observeur{
     private final HitboxView hitboxJoueur;
     //liste des vies actuelle
     private ArrayList<View> listeVie;
+    //liste les valeur pour la clé
+    private ArrayList<ValeurHUDView> clés;
     
+    //nb de clé actuelle
+    private int nbclés;
     /**
      * Constructeur du joueur
      */
@@ -43,7 +52,7 @@ public class JoueurView extends View implements Observeur{
         //Le joueur est observé par la vue
         joueur.Register(this); 
         controlleurJoueur = new ControlleurJoueur(joueur); 
-        
+        this.nbclés = 0;
         //Création de la vue de la hitbox du joueur
         hitboxJoueur = new HitboxView(Partie.get().GetJoueur().getHitbox());
         //ligne à commenter si on rendre l'hitbox du joueur transparente
@@ -52,7 +61,10 @@ public class JoueurView extends View implements Observeur{
         GamePane.get().addView(hitboxJoueur);
         //init l'hud de la vie
         this.listeVie = new ArrayList<>();
+        //init l'hud des clé
+        this.clés = new ArrayList<>();
         InstanceVieHUD();
+        InstanceCléHUD();
         //Ajout du joueur à la liste des evoluables et des collisions
         Partie.get().getNiveauCourant().getSalleCourante().AddEvoluable(joueur);
         Partie.get().addICollision(joueur);
@@ -83,6 +95,9 @@ public class JoueurView extends View implements Observeur{
         else if(message.toLowerCase().equals("degat"))
         {
             prendDegat();
+        }else if(message.toLowerCase().equals("cle"))
+        {
+            this.AddClé(1);
         }
     }
     
@@ -135,7 +150,7 @@ public class JoueurView extends View implements Observeur{
         for(int x = 0 ; x < Partie.get().GetJoueur().getVie().size(); x++)
         {
             Coordonnee coord = new Coordonnee(posx,ligne);
-            if(x % 2 == 0 || x == 0)
+            if((x % 2 == 0 || x == 0)&& (this.joueur.getVieMax() != this.listeVie.size()))
             {
                 //Paire soit gauche
                 //peut-etre faire le cas pour le 0
@@ -150,7 +165,7 @@ public class JoueurView extends View implements Observeur{
                         break;
                 }
                 
-            }else
+            }else if(this.joueur.getVieMax() != this.listeVie.size())
             {
                 //Impaire soit droite
                 switch(Partie.get().GetJoueur().getVie().get(x))
@@ -201,6 +216,71 @@ public class JoueurView extends View implements Observeur{
         }
         this.listeVie.clear();
         this.InstanceVieHUD();
+    }
+    
+    /**
+     * gere le l'affichage du stock de clé
+     */
+    private void InstanceCléHUD()
+    {
+        double posx = 0.0;
+        Coordonnee coord;
+        coord = new Coordonnee(posx,this.listeVie.get(this.listeVie.size()-1).getTranslateY()+this.listeVie.get(this.listeVie.size()-1).getImage().getHeight());
+        Cle cle = new Cle(coord);
+        CléView cleview = new CléView(cle);
+        GamePane.get().addView(cleview);
+        posx += cleview.getImage().getWidth();
+        for(int nbval = 0; nbval <3; nbval ++)
+        {
+            coord = new Coordonnee(posx,this.listeVie.get(this.listeVie.size()-1).getTranslateY()+this.listeVie.get(this.listeVie.size()-1).getImage().getHeight()+15);
+            ValeurHUD val = new ValeurHUD(coord);
+            ValeurHUDView valview = new ValeurHUDView(val);
+            GamePane.get().addView(valview);
+            this.clés.add(valview);
+            posx += valview.getImage().getWidth();
+        }
+        
+    }
+    /**
+     * ajoute une clé au joueur
+     * @param nbclé 
+     */
+    private void AddClé(int nbclé)
+    {
+        int centaine = this.clés.get(0).getValeur();
+        int dizaine = this.clés.get(1).getValeur();
+        int unité = this.clés.get(2).getValeur();
+        
+        
+        if(centaine == 9 && dizaine == 9 && unité == 9)
+        {
+        }else{
+            unité += nbclé;
+            if(unité >= 10)
+            {
+                dizaine += unité / 10;
+                unité = unité % 10;
+            }
+            if(dizaine >= 10)
+            {
+                centaine += dizaine / 10;
+                dizaine = dizaine % 10;
+
+            }
+        }
+        
+        
+        try {
+            this.clés.get(0).changeValeur(centaine);
+            this.clés.get(1).changeValeur(dizaine);
+            this.clés.get(2).changeValeur(unité);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(JoueurView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+
+            
+        this.nbclés = unité + dizaine * 10 + centaine * 100;
     }
 
 }
