@@ -225,14 +225,14 @@ public class JoueurView extends View implements Observeur{
     {
         double posx = 0.0;
         Coordonnee coord;
-        coord = new Coordonnee(posx,this.listeVie.get(this.listeVie.size()-1).getTranslateY()+this.listeVie.get(this.listeVie.size()-1).getImage().getHeight());
+        coord = new Coordonnee(posx,this.listeVie.get(this.listeVie.size()-1).getTranslateY()+(this.listeVie.get(this.listeVie.size()-1).getImage().getHeight())*2);
         Cle cle = new Cle(coord);
         CléView cleview = new CléView(cle);
         GamePane.get().addView(cleview);
         posx += cleview.getImage().getWidth();
         for(int nbval = 0; nbval <3; nbval ++)
         {
-            coord = new Coordonnee(posx,this.listeVie.get(this.listeVie.size()-1).getTranslateY()+this.listeVie.get(this.listeVie.size()-1).getImage().getHeight()+15);
+            coord = new Coordonnee(posx,this.listeVie.get(this.listeVie.size()-1).getTranslateY()+this.listeVie.get(this.listeVie.size()-1).getImage().getHeight()*2+15);
             ValeurHUD val = new ValeurHUD(coord);
             ValeurHUDView valview = new ValeurHUDView(val);
             GamePane.get().addView(valview);
