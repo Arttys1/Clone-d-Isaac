@@ -29,7 +29,7 @@ public class CléView extends View implements Observeur{
         
         hitboxClé = new HitboxView(c.getHitbox());
         //change la couleur du contour de la hitbox (à commenter pour laisser transparent)
-        hitboxClé.setStroke(Color.RED);
+        //hitboxClé.setStroke(Color.RED);
         //ajoute la hitbox du joueur sur l'affichage
         GamePane.get().addView(hitboxClé);
         

@@ -28,7 +28,7 @@ public class TirAllieView extends View implements Observeur{
         
         hitboxTir= new HitboxView(p.getHitbox());
         //ligne à commenter si on veut rendre l'hitbox du tir transparente
-        hitboxTir.setStroke(Color.RED);
+        //hitboxTir.setStroke(Color.RED);
         //La ligne ci-dessous rajoute la hitbox du tir sur l'affichage
         GamePane.get().addView(hitboxTir);
         

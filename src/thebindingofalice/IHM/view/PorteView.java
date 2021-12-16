@@ -57,7 +57,7 @@ public class PorteView extends View implements Observeur{
         
         hitboxPorte = new HitboxView(porte.getHitbox());
         //ligne à commenter si on veut rendre l'hitbox du mur transparente
-        hitboxPorte.setStroke(Color.RED);
+        //hitboxPorte.setStroke(Color.RED);
         //Rajoute la hitbox du mur sur l'affichage
         GamePane.get().addView(hitboxPorte);
         

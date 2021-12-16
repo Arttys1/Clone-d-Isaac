@@ -36,7 +36,7 @@ public class CoeurView  extends View implements Observeur{
         
         hitboxCoeur = new HitboxView(c.getHitbox());
         //change la couleur du contour de la hitbox (à commenter pour laisser transparent)
-        hitboxCoeur.setStroke(Color.RED);
+        //hitboxCoeur.setStroke(Color.RED);
         //ajoute la hitbox du joueur sur l'affichage
         GamePane.get().addView(hitboxCoeur);
         

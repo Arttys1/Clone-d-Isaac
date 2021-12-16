@@ -47,6 +47,7 @@ public class SalleView implements Observeur{
         for (int i = 0; i < 3; i++) {
             Coordonnee coord = new Coordonnee(300 + i * 200 , 300);
             ChauveSouris cS = new ChauveSouris(coord);
+            salle.addEnnemi(cS);
             ChauveSourisView csv = new ChauveSourisView(cS);
             GamePane.get().addView(csv);
         }

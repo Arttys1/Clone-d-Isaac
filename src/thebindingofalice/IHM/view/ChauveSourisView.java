@@ -33,7 +33,7 @@ public class ChauveSourisView extends View implements Observeur{
         
         hitboxChauveSouris = new HitboxView(cS.getHitbox());
          //change la couleur du contour de la hitbox (à commenter pour laisser transparent)
-        hitboxChauveSouris.setStroke(Color.RED);
+        //hitboxChauveSouris.setStroke(Color.RED);
         //ajoute la hitbox de la chauvesouris sur l'affichage
         GamePane.get().addView(hitboxChauveSouris);
         

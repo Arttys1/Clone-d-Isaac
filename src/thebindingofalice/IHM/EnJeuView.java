@@ -72,7 +72,7 @@ public class EnJeuView implements Observeur, Initializable{
         
         hitboxJoueur = new HitboxView(Partie.get().GetJoueur().getHitbox());
         //ligne à commenter si on veut rendre l'hitbox du joueur transparente
-        hitboxJoueur.setStroke(Color.RED);
+        //hitboxJoueur.setStroke(Color.RED);
         //ajoute la hitbox du joueur sur l'affichage
         GamePane.get().addView(hitboxJoueur);
         

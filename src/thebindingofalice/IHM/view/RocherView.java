@@ -27,7 +27,7 @@ public class RocherView extends View implements Observeur{
         rocher.Register(this);
         
         hitboxRocher = new HitboxView(r.getHitbox());
-        hitboxRocher.setStroke(Color.RED);
+        //hitboxRocher.setStroke(Color.RED);
         GamePane.get().addView(hitboxRocher);
         
         Partie.get().getNiveauCourant().getSalleCourante().AddEvoluable(rocher);
