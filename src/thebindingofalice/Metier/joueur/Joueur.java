@@ -67,7 +67,7 @@ public class Joueur extends Evoluable implements ICollision {
         {
             case HAUT:    shootingNorth = true; break;
             case BAS:     shootingSouth = true; break;
-            case GAUCHE:  shootingWest  = true; break;
+            case GAUCHE:  shootingWest  = true; ;break;
             case DROITE:  shootingEast  = true; break;
             default:
                 
@@ -101,7 +101,7 @@ public class Joueur extends Evoluable implements ICollision {
         switch(dir)
         {
             case HAUT:    goNorth = true; break;
-            case BAS:     goSouth = true; break;
+            case BAS:     goSouth = true;  break;
             case GAUCHE:  goWest  = true; break;
             case DROITE:  goEast  = true; break;
             default:
@@ -187,27 +187,6 @@ public class Joueur extends Evoluable implements ICollision {
             }
         }
         
-        //Change la vitesse en x et en y selon la direction dans laquelle on se déplace
-        double v = stats.getVitesseDeplacement();
-        if(goNorth){
-            vitesseY = -v;
-        }
-        else{
-            vitesseY =0;
-        }
-        if(goSouth){
-            vitesseY = v;
-        }
-        if(goWest){
-            vitesseX = -v;
-        }
-        else{
-            vitesseX=0;
-        }
-        if(goEast){
-            vitesseX = v;
-        }
-        
         //Si on peut tirer, tir dans la direction adéquate
         if (canShoot) {
             if (shootingNorth) {
@@ -251,6 +230,63 @@ public class Joueur extends Evoluable implements ICollision {
                 this.canShoot = true;
             }
         }
+        
+        //Change la vitesse en x et en y selon la direction dans laquelle on se déplace
+        double v = stats.getVitesseDeplacement();
+        if(goNorth){
+            
+            vitesseY = -v;
+        }
+        else{
+            vitesseY =0;
+        }
+        if(goSouth){
+            //Notify("bas");
+            vitesseY = v;
+        }
+        if(goWest){
+            //Notify("gauche");
+            vitesseX = -v;
+        }
+        else{
+            vitesseX=0;
+        }
+        if(goEast){
+            vitesseX = v;
+        }
+
+        //on regarde si on tire dans une direction si oui on change dans la direction qu'il faut
+        if(shootingNorth){
+            Notify("haut");
+        }     
+        else if(shootingSouth){
+            Notify("bas");
+        }
+        else if(shootingWest){
+            Notify("gauche");
+        }
+        else if(shootingEast){
+            Notify("droite");
+        }
+        else{ //sinon si on bouge on change la direction dans le sprite qu'il faut
+            if(goNorth){
+                Notify("haut");
+            }
+            if(goSouth){
+                Notify("bas");
+            }
+            if(goWest){
+                Notify("gauche");
+            }
+            if(goEast){
+                Notify("droite");
+            }  
+        }
+        //si on est immobile et ne tire pas le personnage regarde vers nous
+        if(!goNorth && !goSouth && !goWest && !goEast && !shootingNorth && !shootingSouth && !shootingWest && !shootingEast){
+            Notify("bas");
+        }
+        
 
         Coordonnee c = getCoordonnee();
         setCoordonnee(new Coordonnee(c.getX() + vitesseX * pas, c.getY() + vitesseY * pas));

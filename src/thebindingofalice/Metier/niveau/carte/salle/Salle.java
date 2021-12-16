@@ -30,6 +30,7 @@ public abstract class Salle extends Observable{
     public void addEnnemi(Ennemi e) { ennemies.add(e); }
     
     public void removeEnnemi(Ennemi e) {
+        System.out.println("ennemi removed");
         ennemies.remove(e); 
         if(ennemies.isEmpty())
         {
