@@ -57,7 +57,7 @@ public class ChauveSourisView extends View implements Observeur{
         switch(message.toLowerCase())
         {
             case "chauvesourisdeplacement": moveSprite(); break;
-            case "destroy" : destroy(); break;
+            case "destroy" : destroy(); System.out.println("cv meurt");break;
             default : break;
         }
     }

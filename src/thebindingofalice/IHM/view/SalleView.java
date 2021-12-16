@@ -31,7 +31,8 @@ public class SalleView implements Observeur{
     public void Update(String message) {
         switch(message.toLowerCase())
         {
-            case "loot" : InstanciateLoot(); break;
+            
+            case "loot" : InstanciateLoot(); System.out.println("loot");break;
         }
     }
 
@@ -47,7 +48,6 @@ public class SalleView implements Observeur{
         for (int i = 0; i < 3; i++) {
             Coordonnee coord = new Coordonnee(300 + i * 200 , 300);
             ChauveSouris cS = new ChauveSouris(coord);
-            salle.addEnnemi(cS);
             ChauveSourisView csv = new ChauveSourisView(cS);
             GamePane.get().addView(csv);
         }

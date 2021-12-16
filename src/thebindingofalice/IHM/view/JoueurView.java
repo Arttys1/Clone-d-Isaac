@@ -10,13 +10,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import thebindingofalice.Controller.ControlleurJoueur;
 import thebindingofalice.Controller.Observeur;
 import thebindingofalice.IHM.GamePane;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Partie;
-import thebindingofalice.Metier.Statistiques;
 import thebindingofalice.Metier.joueur.DirectionDeplacement;
 import thebindingofalice.Metier.joueur.Joueur;
 import thebindingofalice.Metier.objet.HUD.CoeurHUDDroit;
@@ -87,26 +85,20 @@ public class JoueurView extends View implements Observeur{
 
     @Override
     public void Update(String message) {
+        if(message.toLowerCase().equals("haut")){
+            this.setImage(new Image(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Sprites/aliceBack.png"));
+        }
+        if(message.toLowerCase().equals("bas")){
+            this.setImage(new Image(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Sprites/aliceFront.png"));
+        }
+        if(message.toLowerCase().equals("gauche")){
+            this.setImage(new Image(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Sprites/aliceLeft.png"));
+        }
+        if(message.toLowerCase().equals("droite")){
+            this.setImage(new Image(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Sprites/aliceRight.png"));
+        }
         if(message.toLowerCase().equals("joueur"))
-        {
-            //Le bloc de if si dessous gère le changement de sprite du personnage selon la direction
-            //dans cette version la gauche et la droite sont prioritaire
-            if(this.joueur.getVitesseY()==-5){ //quand on va en haut
-                this.setImage(new Image(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Sprites/aliceBack.png"));
-            }
-            if(this.joueur.getVitesseY()==5){//en bas
-                this.setImage(new Image(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Sprites/aliceFront.png"));
-            }
-            if(this.joueur.getVitesseX()==-5){//à gauche
-                this.setImage(new Image(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Sprites/aliceLeft.png"));
-            }
-            if(this.joueur.getVitesseX()==5){//à droite
-                this.setImage(new Image(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Sprites/aliceRight.png"));
-            }
-            if(this.joueur.getVitesseX()==0 && this.joueur.getVitesseY()==0){ //immobile
-                this.setImage(new Image(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Sprites/aliceFront.png"));
-            }
-            
+        {            
             moveSpriteJoueur();
         }else if(message.toLowerCase().equals("healrouge"))
         {

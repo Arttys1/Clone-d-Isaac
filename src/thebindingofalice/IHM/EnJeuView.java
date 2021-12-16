@@ -62,8 +62,9 @@ public class EnJeuView implements Observeur, Initializable{
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        salle = new SalleView();
+        
         Partie.get().GetJoueur().Register(this);
+        salle = new SalleView();
         instancierRocher();
         joueurView = new JoueurView();  
         root.getChildren().add(gamePane.getForeground());
