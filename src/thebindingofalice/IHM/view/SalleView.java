@@ -45,7 +45,7 @@ public class SalleView implements Observeur{
      * Méthode provisoire servant uniqement à montrer l'affichage d'ennemis
      */
     private void instancierEnnemis(){
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 1; i++) {
             Coordonnee coord = new Coordonnee(300 + i * 200 , 300);
             ChauveSouris cS = new ChauveSouris(coord);
             ChauveSourisView csv = new ChauveSourisView(cS);
