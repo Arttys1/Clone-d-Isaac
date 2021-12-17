@@ -123,5 +123,5 @@ public class Partie {
         this.joueur.sArreter(DirectionDeplacement.DROITE);
         this.objetsCollision.clear();
         this.niveauCourant.getSalleCourante().PartiePerdu();
-    }
+    } 
 }

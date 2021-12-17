@@ -106,5 +106,10 @@ public abstract class Salle extends Observable{
         this.ennemies.clear();
         this.evoluables.clear();
     }
+    
+    public ArrayList<Ennemi> getEnnemis(){
+        return this.ennemies;
+    
+    }
                
 }

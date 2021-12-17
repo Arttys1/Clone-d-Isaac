@@ -8,6 +8,7 @@ package thebindingofalice.Metier.objet.obstacle;
 import thebindingofalice.Metier.Coordonnee;
 import thebindingofalice.Metier.Hitbox;
 import thebindingofalice.Metier.ICollision;
+import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.objet.TypeObjet;
 
 /**
@@ -32,6 +33,9 @@ public class Porte extends Obstacle{
     @Override
     public void evoluer(double pas) {
         
+        if(Partie.get().getNiveauCourant().getSalleCourante().getEnnemis().isEmpty() && !this.ouvert){
+            Notify("ouvert");
+        }
     }
 
     @Override
