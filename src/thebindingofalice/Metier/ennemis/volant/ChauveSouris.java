@@ -76,7 +76,7 @@ public class ChauveSouris extends EnnemiVolant {
 
     @Override
     public TypeEnnemi getType() {
-        return TypeEnnemi.VOLANT;
+        return TypeEnnemi.CHAUVE_SOURIS;
     }
 
     @Override

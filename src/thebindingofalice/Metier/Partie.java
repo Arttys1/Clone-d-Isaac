@@ -6,7 +6,9 @@ import thebindingofalice.Metier.niveau.Niveau;
 import java.util.ArrayList;
 import thebindingofalice.Metier.joueur.DirectionDeplacement;
 import thebindingofalice.Metier.niveau.algoNiveau.AlgoCreationNiveaux;
+import thebindingofalice.Metier.niveau.algoNiveau.GenerationStatique;
 import thebindingofalice.Metier.niveau.algoNiveau.MockAlgoNiveaux;
+import thebindingofalice.Metier.niveau.carte.salle.Salle;
 import thebindingofalice.Metier.objet.ramassable.TypeCoeur;
 
 /**
@@ -22,7 +24,7 @@ public class Partie {
     private Partie() {        
         this.objetsCollision = new ArrayList<>();
         joueur = new Joueur(new Coordonnee(350, 300));
-        AlgoCreationNiveaux algo = new MockAlgoNiveaux();
+        AlgoCreationNiveaux algo = new GenerationStatique();
         this.niveaux = algo.getNiveaux();
         niveauCourant = niveaux.get(0);
     }
@@ -92,6 +94,11 @@ public class Partie {
     public void ChangerSalle(DirectionSalle d) {
         niveauCourant.ChangerSalle(d);
     }
+    
+    public void ChangerSalle(Salle s)
+    {
+        niveauCourant.ChangerSalle(s);
+    }
 
     /**
      * Méthode permettant de passer au niveau suivant
@@ -124,4 +131,10 @@ public class Partie {
         this.objetsCollision.clear();
         this.niveauCourant.getSalleCourante().PartiePerdu();
     } 
+    
+    
+    public void clearCollisions()
+    {
+        objetsCollision.clear();
+    }
 }

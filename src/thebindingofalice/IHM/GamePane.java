@@ -60,4 +60,10 @@ public class GamePane{
     public AnchorPane getForeground(){
          return foreground;
      }
+    
+    
+    public void clear() {
+        foreground.getChildren().clear();
+        System.gc();
+    }
 }

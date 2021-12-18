@@ -24,7 +24,7 @@ public class MurView extends View implements Observeur{
         
         hitboxMur = new HitboxView(mur.getHitbox());
         //ligne à commenter si on veut rendre l'hitbox du mur transparente
-        //hitboxMur.setStroke(Color.RED);
+        hitboxMur.setStroke(Color.RED);
         //Rajoute la hitbox du mur sur l'affichage
         GamePane.get().addView(hitboxMur);
         

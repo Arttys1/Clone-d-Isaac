@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import thebindingofalice.Controller.ControlleurJoueur;
 import thebindingofalice.Controller.Observeur;
 import thebindingofalice.IHM.GamePane;
@@ -56,7 +57,7 @@ public class JoueurView extends View implements Observeur{
         //Création de la vue de la hitbox du joueur
         hitboxJoueur = new HitboxView(Partie.get().GetJoueur().getHitbox());
         //ligne à commenter si on rendre l'hitbox du joueur transparente
-        //hitboxJoueur.setStroke(Color.RED);
+        hitboxJoueur.setStroke(Color.RED);
         //La ligne ci-dessous rajoute la hitbox du joueur sur l'affichage
         GamePane.get().addView(hitboxJoueur);
         //init l'hud de la vie
@@ -65,8 +66,7 @@ public class JoueurView extends View implements Observeur{
         this.clés = new ArrayList<>();
         InstanceVieHUD();
         InstanceCléHUD();
-        //Ajout du joueur à la liste des evoluables et des collisions
-        Partie.get().getNiveauCourant().getSalleCourante().AddEvoluable(joueur);
+        
         Partie.get().addICollision(joueur);
     }
     
