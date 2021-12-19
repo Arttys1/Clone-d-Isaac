@@ -60,7 +60,31 @@ public class GenerationStatique implements AlgoCreationNiveaux{
                     throw new AssertionError(d.name());
 
             }
-        }       
+        }
+        
+        salles.get(1).addVoisin(DirectionSalle.GAUCHE, salles.get(5));
+        salles.get(1).addVoisin(DirectionSalle.DROITE, salles.get(6));
+        
+        salles.get(2).addVoisin(DirectionSalle.GAUCHE, salles.get(7));
+        salles.get(2).addVoisin(DirectionSalle.DROITE, salles.get(8));
+        
+        salles.get(3).addVoisin(DirectionSalle.HAUT, salles.get(5));
+        salles.get(3).addVoisin(DirectionSalle.BAS, salles.get(7));
+                
+        salles.get(4).addVoisin(DirectionSalle.HAUT, salles.get(6));
+        salles.get(4).addVoisin(DirectionSalle.BAS, salles.get(8));
+        
+        salles.get(5).addVoisin(DirectionSalle.BAS, salles.get(3));
+        salles.get(5).addVoisin(DirectionSalle.DROITE, salles.get(1));
+        
+        salles.get(6).addVoisin(DirectionSalle.GAUCHE, salles.get(1));
+        salles.get(6).addVoisin(DirectionSalle.BAS, salles.get(4));
+        
+        salles.get(7).addVoisin(DirectionSalle.HAUT, salles.get(3));
+        salles.get(7).addVoisin(DirectionSalle.DROITE, salles.get(2));
+        
+        salles.get(8).addVoisin(DirectionSalle.GAUCHE, salles.get(2));
+        salles.get(8).addVoisin(DirectionSalle.HAUT, salles.get(4));        
         
         niveau.getCarte().setSalles(salles);
         
