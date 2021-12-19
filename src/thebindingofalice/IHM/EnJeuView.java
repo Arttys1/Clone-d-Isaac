@@ -11,31 +11,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import thebindingofalice.Controller.Observeur;
-import thebindingofalice.IHM.view.ChauveSourisView;
-import thebindingofalice.IHM.view.CléView;
-import thebindingofalice.IHM.view.CoeurView;
 import thebindingofalice.IHM.view.HitboxView;
 import thebindingofalice.IHM.view.JoueurView;
-import thebindingofalice.IHM.view.MurView;
-import thebindingofalice.IHM.view.PorteView;
-import thebindingofalice.IHM.view.RocherView;
 import thebindingofalice.IHM.view.SalleView;
 import thebindingofalice.Main;
 import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.joueur.DirectionDeplacement;
-import thebindingofalice.Metier.Coordonnee;
-import thebindingofalice.Metier.ennemis.volant.ChauveSouris;
-import thebindingofalice.Metier.niveau.carte.Generateur.Case;
-import thebindingofalice.Metier.niveau.carte.Generateur.TypeCase;
-import thebindingofalice.Metier.objet.obstacle.Rocher;
-import thebindingofalice.Metier.objet.ramassable.Cle;
-import thebindingofalice.Metier.objet.ramassable.Coeur;
 import thebindingofalice.Metier.projectiles.DirectionTir;
 
 
@@ -54,7 +39,6 @@ public class EnJeuView implements Observeur, Initializable{
     private AnchorPane background;  //arrière plan
     @FXML
     private AnchorPane root;  //racine
-    private HitboxView hitboxJoueur;
     private SalleView salle;
     AnimationTimer animationTimer;
     /**
@@ -69,12 +53,6 @@ public class EnJeuView implements Observeur, Initializable{
         root.getChildren().add(gamePane.getForeground());
         
         GamePane.get().addView(joueurView);
-        
-        hitboxJoueur = new HitboxView(Partie.get().GetJoueur().getHitbox());
-        //ligne à commenter si on veut rendre l'hitbox du joueur transparente
-        //hitboxJoueur.setStroke(Color.RED);
-        //ajoute la hitbox du joueur sur l'affichage
-        GamePane.get().addView(hitboxJoueur);
         
         //Lance la boucle du jeu
         boucleDeJeu();
