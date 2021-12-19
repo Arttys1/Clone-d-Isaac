@@ -64,6 +64,6 @@ public class GamePane{
     
     public void clear() {
         foreground.getChildren().clear();
-        System.gc();
+        System.gc();    //appel du garbage collector pour clean la mémoire
     }
 }

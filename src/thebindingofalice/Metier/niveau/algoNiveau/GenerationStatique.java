@@ -63,7 +63,6 @@ public class GenerationStatique implements AlgoCreationNiveaux{
         }       
         
         niveau.getCarte().setSalles(salles);
-        //salles.get(0).generateSalle();
         
         return niveau;
     }

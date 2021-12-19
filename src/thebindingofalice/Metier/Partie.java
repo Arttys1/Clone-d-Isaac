@@ -137,4 +137,11 @@ public class Partie {
     {
         objetsCollision.clear();
     }
+
+    public void addJoueurCollision() {
+        if(!objetsCollision.contains(joueur))
+        {
+            addICollision(joueur);
+        }
+    }
 }

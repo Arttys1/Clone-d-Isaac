@@ -159,7 +159,7 @@ public abstract class Salle extends Observable{
         if(!evoluables.contains(joueur))
         {
             AddEvoluable(joueur);
-            Partie.get().addICollision(joueur);
+            Partie.get().addJoueurCollision();
             Notify("AddJoueur");
             
         }

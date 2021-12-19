@@ -54,10 +54,9 @@ public class SalleView implements Observeur{
      */
     private void displaySalle()
     {
-        Partie.get().clearCollisions();
-        GamePane.get().clear();
+        clearBeforeChangeRoom();
         salle = Partie.get().getNiveauCourant().getSalleCourante();
-        salle.Register(this);
+        salle.RegisterOnce(this);
         salle.clearEvoluables();
         salle.addJoueur();        
         if(!salle.isFinished())
@@ -66,7 +65,6 @@ public class SalleView implements Observeur{
             instancierRamassables();
             instancierObstacles();
         }
-        background.getChildren().clear();
         int size = 60;
         for (Case c : salle.getCases()) {
             ImageView img = new ImageView(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Salle/" + c.getSprite());
@@ -90,6 +88,17 @@ public class SalleView implements Observeur{
         }
     }  
     
+    private void clearBeforeChangeRoom()
+    {
+        if(salle != null)
+        {
+            salle.clearEvoluables();    //clear les objets de la première salle
+            salle.clearCases();
+        }
+        background.getChildren().clear();
+        Partie.get().clearCollisions();
+        GamePane.get().clear(); //On met cette opération en dernier car elle appel le garbage collector
+    }
 
     private void InstanciateLoot() {
         CléView cle = new CléView(new Cle(new Coordonnee(350, 200)));
@@ -97,7 +106,7 @@ public class SalleView implements Observeur{
     }
 
     /**
-     * Méthode provisoire servant uniqement à montrer l'affichage d'ennemis
+     * Méthode permettant d'instancier les ennemis
      */
     private void instancierEnnemis(){
         ArrayList<Ennemi> instanciateEnnemis = salle.instanciateEnnemis();
