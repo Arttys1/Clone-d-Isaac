@@ -34,4 +34,8 @@ public class Niveau {
     public void ChangerSalle(DirectionSalle d) {
             throw new UnsupportedOperationException();
     }
+
+    public void ChangerSalle(Salle s) {
+        carte.ChangerSalle(s);
+    }
 }

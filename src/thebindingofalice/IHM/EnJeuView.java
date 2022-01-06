@@ -11,31 +11,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import thebindingofalice.Controller.Observeur;
-import thebindingofalice.IHM.view.ChauveSourisView;
-import thebindingofalice.IHM.view.CléView;
-import thebindingofalice.IHM.view.CoeurView;
 import thebindingofalice.IHM.view.HitboxView;
 import thebindingofalice.IHM.view.JoueurView;
-import thebindingofalice.IHM.view.MurView;
-import thebindingofalice.IHM.view.PorteView;
-import thebindingofalice.IHM.view.RocherView;
 import thebindingofalice.IHM.view.SalleView;
 import thebindingofalice.Main;
 import thebindingofalice.Metier.Partie;
 import thebindingofalice.Metier.joueur.DirectionDeplacement;
-import thebindingofalice.Metier.Coordonnee;
-import thebindingofalice.Metier.ennemis.volant.ChauveSouris;
-import thebindingofalice.Metier.niveau.carte.Generateur.Case;
-import thebindingofalice.Metier.niveau.carte.Generateur.TypeCase;
-import thebindingofalice.Metier.objet.obstacle.Rocher;
-import thebindingofalice.Metier.objet.ramassable.Cle;
-import thebindingofalice.Metier.objet.ramassable.Coeur;
 import thebindingofalice.Metier.projectiles.DirectionTir;
 
 
@@ -47,14 +32,13 @@ import thebindingofalice.Metier.projectiles.DirectionTir;
  * @author Pascaline, Arnaud
  */
 public class EnJeuView implements Observeur, Initializable{  
-    private Partie partie = Partie.get();     //partie de jeu
+    private Partie partie;     //partie de jeu
     private JoueurView joueurView;    
     private final GamePane gamePane = GamePane.get();
     @FXML
     private AnchorPane background;  //arrière plan
     @FXML
     private AnchorPane root;  //racine
-    private HitboxView hitboxJoueur;
     private SalleView salle;
     AnimationTimer animationTimer;
     /**
@@ -62,29 +46,14 @@ public class EnJeuView implements Observeur, Initializable{
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        Partie.get().GetJoueur().Register(this);
-        salle = new SalleView();
-        instancierRocher();
+        salle = new SalleView(background);
+        partie = Partie.get();
+        partie.GetJoueur().Register(this);        
         joueurView = new JoueurView();  
         root.getChildren().add(gamePane.getForeground());
         
         GamePane.get().addView(joueurView);
         
-        hitboxJoueur = new HitboxView(Partie.get().GetJoueur().getHitbox());
-        //ligne à commenter si on veut rendre l'hitbox du joueur transparente
-        //hitboxJoueur.setStroke(Color.RED);
-        //ajoute la hitbox du joueur sur l'affichage
-        GamePane.get().addView(hitboxJoueur);
-        
-        //Affiche la salle avec les murs et les portes
-        displaySalle();
-        
-        //Créer des coeurs dans la salle A supprimer plus tard
-        instancierDesCoeurs();  
-        
-        //Créer des clé dans la salle A supprimer plus tard
-        instancierclé();
         //Lance la boucle du jeu
         boucleDeJeu();
     }
@@ -149,54 +118,6 @@ public class EnJeuView implements Observeur, Initializable{
             default : break;
         }
     }
-    
-    /**
-     * Méthode qui provisoire servant uniqement à montrer l'affichage de trois coeurs
-     */
-    private void instancierDesCoeurs() {
-        for (int i = 0; i < 3; i++) {
-            Coordonnee coor = new Coordonnee(300 + i * 100 , 500);
-            Coeur c = new Coeur(coor);
-            CoeurView coeurView = new CoeurView(c);  
-            
-            GamePane.get().addView(coeurView);
-        }
-    }
-    
-    private void instancierRocher() {
-        RocherView rocher = new RocherView(new Rocher(new Coordonnee(600, 200)));
-        GamePane.get().addView(rocher);
-    }
-
-    
-    
-    
-    /**
-     * Méthode permettant d'afficher la salle en court.
-     */
-    private void displaySalle()
-    {  
-        background.getChildren().clear();
-        int size = 60;
-        for (Case c : partie.getNiveauCourant().getSalleCourante().getCases()) {
-            ImageView img = new ImageView(System.getProperty("user.dir") + "/src/thebindingofalice/Images/Salle/" + c.getSprite());
-            int x = 200 + c.getColonne() * size;
-            int y = 20 + c.getLigne() * size;
-            img.setX(x);
-            img.setY(y);
-            img.setFitHeight(size);
-            img.setFitWidth(size);
-            background.getChildren().add(img);
-            if (c.getType() == TypeCase.MUR) {
-                MurView mur = new MurView(new Coordonnee(x, y));
-                GamePane.get().addView(mur);
-            }
-            else if (c.getType() == TypeCase.PORTE) {
-                PorteView porte = new PorteView(new Coordonnee(x, y),c.getColonne(),c.getLigne());
-                GamePane.get().addView(porte);
-            }
-        }
-    }  
 
     @FXML
     /**
@@ -233,16 +154,5 @@ public class EnJeuView implements Observeur, Initializable{
         }
     }
     
-    /**
-     * méthode pour ajouter des clés dans la salle
-     */
-    private void instancierclé() {
-        for (int i = 0; i < 3; i++) {
-            Coordonnee coord = new Coordonnee(400 + i * 100 , 400);
-            Cle cle = new Cle(coord);
-            CléView cléview = new CléView(cle);
-            GamePane.get().addView(cléview);
-        }
-    }
 
 }
