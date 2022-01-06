@@ -12,6 +12,7 @@ import thebindingofalice.Metier.ennemis.volant.ChauveSouris;
 import thebindingofalice.Metier.fabrique.FabriqueCase;
 import thebindingofalice.Metier.niveau.carte.Generateur.TypeCase;
 import thebindingofalice.Metier.objet.obstacle.Obstacle;
+import thebindingofalice.Metier.objet.obstacle.ObstacleDestructible;
 import thebindingofalice.Metier.objet.obstacle.Rocher;
 import thebindingofalice.Metier.objet.ramassable.Cle;
 import thebindingofalice.Metier.objet.ramassable.Coeur;
@@ -99,6 +100,10 @@ public class SalleSimple extends Salle{
         ArrayList<Obstacle> ob = new ArrayList<>();
         Rocher rocher = new Rocher(new Coordonnee(600, 200));
         ob.add(rocher);
+        
+        ObstacleDestructible o = new ObstacleDestructible(new Coordonnee(600, 500));
+        ob.add(o);
+        
         return ob;
     }
 }

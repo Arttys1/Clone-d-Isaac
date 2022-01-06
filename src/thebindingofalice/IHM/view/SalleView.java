@@ -17,7 +17,9 @@ import thebindingofalice.Metier.ennemis.volant.ChauveSouris;
 import thebindingofalice.Metier.niveau.carte.Generateur.Case;
 import thebindingofalice.Metier.niveau.carte.Generateur.TypeCase;
 import thebindingofalice.Metier.niveau.carte.salle.Salle;
+import thebindingofalice.Metier.objet.Bombe;
 import thebindingofalice.Metier.objet.obstacle.Obstacle;
+import thebindingofalice.Metier.objet.obstacle.ObstacleDestructible;
 import thebindingofalice.Metier.objet.obstacle.Porte;
 import thebindingofalice.Metier.objet.obstacle.Rocher;
 import thebindingofalice.Metier.objet.ramassable.Cle;
@@ -101,8 +103,12 @@ public class SalleView implements Observeur{
     }
 
     private void InstanciateLoot() {
+        GamePane gamePane = GamePane.get();
         CléView cle = new CléView(new Cle(new Coordonnee(350, 200)));
-        GamePane.get().addView(cle);
+        gamePane.addView(cle);
+        
+        BombeView bombe = new BombeView(new Bombe(new Coordonnee(300, 400)));
+        gamePane.addView(bombe);
     }
 
     /**
@@ -150,6 +156,8 @@ public class SalleView implements Observeur{
             switch(o.getType()){
                 case ROCHER: view = new RocherView((Rocher) o);
                     break;
+                case BOMBE: view = new BombeView((Bombe) o); break;
+                case OBSDESC: view = new TeapotView((ObstacleDestructible) o); break;
                 default:
                     throw new AssertionError(o.getType().name());
                 

@@ -46,5 +46,12 @@ public abstract class Ennemi extends Evoluable implements ICollision {
         this.vitesseY = vitesseY;
     }
     
+    /**
+     * Méthode pour prendre des dégats
+     * @param degats 1 degat vaut un demie coeur de vie
+     */
+    public void prendDegats(int degats){
+        vie -=degats;
+    }
     
 }
